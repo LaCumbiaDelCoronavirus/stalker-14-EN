@@ -1,8 +1,9 @@
 - files: ["hiss.ogg"]
-  copyright: "https://soundtrackloops.com/, sample modified by carousel in compliance with EULA terms"
+  license: "Custom" # From soundtrackloops' EULA: "Licensee may use our loops and sounds unmodified within commercially available video games"
+  copyright: "https://soundtrackloops.com/, sample modified by carousel in compliance with EULA terms. See https://soundtrackloops.com/eula-legal/ for copyright details."
 
 - files: ["cat1.ogg"]
-  license: "Attribution NonCommercial 4.0"
+  license: "CC-BY-NC-4.0"
   copyright: "Seidhepriest and Gunilla the cat"
   source: "https://freesound.org/people/Seidhepriest/sounds/199631/"
 
@@ -12,26 +13,26 @@
   source: "https://freesound.org/people/killumimati/sounds/381761/"
 
 - files: ["bear_hit.ogg"]
-  license: "royalty free"
-  copyright: "FilmCow"
+  license: "Custom" # Sound is marked as 'royalty free' however has some restrictions
+  copyright: "FilmCow of https://filmcow.itch.io. See https://filmcow.itch.io/filmcow-sfx for copyright details."
   source: "https://filmcow.itch.io/filmcow-sfx"
 
 - files: ["pbear_hit.ogg"]
-  license: "Attribution NonCommercial 4.0"
+  license: "CC-BY-NC-4.0"
   copyright: "mixed by carousel for stalker14"
 
 - files: ["pbear_miss.ogg"]
-  license: "Attribution NonCommercial 4.0"
+  license: "CC-BY-NC-4.0"
   copyright: "mixed by carousel for stalker14"
 
 - files: ["izlom_death.ogg"]
-  license: "Attribution NonCommercial 4.0"
+  license: "CC-BY-NC-4.0"
   copyright: "mixed by carousel for stalker14"
 
 - files: ["izlom_hit.ogg"]
-  license: "Attribution NonCommercial 4.0"
+  license: "CC-BY-NC-4.0"
   copyright: "mixed by carousel for stalker14"
 
 - files: ["izlom_miss.ogg"]
-  license: "Attribution NonCommercial 4.0"
+  license: "CC-BY-NC-4.0"
   copyright: "mixed by carousel for stalker14"
