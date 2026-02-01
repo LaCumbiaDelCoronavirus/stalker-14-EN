@@ -66,33 +66,28 @@ public sealed class GunPredictionSystem : SharedGunPredictionSystem
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestartCleanup);
         SubscribeNetworkEvent<RequestShootEvent>(OnShootRequest);
         SubscribeNetworkEvent<PredictedProjectileHitEvent>(OnPredictedProjectileHit);
-        SubscribeLocalEvent<GameRunLevelChangedEvent>(OnSendLinearVelocityAll);
+        // ST14-EN: Removed anything related to `MaxLinearVelocityMsg` as CVars.MaxLinVelocity is already automatically replicated server -> client.
 
         SubscribeLocalEvent<PredictedProjectileServerComponent, MapInitEvent>(OnPredictedMapInit);
         SubscribeLocalEvent<PredictedProjectileServerComponent, ComponentRemove>(OnPredictedRemove);
         SubscribeLocalEvent<PredictedProjectileServerComponent, EntityTerminatingEvent>(OnPredictedRemove);
         SubscribeLocalEvent<PredictedProjectileServerComponent, PreventCollideEvent>(OnPredictedPreventCollide);
 
-        Subs.CVar(_config, CVars.MaxLinVelocity, OnSendLinearVelocityAll);
+        // ST14-EN: Removed anything related to `MaxLinearVelocityMsg` as CVars.MaxLinVelocity is already automatically replicated server -> client.
         Subs.CVar(_config, RMCCVars.RMCGunPredictionPreventCollision, v => _preventCollision = v, true);
         Subs.CVar(_config, RMCCVars.RMCGunPredictionLogHits, v => _logHits = v, true);
         Subs.CVar(_config, RMCCVars.RMCGunPredictionCoordinateDeviation, v => _coordinateDeviation = v, true);
         Subs.CVar(_config, RMCCVars.RMCGunPredictionLowestCoordinateDeviation, v => _lowestCoordinateDeviation = v, true);
         Subs.CVar(_config, RMCCVars.RMCGunPredictionAabbEnlargement, v => _aabbEnlargement = v, true);
-
-        _player.PlayerStatusChanged += OnPlayerStatusChanged;
+        // ST14-EN: Removed anything related to `MaxLinearVelocityMsg` as CVars.MaxLinVelocity is already automatically replicated server -> client.
     }
 
-    public override void Shutdown()
-    {
-        base.Shutdown();
-        _player.PlayerStatusChanged -= OnPlayerStatusChanged;
-    }
+    // ST14-EN: Removed anything related to `MaxLinearVelocityMsg` as CVars.MaxLinVelocity is already automatically replicated server -> client.
 
     private void OnRoundRestartCleanup(RoundRestartCleanupEvent ev)
     {
         _predicted.Clear();
-        OnSendLinearVelocityAll(ev);
+        // ST14-EN: Removed anything related to `MaxLinearVelocityMsg` as CVars.MaxLinVelocity is already automatically replicated server -> client.
     }
 
     private void OnShootRequest(RequestShootEvent ev, EntitySessionEventArgs args)
@@ -115,15 +110,7 @@ public sealed class GunPredictionSystem : SharedGunPredictionSystem
         _predictedHits.Add((ev, args.SenderSession));
     }
 
-    private void OnSendLinearVelocityAll<T>(T ev)
-    {
-        if (_net.IsClient)
-            return;
-
-        // TODO gun prediction remove this when we pull engine with a replicated physics maxlinvelocity
-        var msg = new MaxLinearVelocityMsg(_config.GetCVar(CVars.MaxLinVelocity));
-        RaiseNetworkEvent(msg);
-    }
+    // ST14-EN: Removed anything related to `MaxLinearVelocityMsg` as CVars.MaxLinVelocity is already automatically replicated server -> client.
 
     private void OnPredictedPreventCollide(Entity<PredictedProjectileServerComponent> ent, ref PreventCollideEvent args)
     {
@@ -153,15 +140,7 @@ public sealed class GunPredictionSystem : SharedGunPredictionSystem
         }
     }
 
-    private void OnPlayerStatusChanged(object? sender, SessionStatusEventArgs e)
-    {
-        if (e.NewStatus != SessionStatus.Connected && e.NewStatus != SessionStatus.InGame)
-            return;
-
-        // TODO gun prediction remove this when we pull engine with a replicated physics maxlinvelocity
-        var msg = new MaxLinearVelocityMsg(_config.GetCVar(CVars.MaxLinVelocity));
-        RaiseNetworkEvent(msg, e.Session.Channel);
-    }
+    // ST14-EN: Removed anything related to `MaxLinearVelocityMsg` as CVars.MaxLinVelocity is already automatically replicated server -> client.
 
     private bool Collides(
         Entity<PredictedProjectileServerComponent, PhysicsComponent> projectile,

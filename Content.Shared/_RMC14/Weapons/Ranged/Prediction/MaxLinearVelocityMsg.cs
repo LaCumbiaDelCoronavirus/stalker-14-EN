@@ -1,9 +1,4 @@
-﻿using Robust.Shared.Serialization;
+﻿namespace Content.Shared._RMC14.Weapons.Ranged.Prediction;
 
-namespace Content.Shared._RMC14.Weapons.Ranged.Prediction;
-
-[Serializable, NetSerializable]
-public sealed class MaxLinearVelocityMsg(float velocity) : EntityEventArgs
-{
-    public float Velocity = velocity;
-}
+// ST14-EN: Removed `MaxLinearVelocityMsg` as CVars.MaxLinVelocity is already automatically replicated server -> client.
+// S14-EN: This file is kept here so that you know *why* this was removed during a merge conflict.

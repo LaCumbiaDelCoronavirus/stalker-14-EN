@@ -40,7 +40,7 @@ public sealed class GunPredictionSystem : SharedGunPredictionSystem
         SubscribeLocalEvent<PhysicsUpdateBeforeSolveEvent>(OnBeforeSolve);
         SubscribeLocalEvent<PhysicsUpdateAfterSolveEvent>(OnAfterSolve);
         SubscribeLocalEvent<RequestShootEvent>(OnShootRequest);
-        SubscribeNetworkEvent<MaxLinearVelocityMsg>(OnLinearVelocityMsg);
+        // ST14-EN: Removed `OnLinearVelocityMsg` as CVars.MaxLinVelocity is already automatically replicated server -> client.
 
         SubscribeLocalEvent<PredictedProjectileClientComponent, UpdateIsPredictedEvent>(OnClientProjectileUpdateIsPredicted);
         SubscribeLocalEvent<PredictedProjectileClientComponent, StartCollideEvent>(OnClientProjectileStartCollide);
@@ -82,10 +82,7 @@ public sealed class GunPredictionSystem : SharedGunPredictionSystem
         ShootRequested(ev.Gun, ev.Coordinates, ev.Target, null, args.SenderSession);
     }
 
-    private void OnLinearVelocityMsg(MaxLinearVelocityMsg ev)
-    {
-        _config.SetCVar(CVars.MaxLinVelocity, ev.Velocity);
-    }
+    // ST14-EN: Removed `OnLinearVelocityMsg` as CVars.MaxLinVelocity is already automatically replicated server -> client.
 
     private void OnClientProjectileUpdateIsPredicted(Entity<PredictedProjectileClientComponent> ent, ref UpdateIsPredictedEvent args)
     {
