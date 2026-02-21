@@ -1,0 +1,9 @@
+- type: lightCraftingRecipe
+  id: STCraftSkinClothingEyesGlassesCheapSunglassesRenegade
+  results:
+  - STClothingEyesGlassesCheapSunglassesRenegade
+  steps:
+    firstIngredient: STSkinsKitRenegate
+    secondIngredient: ClothingEyesGlassesCheapSunglasses
+    keepFirst: true
+    time: 3

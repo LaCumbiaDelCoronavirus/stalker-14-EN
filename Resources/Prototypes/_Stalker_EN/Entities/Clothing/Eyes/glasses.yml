@@ -1,0 +1,10 @@
+- type: entity
+  parent: ClothingEyesGlassesCheapSunglasses
+  id: STClothingEyesGlassesCheapSunglassesRenegade
+  name: renegade sunglasses
+  description: A pair of orange-tinted sunglasses, crafted by Renegades. Doesn't block light well, more of an accessory than something useful. They provide absolutely no tactical advantage, but they look cool.
+  components:
+  - type: Sprite
+    sprite: Clothing/Eyes/Hud/beergoggles.rsi
+  - type: Clothing
+    sprite: Clothing/Eyes/Hud/beergoggles.rsi
