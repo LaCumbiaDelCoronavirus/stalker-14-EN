@@ -1,0 +1,16 @@
+- type: entity
+  parent: ClothingMaskPullableBase
+  id: LCDCGimmickClothingMaskTilin
+  name: weird mask
+  description: EVERYONE ARE FUCKING IDIOTS EXCEPT ME # This is intentional
+  components:
+  - type: Sprite
+    sprite: _Stalker_EN/Objects/Clothing/mask/tilin.rsi
+  - type: Clothing
+    sprite: _Stalker_EN/Objects/Clothing/mask/tilin.rsi
+    clothingVisuals:
+      mask:
+      - state: worn_animated
+        scale: 0.38125,0.32857142857
+        offset: -0.015,0.25
+  - type: IdentityBlocker
