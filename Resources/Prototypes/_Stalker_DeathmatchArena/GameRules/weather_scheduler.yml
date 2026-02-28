@@ -1,0 +1,19 @@
+- type: entity
+  parent: BaseGameRule
+  id: STDAWeatherScheduler
+  components:
+  - type: WeatherSchedulerRule
+    # Default pool for maps without overrides
+    weatherPool:
+      STRain: 3.0
+      STStorm: 1.0
+      #STFogLight: 1.0
+      #STFogHeavy: 0.5
+      STRedStorm: 0.2
+    clearWeatherWeight: 3.5
+    changeInterval:
+      min: 60
+      max: 120
+    weatherDuration:
+      min: 120
+      max: 240

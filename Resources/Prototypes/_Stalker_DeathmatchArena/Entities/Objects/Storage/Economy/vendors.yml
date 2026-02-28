@@ -1,0 +1,35 @@
+- type: entity
+  parent: VendingMachineBoxesPSZMilitary
+  id: STDAVendingMachineBoxesRoubles
+  name: counterfeit rouble supply-crate
+  description: Millions of roubles!
+  suffix: ST-DA
+  components:
+  - type: AccessReader
+    access: []
+  - type: VendingMachine
+    ejectDelay: 0.1
+    pack: STDAInventoryBoxesRoubles #EN
+    dispenseOnHitChance: 0.0
+    dispenseOnHitThreshold: 2
+    offState: off
+    brokenState: broken
+
+- type: vendingMachineInventory
+  id: STDAInventoryBoxesRoubles
+  startingInventory:
+    STDARoubles60k: 725
+    Binocularus: 725
+    MedkitMilitary: 725
+    STFlashlightSeclite: 725
+
+- type: entity
+  parent: Roubles5000
+  id: STDARoubles60k
+  suffix: ST-DA, 60k
+  components:
+  - type: Icon
+    sprite: _Stalker/Objects/Economy/rubles.rsi
+    state: cash_5000
+  - type: Stack
+    count: 60000

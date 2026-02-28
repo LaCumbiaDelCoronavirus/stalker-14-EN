@@ -1,0 +1,9 @@
+- type: entity
+  parent: RitualChasmExitPointMarker
+  id: STDADeathmatchRitualChasmExitPointMarker
+  suffix: Anom-blocker, 10 tiles
+  components:
+  - type: STAnomalyGeneratorSpawnBlocker
+    size: 10
+  # - type: EmissionLightningSpawnBlocker
+  #   radius: 10

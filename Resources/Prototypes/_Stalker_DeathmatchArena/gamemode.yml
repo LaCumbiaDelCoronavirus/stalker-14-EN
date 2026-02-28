@@ -5,7 +5,7 @@
   name: game-preset-stalker-title
   description: game-preset-stalker-description
   rules:
-  - STWeatherScheduler
+  - STDAWeatherScheduler
   supportedMaps: STDefaultMapPool
 
 - type: gameMapPool
@@ -16,4 +16,4 @@
 - type: gameMap
   parent: STWorld
   id: STDAWorld
-  mapPath: "/Maps/_ST/World/KordonV166.yml"
+  mapPath: "/Maps/_STDA/World/hub_v1.yml"

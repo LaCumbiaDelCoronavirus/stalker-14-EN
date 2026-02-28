@@ -306,8 +306,9 @@
     stunModifierThresholds:
       0: 1.0
   - type: STWeight
-    self: 70
-  - type: StaminaActive
+    self: 20 # ST14EN-ARENA-DEATMATCH: 70 -> 20
+  #- type: StaminaActive # ST14EN-ARENA-DEATMATCH: Removed stamina damage from sprint
+  - type: STAnomalyTipsViewing # ST14EN-ARENA-DEATMATCH: Everyone Sees Anoms
   - type: StaminaDecayModifier
   - type: StaminaCritThresholdModifier
   - type: RespawnOnDeath

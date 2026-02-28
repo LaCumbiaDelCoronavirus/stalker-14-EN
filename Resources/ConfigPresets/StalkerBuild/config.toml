@@ -57,8 +57,5 @@ server = "https://auth.spacestation14.com/"
 [events]
 enabled = false
 
-[console]
-login_host_user = "coolmankid12345"
-
 [crewmanifest]
 no_entity = false

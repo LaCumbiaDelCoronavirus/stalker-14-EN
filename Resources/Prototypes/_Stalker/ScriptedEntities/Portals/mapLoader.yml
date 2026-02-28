@@ -1,15 +1,15 @@
 - type: mapLoader
   id: StalkerBaseMaps
   mapPaths:
-    RedForest: /Maps/_ST/World/RedForestV79.yml
-    Svalka: /Maps/_ST/World/SvalkaV158.yml
-    TemnajLohina: /Maps/_ST/World/TemnajLohinaV88.yml
-    RostokAndWilds: /Maps/_ST/World/RostokAndWildsV21.yml
-    UndegroundWildsBar100rads: /Maps/_ST/World/UndegroundWildsBar100radsV38.yml
-    Topi: /Maps/_ST/World/TopiV32.yml
-    TemDolina: /Maps/_ST/World/TemnajDolinaGEN2V37.yml
-    Agroprom: /Maps/_ST/World/AgropromV96.yml
-    Limansk: /Maps/_ST/World/limanskV148.yml
-    MiltiaryBase: /Maps/_ST/World/MBaseV15.yml
+    #RedForest: /Maps/_ST/World/RedForestV79.yml # ST14EN-ARENA-DEATMATCH: Removed
+    #Svalka: /Maps/_ST/World/SvalkaV158.yml # ST14EN-ARENA-DEATMATCH: Removed
+    #TemnajLohina: /Maps/_ST/World/TemnajLohinaV88.yml # ST14EN-ARENA-DEATMATCH: Removed
+    RostokAndWilds: /Maps/_STDA/World/rostok_pvp_v1.yml # ST14EN-ARENA-DEATMATCH: changed
+    #UndegroundWildsBar100rads: /Maps/_ST/World/UndegroundWildsBar100radsV38.yml # ST14EN-ARENA-DEATMATCH: Removed
+    #Topi: /Maps/_ST/World/TopiV32.yml # ST14EN-ARENA-DEATMATCH: Removed
+    #TemDolina: /Maps/_ST/World/TemnajDolinaGEN2V37.yml # ST14EN-ARENA-DEATMATCH: Removed
+    #Agroprom: /Maps/_ST/World/AgropromV96.yml # ST14EN-ARENA-DEATMATCH: Removed
+    #Limansk: /Maps/_ST/World/limanskV148.yml # ST14EN-ARENA-DEATMATCH: Removed
+    #MiltiaryBase: /Maps/_ST/World/MBaseV15.yml # ST14EN-ARENA-DEATMATCH: Removed
     #Yantar: /Maps/_ST/World/YantarV3.yml
     #YantarLabs: /Maps/_ST/World/YantarLabsV2.yml
