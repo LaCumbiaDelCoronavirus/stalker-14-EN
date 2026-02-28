@@ -1,14 +1,14 @@
 using Content.Shared.Whitelist;
-using JetBrains.Annotations;
-using Robust.Shared.Network;
-using Robust.Shared.Player;
-using Robust.Shared.Serialization;
 
 namespace Content.Shared._Stalker.StalkerRepository;
 
 [RegisterComponent]
 public sealed partial class StalkerRepositoryComponent : Component
 {
+    // ST14EN-ARENA-DEATMATCH
+    [DataField]
+    public bool LoadoutsCloneItems = false;
+
     [DataField("Owner")]
     public string StorageOwner = "";
 

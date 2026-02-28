@@ -15,7 +15,7 @@
   components:
   - type: Action
     startDelay: true
-    useDelay: 120
+    useDelay: 0 # ST14EN-ARENA-DEATMATCH: Made 0
     icon:
       sprite: Mobs/Ghosts/ghost_human.rsi
       state: icon
@@ -29,7 +29,7 @@
   description: Pretend to take your final breath while staying alive.
   components:
   - type: Action
-    useDelay: 30
+    useDelay: 15 # ST14EN-ARENA-DEATMATCH: Made 0
     icon:
       sprite: Interface/Actions/actions_crit.rsi
       state: fakedeath
@@ -44,7 +44,7 @@
   components:
   - type: Action
     startDelay: true
-    useDelay: 120
+    useDelay: 0 # ST14EN-ARENA-DEATMATCH: Made 0
     icon:
       sprite: Interface/Actions/actions_crit.rsi
       state: lastwords

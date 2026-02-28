@@ -19,8 +19,8 @@ namespace Content.Client._RD.DeathScreen;
 
 public sealed class RDDeathScreenControl : RDControl
 {
-    private const float FadeDuration = 4f;
-    private const float DelayTime = 3f;
+    private const float FadeDuration = 0.5f; // ST14EN-ARENA-DEATMATCH: Made 0.5
+    private const float DelayTime = 0.5f; // ST14EN-ARENA-DEATMATCH: Made 0.5
 
     [Dependency] private readonly IResourceCache _resourceCache = default!;
 
@@ -87,6 +87,6 @@ public sealed class RDDeathScreenControl : RDControl
         _elapsedTime += args.DeltaSeconds;
 
         _label.Modulate = Color.White.WithAlpha(MathHelper.Lerp(0f, 1f, _elapsedTime / FadeDuration));
-        BackgroundColor = Color.Black.WithAlpha( MathHelper.Lerp(0f, 1f, _elapsedTime / FadeDuration));
+        BackgroundColor = Color.Black.WithAlpha(MathHelper.Lerp(0f, 1f, _elapsedTime / FadeDuration));
     }
 }

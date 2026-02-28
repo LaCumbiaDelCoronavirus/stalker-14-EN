@@ -116,7 +116,7 @@
     thresholds:
       0: Alive
       100: Critical
-      200: Dead
+      110: Dead # ST14EN-ARENA-DEATMATCH: `200` -> `110`
   - type: STSoftCritEnabled # stalker-en-changes
     softCritFraction: 0.5
     crawlSpeedModifier: 0.3

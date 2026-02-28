@@ -1,0 +1,19 @@
+- type: gamePreset
+  id: STDAGamePreset
+  alias:
+  - stalker
+  name: game-preset-stalker-title
+  description: game-preset-stalker-description
+  rules:
+  - STWeatherScheduler
+  supportedMaps: STDefaultMapPool
+
+- type: gameMapPool
+  id: STDefaultMapPool
+  maps:
+  - STDAWorld
+
+- type: gameMap
+  parent: STWorld
+  id: STDAWorld
+  mapPath: "/Maps/_ST/World/KordonV166.yml"

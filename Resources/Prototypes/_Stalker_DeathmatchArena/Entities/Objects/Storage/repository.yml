@@ -1,0 +1,11 @@
+- type: entity
+  parent: DebugRepository
+  id: STDARepository
+  name: loadout-cloning repository
+  suffix: ST-DA, Clones Loadouts
+  description: When you try to load a loadout from it, items arent actually taken from the stash. Amazing technology!
+  components:
+  - type: StalkerRepository
+    loadoutsCloneItems: true
+  - type: Sprite
+    sprite: _Stalker/Structures/Machines/VendingMachines/torgomat_mini_red.rsi

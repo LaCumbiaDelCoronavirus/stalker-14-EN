@@ -950,7 +950,7 @@ public sealed class LoadoutSystem : EntitySystem
     {
         // Find the item in stash
         var stashItem = FindItemInStash(slotItem.Identifier, slotItem.PrototypeId, stashLookup);
-        if (stashItem == null)
+        if (stashItem == null && !repository.Comp.LoadoutsCloneItems)
             return false;
 
         // NOTE: Don't remove from stash yet - wait until equip succeeds
@@ -958,9 +958,22 @@ public sealed class LoadoutSystem : EntitySystem
 
         // Spawn the item
         var xform = Transform(player);
-        var spawned = Spawn(stashItem.ProductEntity, xform.Coordinates);
 
-        if (stashItem.SStorageData is IItemStalkerStorage iss)
+        string prototypeId;
+        object? storageData;
+        if (repository.Comp.LoadoutsCloneItems)
+        {
+            prototypeId = slotItem.PrototypeId;
+            storageData = slotItem.StorageData;
+        }
+        else
+        {
+            prototypeId = stashItem!.ProductEntity;
+            storageData = stashItem!.SStorageData;
+        }
+
+        var spawned = Spawn(prototypeId, xform.Coordinates);
+        if (storageData is IItemStalkerStorage iss)
             _stalkerStorage.SpawnedItem(spawned, iss);
 
         // Equip before removing from stash - if equip fails, item state is preserved
@@ -973,7 +986,8 @@ public sealed class LoadoutSystem : EntitySystem
             }
         }
 
-        RemoveFromStash(repository, stashItem, stashLookup);
+        if (!repository.Comp.LoadoutsCloneItems)
+            RemoveFromStash(repository, stashItem!, stashLookup);
 
         // Clear and restore after equip - StorageFill may trigger during equip
         if (slotItem.NestedItems.Count > 0)
@@ -1623,9 +1637,12 @@ public sealed class LoadoutSystem : EntitySystem
 
             // Calculate missing items for each loadout (use fresh component)
             var stashLookup = BuildStashLookup(freshComponent.ContainedItems);
-            foreach (var loadout in loadouts)
+
+            // ST14EN-ARENA-DEATMATCH
+            if (!component.LoadoutsCloneItems)
             {
-                CalculateMissingItems(loadout, stashLookup, equippedPrototypes);
+                foreach (var loadout in loadouts)
+                    CalculateMissingItems(loadout, stashLookup, equippedPrototypes);
             }
 
             // Sort: Quick Save first, then by name

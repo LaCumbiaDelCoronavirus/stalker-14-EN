@@ -141,14 +141,17 @@ public sealed class TrashDeletingSystem : EntitySystem
                     break;
                 }
             }
-            if (!hasPlayer && !_mapMan.IsMapPaused(map))
-            {
-                _mapMan.SetMapPaused(map, true);
-            }
-            else if (hasPlayer && _mapMan.IsMapPaused(map))
-            {
-                _mapMan.SetMapPaused(map, false);
-            }
+
+
+            // ST14EN-ARENA-DEATMATCH: FUCK OFF
+            // if (!hasPlayer && !_mapMan.IsMapPaused(map))
+            // {
+            //     _mapMan.SetMapPaused(map, true);
+            // }
+            // else if (hasPlayer && _mapMan.IsMapPaused(map))
+            // {
+            //     _mapMan.SetMapPaused(map, false);
+            // }
         }
     }
 }

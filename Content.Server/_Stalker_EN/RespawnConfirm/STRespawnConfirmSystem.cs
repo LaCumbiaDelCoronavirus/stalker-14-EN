@@ -85,7 +85,7 @@ public sealed class STRespawnConfirmSystem : EntitySystem
     /// Duration to wait before respawning after death screen is shown.
     /// Matches the death screen animation: 4 seconds fade + 3 seconds delay.
     /// </summary>
-    private static readonly TimeSpan DeathScreenDuration = TimeSpan.FromSeconds(7);
+    private static readonly TimeSpan DeathScreenDuration = TimeSpan.FromSeconds(1); // ST14EN-ARENA-DEATMATCH: Made 1
 
     /// <summary>
     /// Audio path for the death screen sound effect.
@@ -147,9 +147,13 @@ public sealed class STRespawnConfirmSystem : EntitySystem
         if (_pendingRespawns.ContainsKey(session))
             return;
 
-        var eui = new STRespawnConfirmEui(this, session);
-        _euiManager.OpenEui(eui, session);
-        _openConfirms.Add(session);
+        // ST14EN-ARENA-DEATMATCH: Immediate respawn
+        // var eui = new STRespawnConfirmEui(this, session);
+        // _euiManager.OpenEui(eui, session);
+        // _openConfirms.Add(session);
+
+        // ST14EN-ARENA-DEATMATCH: Immediate respawn
+        HandleRespawnAccepted(session);
     }
 
     /// <summary>
