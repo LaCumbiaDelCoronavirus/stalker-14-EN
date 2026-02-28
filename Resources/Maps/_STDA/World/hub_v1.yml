@@ -149282,7 +149282,7 @@ entities:
       rot: 3.141592653589793 rad
       pos: 148.5,140.5
       parent: 1
-- proto: FloorRitualChasmEntity
+- proto: STDAFloorRitualChasmEntity
   entities:
   - uid: 2671
     components:

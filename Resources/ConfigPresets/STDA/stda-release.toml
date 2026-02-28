@@ -28,10 +28,5 @@ punctuation = false
 [tts]
 enabled = false
 
-[hub]
-advertise = true
-tags = "lang:en,rp:high,region:us_e"
-hub_urls = "https://hub.spacestation14.com/"
-
 [crewmanifest]
 no_entity = false

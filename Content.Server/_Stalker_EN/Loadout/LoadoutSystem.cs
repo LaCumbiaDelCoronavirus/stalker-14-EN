@@ -35,6 +35,7 @@ using Robust.Shared.Containers;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using EntityPrototype = Robust.Shared.Prototypes.EntityPrototype;
+using Newtonsoft.Json;
 
 namespace Content.Server._Stalker_EN.Loadout;
 
@@ -133,6 +134,13 @@ public sealed class LoadoutSystem : EntitySystem
     // Default blacklists (used when component is missing or field is null)
     private static readonly HashSet<string> DefaultSlotBlacklist = new() { "id" };
     private static readonly HashSet<string> DefaultContainerBlacklist = new() { "toggleable-clothing", "actions" };
+
+    // STDA
+    private static readonly JsonSerializerSettings JsonSerializerSettings = new()
+    {
+        TypeNameHandling = TypeNameHandling.Auto, // preserve types
+        Formatting = Formatting.Indented
+    };
 
     public override void Initialize()
     {
@@ -1145,6 +1153,9 @@ public sealed class LoadoutSystem : EntitySystem
             {
                 prototypeId = nestedItem.PrototypeId;
                 storageData = nestedItem.StorageData;
+
+                Log.Info($"storageData type: {storageData?.GetType()}");
+                Log.Info($"storageData: {storageData}");
             }
             else
             {
@@ -1949,7 +1960,8 @@ public sealed class LoadoutSystem : EntitySystem
 
         try
         {
-            return JsonSerializer.Deserialize<AllLoadoutsContainer>(json);
+            //return JsonSerializer.Deserialize<AllLoadoutsContainer>(json);
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<AllLoadoutsContainer>(json, JsonSerializerSettings);
         }
         catch (Exception e)
         {
@@ -1962,7 +1974,8 @@ public sealed class LoadoutSystem : EntitySystem
     {
         try
         {
-            var json = JsonSerializer.Serialize(container);
+            //var json = JsonSerializer.Serialize(container);
+            var json = Newtonsoft.Json.JsonConvert.SerializeObject(container, JsonSerializerSettings);
             await _dbManager.SetLoadouts(owner, json);
         }
         catch (Exception e)

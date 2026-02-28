@@ -198,11 +198,11 @@ namespace Content.Server.Entry
             switch (level)
             {
                 case ModUpdateLevel.PostEngine:
-                {
-                    _euiManager.SendUpdates();
-                    _voteManager.Update();
-                    break;
-                }
+                    {
+                        _euiManager.SendUpdates();
+                        _voteManager.Update();
+                        break;
+                    }
 
                 case ModUpdateLevel.FramePostEngine:
                     _updateManager.Update();
@@ -263,7 +263,7 @@ namespace Content.Server.Entry
 #endif
 
 #if RELEASE
-            Load(CCVars.ConfigPresetDebug, "strelease");
+            Load(CCVars.ConfigPresetDebug, "stda-release"); // STDA change
 #endif
             // stalker-changes-ends
 
