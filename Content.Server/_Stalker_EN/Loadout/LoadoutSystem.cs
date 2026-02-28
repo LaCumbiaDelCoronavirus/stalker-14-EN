@@ -1153,9 +1153,6 @@ public sealed class LoadoutSystem : EntitySystem
             {
                 prototypeId = nestedItem.PrototypeId;
                 storageData = nestedItem.StorageData;
-
-                Log.Info($"storageData type: {storageData?.GetType()}");
-                Log.Info($"storageData: {storageData}");
             }
             else
             {
