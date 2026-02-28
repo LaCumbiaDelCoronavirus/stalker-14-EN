@@ -2,18 +2,65 @@
   id: STDAGamePreset
   alias:
   - stalker
-  name: game-preset-stalker-title
-  description: game-preset-stalker-description
+  name: game-preset-stda-title
+  description: game-preset-stda-description
   rules:
   - STDAWeatherScheduler
-  supportedMaps: STDefaultMapPool
+  supportedMaps: STDADefaultMapPool
 
 - type: gameMapPool
-  id: STDefaultMapPool
+  id: STDADefaultMapPool
   maps:
   - STDAWorld
 
 - type: gameMap
   parent: STWorld
   id: STDAWorld
+  mapName: "Arena"
   mapPath: "/Maps/_STDA/World/hub_v1.yml"
+  minPlayers: 0
+  stations:
+    Stalker:
+      stationProto: StandardStalkerStation
+      components:
+      - type: StationNameSetup
+        mapNameTemplate: "Cordon"
+      - type: StationJobs
+        availableJobs:
+          Stalker: [ 0, -1 ]
+          StalkerRookie: [ 0, -1 ]
+          StalkerRene: [ 0, -1 ]
+          # StalkerHeadRene: [ 0, -1 ]
+          # StalkerGreh: [ 0, -1 ]
+          # StalkerMonolith: [ 0, -1 ]
+          # StalkerHeadMonolith: [ 0, -1 ]
+          StalkerClearSky: [ 0, -1 ]
+          # StalkerHeadClearSky: [ 0, -1 ]
+          StalkerNeutral: [ 0, -1 ]
+          # StalkerPostulant: [ 0, -1 ]
+          # StalkerBishop: [ 0, -1 ]
+          # Science
+          # sci: [ 0, -1 ]
+          # sci_decan: [ 0, -1 ]
+          # sci_rector: [ 0, -1 ]
+          # Military
+          Military: [ 0, -1 ]
+          MilitaryOfficer: [ 0, -1 ]
+          # MilitaryHead: [ 0, -1 ]
+          # Freedom
+          StalkerFreedom: [ 0, -1 ]
+          # StalkerHeadFreedom: [ 0, -1 ]
+          # Brigades
+          StalkerBandit: [ 0, -1 ]
+          # StalkerHeadBandit: [0, -1]
+          # Duty
+          StalkerDolg: [ 0, -1 ]
+          # StalkerHeadDolg: [ 0, -1 ]
+          # Journalists
+          # StalkerJournalist: [ 0, -1 ]
+          # Mercenary
+          StalkerMercenary: [ 0, -1 ]
+          # StalkerHeadMercenary: [ 0, -1 ]
+          # United Nations
+          # StalkerUN:  [0, -1]
+          #StalkerUNISG: [0, -1]

@@ -8,7 +8,7 @@
   - type: AccessReader
     access: []
   - type: VendingMachine
-    ejectDelay: 0.1
+    ejectDelay: 3
     pack: STDAInventoryBoxesRoubles #EN
     dispenseOnHitChance: 0.0
     dispenseOnHitThreshold: 2
@@ -18,10 +18,17 @@
 - type: vendingMachineInventory
   id: STDAInventoryBoxesRoubles
   startingInventory:
-    STDARoubles60k: 725
-    Binocularus: 725
-    MedkitMilitary: 725
-    STFlashlightSeclite: 725
+    STDARoubles60k: 87250
+    Binocularus: 87250
+    MedkitMilitary: 87250
+    STFlashlightSeclite: 87250
+
+    # Ammo
+    556FMJBoxCink: 87250
+    739FMJBoxCink: 87250
+    751M80BoxCink: 87250
+    754FMJBoxCink: 87250
+    39BPBoxCink: 87250
 
 - type: entity
   parent: Roubles5000

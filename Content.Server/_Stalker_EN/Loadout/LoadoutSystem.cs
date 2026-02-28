@@ -961,7 +961,7 @@ public sealed class LoadoutSystem : EntitySystem
 
         string prototypeId;
         object? storageData;
-        if (repository.Comp.LoadoutsCloneItems)
+        if (stashItem == null)
         {
             prototypeId = slotItem.PrototypeId;
             storageData = slotItem.StorageData;
@@ -1050,7 +1050,7 @@ public sealed class LoadoutSystem : EntitySystem
 
             // Find the item in stash
             var stashItem = FindItemInStash(nestedItem.Identifier, nestedItem.PrototypeId, stashLookup);
-            if (stashItem == null)
+            if (stashItem == null && !repository.Comp.LoadoutsCloneItems)
                 continue;
 
             // Find container and ItemSlot (if applicable) - try multiple methods
@@ -1138,13 +1138,25 @@ public sealed class LoadoutSystem : EntitySystem
 
             // Spawn the item
             var xform = Transform(parent);
-            var spawned = Spawn(stashItem.ProductEntity, xform.Coordinates);
+
+            string prototypeId;
+            object? storageData;
+            if (stashItem == null)
+            {
+                prototypeId = nestedItem.PrototypeId;
+                storageData = nestedItem.StorageData;
+            }
+            else
+            {
+                prototypeId = stashItem!.ProductEntity;
+                storageData = stashItem!.SStorageData;
+            }
+
+            var spawned = Spawn(prototypeId, xform.Coordinates);
 
             // Restore item state
-            if (stashItem.SStorageData is IItemStalkerStorage iss)
-            {
+            if (storageData is IItemStalkerStorage iss)
                 _stalkerStorage.SpawnedItem(spawned, iss);
-            }
 
             // Clear auto-filled contents BEFORE inserting into parent storage to prevent
             // StorageFill contents from leaking into parent's StoredItems dictionary
@@ -1244,7 +1256,8 @@ public sealed class LoadoutSystem : EntitySystem
                 continue;
             }
 
-            RemoveFromStash(repository, stashItem, stashLookup);
+            if (!repository.Comp.LoadoutsCloneItems)
+                RemoveFromStash(repository, stashItem!, stashLookup);
 
             // Prevent subsequent iterations from matching this item via FindExistingCorrectItem
             consumedExistingItems.Add(spawned);
