@@ -6,5 +6,5 @@
   components:
   - type: BlurredSprite
     layers:
-    - sprite: /Textures/_Stalker_DeathmatchArena/Objects/Misc/hind.rsi
+    - sprite: /Textures/_Stalker_DeathmatchArena/Objects/Misc/hind.rsi # has to be rooted
       state: body

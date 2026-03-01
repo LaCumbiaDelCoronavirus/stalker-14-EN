@@ -1,4 +1,3 @@
-using System.Linq;
 using System.Numerics;
 using Content.Client.Graphics;
 using Content.Client.Light;
@@ -19,8 +18,8 @@ public sealed class BlurredSpriteOverlay : Overlay
     [Dependency] private readonly IEntityManager _entityManager = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly IClyde _clyde = default!;
-    [Dependency] private readonly TransformSystem _transformSystem = default!;
-    [Dependency] private readonly SpriteSystem _spriteSystem = default!;
+    private readonly TransformSystem _transformSystem = default!;
+    private readonly SpriteSystem _spriteSystem = default!;
 
     private readonly OverlayResourceCache<CachedResources> _resources = new();
     public override OverlaySpace Space => OverlaySpace.BeforeLighting;
@@ -31,7 +30,7 @@ public sealed class BlurredSpriteOverlay : Overlay
 
         _entityManager.EntitySysManager.Resolve(ref _transformSystem);
         _entityManager.EntitySysManager.Resolve(ref _spriteSystem);
-        ZIndex = AfterLightTargetOverlay.ContentZIndex + 2;
+        ZIndex = AfterLightTargetOverlay.ContentZIndex + 1;
     }
 
     protected override bool BeforeDraw(in OverlayDrawArgs args)
@@ -67,7 +66,7 @@ public sealed class BlurredSpriteOverlay : Overlay
         var rotationMatrix = Matrix3x2.CreateRotation(-(float)eye.Rotation.Degrees);
 
         var worldHandle = args.WorldHandle;
-        args.WorldHandle.RenderInRenderTarget(res.Target,
+        worldHandle.RenderInRenderTarget(res.Target,
             () =>
             {
                 var shadowEnumerator = _entityManager.EntityQueryEnumerator<BlurredSpriteComponent, TransformComponent>();
@@ -99,7 +98,7 @@ public sealed class BlurredSpriteOverlay : Overlay
 
         // Draw stencil (see roofoverlay).
         worldHandle.UseShader(maskShader);
-        args.WorldHandle.RenderInRenderTarget(viewport.LightRenderTarget,
+        worldHandle.RenderInRenderTarget(viewport.LightRenderTarget,
             () =>
             {
                 var invMatrix =
