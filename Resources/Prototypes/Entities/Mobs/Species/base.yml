@@ -217,6 +217,10 @@
     tags:
     - FootstepSound
     - STMaterialOrganic # Stalker
+  # STDA Changes start
+  - type: ESViewcone
+  - type: ESViewconeOccludable
+  # STDA Changes end
 
 - type: entity
   save: false
