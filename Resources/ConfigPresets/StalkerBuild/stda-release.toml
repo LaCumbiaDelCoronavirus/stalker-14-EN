@@ -1,5 +1,5 @@
 [game]
-hostname = "☢️S.T.A.L.K.E.R. [EN Test] [PvP Arena] ☣️"
+hostname = "S.T.A.L.K.E.R. [EN Test] [PvP Arena]"
 desc = "Server in S.T.A.L.K.E.R. setting. Now in English! This is a PvP deathmatch arena gamemode."
 #map = "STWorld" # st-changes-dev-map
 map_pool = "STDefaultMapPool"  # st-changes-map-pool
@@ -21,6 +21,8 @@ arrivals = false
 preload_grids = false
 camera_rotation_locked = true
 
+[pointing]
+cooldown_seconds = 0.08
 [ic]
 flavor_text = true
 punctuation = false

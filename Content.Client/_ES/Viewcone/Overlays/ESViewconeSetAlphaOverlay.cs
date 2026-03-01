@@ -34,7 +34,7 @@ public sealed class ESViewconeSetAlphaOverlay : Overlay
 
         _cone = _ent.EntitySysManager.GetEntitySystem<ESViewconeOverlayManagementSystem>();
         _tree = _ent.EntitySysManager.GetEntitySystem<ESViewconeOccludableTreeSystem>();
-        _xform  = _ent.EntitySysManager.GetEntitySystem<TransformSystem>();
+        _xform = _ent.EntitySysManager.GetEntitySystem<TransformSystem>();
         _sprite = _ent.EntitySysManager.GetEntitySystem<SpriteSystem>();
     }
 
@@ -102,7 +102,7 @@ public sealed class ESViewconeSetAlphaOverlay : Overlay
             var distLength = dist.Length();
             var angleDist = Angle.ShortestDistance(dist.ToWorldAngle(), eyeRot);
 
-            var angleAlpha = (float) Math.Clamp((Math.Abs(angleDist.Theta) - (radConeAngle * 0.5f)) + (radConeFeather * 0.5f), 0f, radConeFeather) / radConeFeather;
+            var angleAlpha = (float)Math.Clamp((Math.Abs(angleDist.Theta) - (radConeAngle * 0.5f)) + (radConeFeather * 0.5f), 0f, radConeFeather) / radConeFeather;
             var distAlpha = Math.Clamp((distLength - cone.ConeIgnoreRadius) + (cone.ConeIgnoreFeather * 0.5f), 0f, cone.ConeIgnoreFeather) / cone.ConeIgnoreFeather;
             var targetAlpha = Math.Max(1f - angleAlpha, 1f - distAlpha);
 
@@ -110,7 +110,7 @@ public sealed class ESViewconeSetAlphaOverlay : Overlay
             _cone.CachedBaseAlphas.Add(((uid, sprite), sprite.Color.A));
 
             var alpha = comp.Inverted ? 1f - targetAlpha : targetAlpha;
-            sprite.Color = sprite.Color.WithAlpha(targetAlpha);
+            sprite.Color = sprite.Color.WithAlpha(alpha); // STDA: Use `alpha` not `targetAlpha`
             comp.IsHidden = alpha <= 0.01f;
 
         }

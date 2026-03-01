@@ -1,0 +1,4 @@
+- files: ["togglecombat.ogg", "toggleoffcombat.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from https://github.com/tgstation/tgstation/ at commit 543aeb48c2ab5bf90efa1a5f75b05c5fbf65be79"
+  source: "https://github.com/tgstation/tgstation/tree/543aeb48c2ab5bf90efa1a5f75b05c5fbf65be79/sound/misc"
