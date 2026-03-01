@@ -19,8 +19,8 @@ public abstract class SharedCombatModeSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audioSystem = default!; // STDA
 
     // STDA start
-    private static readonly SoundSpecifier CombatModeOnSpecifier = new SoundPathSpecifier("/Audio/_Stalker_DeathmatchArena/Misc/togglecombat.ogg", AudioParams.Default with { Volume = -5 });
-    private static readonly SoundSpecifier CombatModeOffSpecifier = new SoundPathSpecifier("/Audio/_Stalker_DeathmatchArena/Misc/toggleoffcombat.ogg", AudioParams.Default with { Volume = -5 });
+    private static readonly SoundSpecifier CombatModeOnSpecifier = new SoundPathSpecifier("/Audio/_Stalker_DeathmatchArena/Misc/togglecombat.ogg", AudioParams.Default with { Volume = -6 });
+    private static readonly SoundSpecifier CombatModeOffSpecifier = new SoundPathSpecifier("/Audio/_Stalker_DeathmatchArena/Misc/toggleoffcombat.ogg", AudioParams.Default with { Volume = -6 });
     // STDA end
 
     public override void Initialize()
