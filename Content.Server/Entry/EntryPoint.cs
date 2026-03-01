@@ -42,8 +42,8 @@ namespace Content.Server.Entry
 {
     public sealed class EntryPoint : GameServer
     {
-        internal const string ConfigPresetsDir = "/ConfigPresets/Stalker"; // stalker-changes. Taking configs from ours
-        private const string ConfigPresetsDirBuild = $"{ConfigPresetsDir}Build/";
+        internal const string ConfigPresetsDir = "/ConfigPresets/";
+        private const string ConfigPresetsDirBuild = $"{ConfigPresetsDir}/";
 
         [Dependency] private readonly CVarControlManager _cvarCtrl = default!;
         [Dependency] private readonly ContentLocalizationManager _loc = default!;
@@ -254,19 +254,6 @@ namespace Content.Server.Entry
 
         private static void LoadBuildConfigPresets(IConfigurationManager cfg, IResourceManager res, ISawmill sawmill)
         {
-            // stalker-changes. Taking configs from Stalker folder
-#if TOOLS
-            Load(CCVars.ConfigPresetDevelopment, "sttools");
-#endif
-#if DEBUG
-            Load(CCVars.ConfigPresetDebug, "stdebug");
-#endif
-
-#if RELEASE
-            Load(CCVars.ConfigPresetDebug, "stda-release"); // STDA change
-#endif
-            // stalker-changes-ends
-
 #pragma warning disable CS8321
             void Load(CVarDef<bool> cVar, string name)
             {
