@@ -219,6 +219,8 @@
     - STMaterialOrganic # Stalker
   # STDA Changes start
   - type: ESViewcone
+    coneAngle: 200
+    coneFeather: 10
   - type: ESViewconeOccludable
   # STDA Changes end
 
