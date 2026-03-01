@@ -6,6 +6,7 @@ using Robust.Client.Input;
 using Robust.Client.Player;
 using Robust.Shared.Enums;
 using Robust.Shared.Map;
+using Robust.Shared.Map.Components;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
@@ -72,15 +73,21 @@ public sealed class ESViewconeConeOverlay : Overlay
 
         _viewconeShader.SetParameter("SCREEN_TEXTURE", ScreenTexture);
         _viewconeShader.SetParameter("Zoom", _eyeEntity.Value.Comp1.Zoom.X);
-        _viewconeShader.SetParameter("ViewAngle", (float) _eyeEntity.Value.Comp2.ViewAngle.Theta);
+        _viewconeShader.SetParameter("ViewAngle", (float)_eyeEntity.Value.Comp2.ViewAngle.Theta);
         _viewconeShader.SetParameter("ConeAngle", _coneAngle);
         _viewconeShader.SetParameter("ConeFeather", _coneFeather);
         _viewconeShader.SetParameter("ConeIgnoreRadius", _coneIgnoreRadius);
         _viewconeShader.SetParameter("ConeIgnoreFeather", _coneIgnoreFeather);
 
-        worldHandle.UseShader(_viewconeShader);
-        worldHandle.DrawRect(viewport, Color.White);
-        worldHandle.UseShader(null);
+        // STDA - Made ts more simple
+        if (_ent.TryGetComponent<MapLightComponent>(args.MapUid, out var mapLightComponent))
+            worldHandle.DrawRect(viewport, mapLightComponent.AmbientLightColor);
+        else
+            worldHandle.DrawRect(viewport, Color.Black);
+
+        // worldHandle.UseShader(_viewconeShader);
+        // worldHandle.DrawRect(viewport, Color.White);
+        // worldHandle.UseShader(null);
         _eyeEntity = null;
     }
 }
