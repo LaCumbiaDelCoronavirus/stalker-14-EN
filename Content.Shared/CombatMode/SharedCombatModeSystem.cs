@@ -3,6 +3,8 @@ using Content.Shared.Mind;
 using Content.Shared.MouseRotator;
 using Content.Shared.Movement.Components;
 using Content.Shared.Popups;
+using Robust.Shared.Audio; // STDA
+using Robust.Shared.Audio.Systems; // STDA
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
 
@@ -14,6 +16,12 @@ public abstract class SharedCombatModeSystem : EntitySystem
     [Dependency] private readonly SharedActionsSystem _actionsSystem = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
+    [Dependency] private readonly SharedAudioSystem _audioSystem = default!; // STDA
+
+    // STDA start
+    private static readonly SoundSpecifier CombatModeOnSpecifier = new SoundPathSpecifier("/Audio/_Stalker_DeathmatchArena/Misc/togglecombat.ogg", AudioParams.Default with { Volume = -5 });
+    private static readonly SoundSpecifier CombatModeOffSpecifier = new SoundPathSpecifier("/Audio/_Stalker_DeathmatchArena/Misc/toggleoffcombat.ogg", AudioParams.Default with { Volume = -5 });
+    // STDA end
 
     public override void Initialize()
     {
@@ -47,6 +55,15 @@ public abstract class SharedCombatModeSystem : EntitySystem
 
         var msg = component.IsInCombatMode ? "action-popup-combat-enabled" : "action-popup-combat-disabled";
         _popup.PopupClient(Loc.GetString(msg), args.Performer, args.Performer);
+
+        // STDA start
+        _audioSystem.PlayLocal(component.IsInCombatMode ?
+            CombatModeOnSpecifier :
+            CombatModeOffSpecifier,
+            uid,
+            uid
+        );
+        // STDA end
     }
 
     public void SetCanDisarm(EntityUid entity, bool canDisarm, CombatModeComponent? component = null)

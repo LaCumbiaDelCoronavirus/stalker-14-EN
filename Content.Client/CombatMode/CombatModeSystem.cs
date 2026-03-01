@@ -2,11 +2,9 @@ using Content.Client.Hands.Systems;
 using Content.Client.NPC.HTN;
 using Content.Shared.CCVar;
 using Content.Shared.CombatMode;
-using Robust.Client.Audio; // STDA
 using Robust.Client.Graphics;
 using Robust.Client.Input;
 using Robust.Client.Player;
-using Robust.Shared.Audio; // STDA
 using Robust.Shared.Configuration;
 
 namespace Content.Client.CombatMode;
@@ -18,12 +16,6 @@ public sealed class CombatModeSystem : SharedCombatModeSystem
     [Dependency] private readonly IConfigurationManager _cfg = default!;
     [Dependency] private readonly IInputManager _inputManager = default!;
     [Dependency] private readonly IEyeManager _eye = default!;
-    [Dependency] private readonly AudioSystem _stdaAudioSystem = default!; // STDA
-
-    // STDA start
-    private static readonly SoundSpecifier CombatModeOnSpecifier = new SoundPathSpecifier("/Audio/_Stalker_DeathmatchArena/Misc/togglecombat.ogg");
-    private static readonly SoundSpecifier CombatModeOffSpecifier = new SoundPathSpecifier("/Audio/_Stalker_DeathmatchArena/Misc/toggleoffcombat.ogg");
-    // STDA end
 
     /// <summary>
     /// Raised whenever combat mode changes.
@@ -65,14 +57,6 @@ public sealed class CombatModeSystem : SharedCombatModeSystem
     {
         base.SetInCombatMode(entity, value, component);
         UpdateHud(entity);
-
-        // STDA start
-        _stdaAudioSystem.PlayGlobal(value ?
-            CombatModeOnSpecifier :
-            CombatModeOffSpecifier,
-            entity
-        );
-        // STDA end
     }
 
     protected override bool IsNpc(EntityUid uid)
