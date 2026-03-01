@@ -1,0 +1,31 @@
+﻿{
+    "version": 1,
+    "license": "CC0-1.0",
+    "copyright": "Taken from Wikimedia Commons at https://commons.wikimedia.org/wiki/File:Mil_Mi-24_HIND.png, modified for ST-DA",
+    "size": {
+        "x": 256,
+        "y": 256
+    },
+    "metaAtlas": false,
+    "states": [
+        {
+            "name": "body"
+        },
+        {
+            "name": "rotor_static"
+        },
+        {
+            "name": "rotor",
+            "delays":
+            [
+                [
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1
+                ]
+            ]
+        }
+    ]
+}

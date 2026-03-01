@@ -22,7 +22,8 @@ namespace Content.Server.Entry
             "OptionsVisualizer",
             "AnomalyScannerScreen",
             "MultipartMachineGhost",
-            "STIcon" // Stalker-Changes
+            "STIcon", // Stalker-Changes
+            "BlurredSprite" // STDA
         };
     }
 }

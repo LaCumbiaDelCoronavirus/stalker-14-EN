@@ -1,0 +1,10 @@
+
+- type: entity
+  id: STDASetpieceHind
+  name: mi-24 hind
+  description: Uh oh.
+  components:
+  - type: BlurredSprite
+    layers:
+    - sprite: /Textures/_Stalker_DeathmatchArena/Objects/Misc/hind.rsi
+      state: body
