@@ -222,6 +222,7 @@
     coneAngle: 200
     coneFeather: 10
   - type: ESViewconeOccludable
+  #- type: ScorestreakReward
   # STDA Changes end
 
 - type: entity

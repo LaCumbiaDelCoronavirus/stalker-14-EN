@@ -1,14 +1,12 @@
-using Content.Shared.Administration.Systems;
+using Content.Shared._Stalker_DeathmatchArena.Scorestreak;
 using Content.Shared.Mobs;
-using Content.Shared.Popups;
 using Robust.Shared.Player;
 
 namespace Content.Shared._Stalker_DeathmatchArena.RejuvenateOnKill;
 
 public sealed class RejuvenateOnKillSystem : EntitySystem
 {
-    [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
-    [Dependency] private readonly RejuvenateSystem _rejuvenateSystem = default!;
+    [Dependency] private readonly ScorestreakSystem _scorestreakSystem = default!;
 
     private EntityQuery<ActorComponent> _actorQuery;
 
@@ -20,17 +18,19 @@ public sealed class RejuvenateOnKillSystem : EntitySystem
         SubscribeLocalEvent<MobStateChangedEvent>(OnMobStateChanged);
     }
 
-    private void OnMobStateChanged(ref MobStateChangedEvent args)
+    private void OnMobStateChanged(MobStateChangedEvent args) // not by-ref
     {
-        if (!_actorQuery.HasComponent(args.Origin) ||
-            !_actorQuery.HasComponent(args.Target))
+        if (args.Origin == args.Target ||
+            args.Origin is not { } originUid) // GG
+            return;
+
+        if (!_actorQuery.HasComponent(args.Target))
             return;
 
         if (args.NewMobState == args.OldMobState ||
             args.NewMobState != MobState.Dead)
             return;
 
-        _rejuvenateSystem.PerformRejuvenate(args.Origin.Value);
-        _popupSystem.PopupClient("You are rejuvenated!", args.Origin.Value, args.Origin, PopupType.Medium);
+        _scorestreakSystem.AddScore(originUid, 1);
     }
 }
