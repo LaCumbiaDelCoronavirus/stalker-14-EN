@@ -1,10 +1,10 @@
 
-- type: entity
-  id: STDASetpieceHind
-  name: mi-24 hind
-  description: Uh oh.
-  components:
-  - type: BlurredSprite
-    layers:
-    - sprite: /Textures/_Stalker_DeathmatchArena/Objects/Misc/hind.rsi # has to be rooted
-      state: body
+# - type: entity
+#   id: STDASetpieceHind
+#   name: mi-24 hind
+#   description: Uh oh.
+#   components:
+#   - type: BlurredSprite
+#     layers:
+#     - sprite: /Textures/_Stalker_DeathmatchArena/Objects/Misc/hind.rsi # has to be rooted
+#       state: body

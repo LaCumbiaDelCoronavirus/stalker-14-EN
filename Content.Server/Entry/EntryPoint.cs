@@ -254,10 +254,22 @@ namespace Content.Server.Entry
 
         private static void LoadBuildConfigPresets(IConfigurationManager cfg, IResourceManager res, ISawmill sawmill)
         {
+            // ST14-changed
+#if TOOLS
+            Load(CCVars.ConfigPresetDevelopment, "StalkerBuild/sttools");
+#endif
+#if DEBUG
+            Load(CCVars.ConfigPresetDebug, "StalkerBuild/stdebug");
+#endif
+
+#if RELEASE
+            Load(CCVars.ConfigPresetDebug, "STDA/stda"); // STDA
+#endif
+
 #pragma warning disable CS8321
             void Load(CVarDef<bool> cVar, string name)
             {
-                var path = $"{ConfigPresetsDirBuild}{name}.toml";
+                var path = $"{ConfigPresetsDir}{name}.toml";
                 if (cfg.GetCVar(cVar) && res.TryContentFileRead(path, out var file))
                 {
                     cfg.LoadDefaultsFromTomlStream(file);
