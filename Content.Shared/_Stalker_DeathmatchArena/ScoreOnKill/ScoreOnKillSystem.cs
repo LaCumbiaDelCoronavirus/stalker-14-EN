@@ -2,9 +2,9 @@ using Content.Shared._Stalker_DeathmatchArena.Scorestreak;
 using Content.Shared.Mobs;
 using Robust.Shared.Player;
 
-namespace Content.Shared._Stalker_DeathmatchArena.RejuvenateOnKill;
+namespace Content.Shared._Stalker_DeathmatchArena.ScoreOnKill;
 
-public sealed class RejuvenateOnKillSystem : EntitySystem
+public sealed class ScoreOnKillSystem : EntitySystem
 {
     [Dependency] private readonly ScorestreakSystem _scorestreakSystem = default!;
 

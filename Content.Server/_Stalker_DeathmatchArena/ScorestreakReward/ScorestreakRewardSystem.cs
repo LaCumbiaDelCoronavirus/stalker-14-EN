@@ -5,7 +5,7 @@ using Content.Shared.Administration.Systems;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Popups;
 
-namespace Content.Server._Stalker_DeathmatchArena.Scorestreak;
+namespace Content.Server._Stalker_DeathmatchArena.ScorestreakReward;
 
 public sealed class ScorestreakRewardSystem : EntitySystem
 {
