@@ -21,7 +21,7 @@
     maxAngle: -50
   - type: Clothing
     sprite: Objects/Weapons/Guns/Snipers/bolt_gun_wood.rsi
-  - type: AmmoCounter
+  #- type: AmmoCounter # STDA
   - type: Gun
     projectileSpeed: 75
     fireRate: 0.75

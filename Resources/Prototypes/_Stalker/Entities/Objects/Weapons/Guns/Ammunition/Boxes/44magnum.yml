@@ -4,6 +4,7 @@
   suffix: Stalker
   abstract: true
   components:
+  - type: AmmoCounter # STDA
   - type: RepositoryItem
     categoryName: repository-cartridges-category
   - type: BallisticAmmoProvider

@@ -6,6 +6,7 @@
   categories: [ HideSpawnMenu ]
   suffix: Stalker
   components:
+  - type: AmmoCounter # STDA
   - type: STBulkBuyable # stalker-14-en
     maxQuantity: 10
   - type: RepositoryItem
@@ -44,6 +45,7 @@
   categories: [ HideSpawnMenu ]
   suffix: Stalker
   components:
+  - type: AmmoCounter # STDA
   - type: STBulkBuyable # stalker-14-en
     maxQuantity: 5
   - type: RepositoryItem

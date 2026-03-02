@@ -63,6 +63,7 @@
   parent: BaseItem
   suffix: Stalker
   components:
+  - type: AmmoCounter # STDA
   - type: STBulkBuyable # stalker-14-en
     maxQuantity: 10
   - type: STWeight
@@ -185,6 +186,7 @@
   parent: BaseItem
   suffix: Stalker
   components:
+  - type: AmmoCounter # STDA
   - type: STBulkBuyable # stalker-14-en
     maxQuantity: 10
   - type: STWeight

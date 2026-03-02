@@ -5,6 +5,7 @@
   suffix: Stalker
   abstract: true
   components:
+  - type: AmmoCounter # STDA
   - type: Tag
     tags:
     - Cartridge
