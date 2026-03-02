@@ -53,26 +53,26 @@ namespace Content.Shared.Weapons.Ranged.Systems;
 
 public abstract partial class SharedGunSystem : EntitySystem
 {
-    [Dependency] private   readonly ActionBlockerSystem _actionBlockerSystem = default!;
+    [Dependency] private readonly ActionBlockerSystem _actionBlockerSystem = default!;
     [Dependency] protected readonly IGameTiming Timing = default!;
     [Dependency] protected readonly IMapManager MapManager = default!;
-    [Dependency] private   readonly INetManager _netManager = default!;
+    [Dependency] private readonly INetManager _netManager = default!;
     [Dependency] protected readonly IPrototypeManager ProtoManager = default!;
     [Dependency] protected readonly IRobustRandom Random = default!;
     [Dependency] protected readonly ISharedAdminLogManager Logs = default!;
-    [Dependency] private   readonly IConfigurationManager _config = default!;
+    [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] protected readonly DamageableSystem Damageable = default!;
     [Dependency] protected readonly ExamineSystemShared Examine = default!;
-    [Dependency] private   readonly SharedHandsSystem _hands = default!;
-    [Dependency] private   readonly ItemSlotsSystem _slots = default!;
-    [Dependency] private   readonly RechargeBasicEntityAmmoSystem _recharge = default!;
+    [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private readonly ItemSlotsSystem _slots = default!;
+    [Dependency] private readonly RechargeBasicEntityAmmoSystem _recharge = default!;
     [Dependency] protected readonly SharedActionsSystem Actions = default!;
     [Dependency] protected readonly SharedAppearanceSystem Appearance = default!;
     [Dependency] protected readonly SharedAudioSystem Audio = default!;
-    [Dependency] private   readonly SharedCameraRecoilSystem _recoil = default!;
-    [Dependency] private   readonly SharedCombatModeSystem _combatMode = default!;
+    [Dependency] private readonly SharedCameraRecoilSystem _recoil = default!;
+    [Dependency] private readonly SharedCombatModeSystem _combatMode = default!;
     [Dependency] protected readonly SharedContainerSystem Containers = default!;
-    [Dependency] private   readonly SharedMapSystem _map = default!;
+    [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] protected readonly SharedPointLightSystem Lights = default!;
     [Dependency] protected readonly SharedPopupSystem PopupSystem = default!;
     [Dependency] protected readonly SharedPhysicsSystem Physics = default!;
@@ -80,11 +80,11 @@ public abstract partial class SharedGunSystem : EntitySystem
     [Dependency] protected readonly SharedTransformSystem TransformSystem = default!;
     [Dependency] protected readonly TagSystem TagSystem = default!;
     [Dependency] protected readonly ThrowingSystem ThrowingSystem = default!;
-    [Dependency] private   readonly UseDelaySystem _useDelay = default!;
-    [Dependency] private   readonly EntityWhitelistSystem _whitelistSystem = default!;
+    [Dependency] private readonly UseDelaySystem _useDelay = default!;
+    [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
     // stalker-changes-start: dependencies for prototype-based hitscan (HitscanPrototype)
-    [Dependency] private   readonly SharedStaminaSystem _stamina = default!;
-    [Dependency] private   readonly SharedColorFlashEffectSystem _color = default!;
+    [Dependency] private readonly SharedStaminaSystem _stamina = default!;
+    [Dependency] private readonly SharedColorFlashEffectSystem _color = default!;
     // stalker-changes-end
 
     private static readonly ProtoId<TagPrototype> TrashTag = "Trash";
@@ -858,7 +858,7 @@ public abstract partial class SharedGunSystem : EntitySystem
         // Use deterministic RNG seeded from tick + entity ID for prediction compatibility
         long tick = Timing.CurTick.Value;
         tick = tick << 32;
-        tick = tick | (uint) GetNetEntity(component.Owner).Id;
+        tick = tick | (uint)GetNetEntity(component.Owner).Id;
         var random = new Xoroshiro64S(tick).NextFloat(-0.5f, 0.5f);
         var spread = component.CurrentAngle.Theta * random;
         var angle = new Angle(direction.Theta + component.CurrentAngle.Theta * random);
@@ -984,7 +984,7 @@ public abstract partial class SharedGunSystem : EntitySystem
     /// <summary>
     /// Call this whenever the ammo count for a gun changes.
     /// </summary>
-    protected virtual void UpdateAmmoCount(EntityUid uid, bool prediction = true) {}
+    protected virtual void UpdateAmmoCount(EntityUid uid, bool prediction = true) { }
 
     protected void SetCartridgeSpent(EntityUid uid, CartridgeAmmoComponent cartridge, bool spent)
     {
@@ -1063,7 +1063,7 @@ public abstract partial class SharedGunSystem : EntitySystem
         if (sprite == null)
             return;
 
-        var ev = new MuzzleFlashEvent(GetNetEntity(gun), sprite, worldAngle);
+        var ev = new MuzzleFlashEvent(GetNetEntity(gun), sprite, component.DetachedMuzzleFlash, worldAngle);
         CreateEffect(gun, ev, user);
     }
 
@@ -1074,7 +1074,7 @@ public abstract partial class SharedGunSystem : EntitySystem
         var shotDirection = (toMap - fromMap).Normalized();
 
         const float impulseStrength = 25.0f;
-        var impulseVector =  shotDirection * impulseStrength;
+        var impulseVector = shotDirection * impulseStrength;
         Physics.ApplyLinearImpulse(user, -impulseVector, body: userPhysics);
     }
 

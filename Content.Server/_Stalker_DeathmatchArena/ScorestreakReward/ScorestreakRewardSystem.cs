@@ -28,7 +28,7 @@ public sealed class ScorestreakRewardSystem : EntitySystem
         _rejuvenateSystem.PerformRejuvenate(entity.Owner);
         _popupSystem.PopupEntity("You are rejuvenated!", entity, entity, PopupType.Medium);
 
-        if (args.NewScore >= entity.Comp.MinGoodScore)
+        if (args.NewScore >= entity.Comp.MinScore)
             _chatManager.DispatchServerAnnouncement($"{Identity.Name(entity.Owner, EntityManager)} has a scorestreak of {args.NewScore}!");
     }
 }

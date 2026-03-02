@@ -238,6 +238,35 @@ public sealed partial class GunSystem : SharedGunSystem
         PopupSystem.PopupEntity(message, uid.Value, user.Value);
     }
 
+    // STDA
+    private void DoEffect(EntityUid uid, out float lifetime)
+    {
+        lifetime = 0.4f;
+        if (TryComp<TimedDespawnComponent>(uid, out var despawn))
+            lifetime = despawn.Lifetime;
+
+        var anim = new Animation()
+        {
+            Length = TimeSpan.FromSeconds(lifetime),
+            AnimationTracks =
+            {
+                new AnimationTrackComponentProperty
+                {
+                    ComponentType = typeof(SpriteComponent),
+                    Property = nameof(SpriteComponent.Color),
+                    InterpolationMode = AnimationInterpolationMode.Linear,
+                    KeyFrames =
+                    {
+                        new AnimationTrackProperty.KeyFrame(Color.White.WithAlpha(1f), 0),
+                        new AnimationTrackProperty.KeyFrame(Color.White.WithAlpha(0f), lifetime)
+                    }
+                }
+            }
+        };
+
+        _animPlayer.Play(uid, anim, "muzzle-flash");
+    }
+
     protected override void CreateEffect(EntityUid gunUid, MuzzleFlashEvent message, EntityUid? tracked = null)
     {
         if (!Timing.IsFirstTimePredicted)
@@ -278,33 +307,17 @@ public sealed partial class GunSystem : SharedGunSystem
             track.Offset = Vector2.UnitX / 2f;
         }
 
-        var lifetime = 0.4f;
+        DoEffect(ent, out var lifetime); // STDA
 
-        if (TryComp<TimedDespawnComponent>(gunUid, out var despawn))
+        // STDA
+        if (message.DetachedPrototype is { } detachedPrototype)
         {
-            lifetime = despawn.Lifetime;
+            var detachedEnt = SpawnAtPosition(detachedPrototype, coordinates);
+            TransformSystem.SetWorldRotationNoLerp(detachedEnt, message.Angle);
+
+            DoEffect(detachedEnt, out _); // STDA
         }
 
-        var anim = new Animation()
-        {
-            Length = TimeSpan.FromSeconds(lifetime),
-            AnimationTracks =
-            {
-                new AnimationTrackComponentProperty
-                {
-                    ComponentType = typeof(SpriteComponent),
-                    Property = nameof(SpriteComponent.Color),
-                    InterpolationMode = AnimationInterpolationMode.Linear,
-                    KeyFrames =
-                    {
-                        new AnimationTrackProperty.KeyFrame(Color.White.WithAlpha(1f), 0),
-                        new AnimationTrackProperty.KeyFrame(Color.White.WithAlpha(0f), lifetime)
-                    }
-                }
-            }
-        };
-
-        _animPlayer.Play(ent, anim, "muzzle-flash");
         if (!TryComp(gunUid, out PointLightComponent? light))
         {
             light = Factory.GetComponent<PointLightComponent>();

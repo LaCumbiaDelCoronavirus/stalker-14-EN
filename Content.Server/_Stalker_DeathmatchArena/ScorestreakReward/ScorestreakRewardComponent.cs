@@ -1,10 +1,8 @@
-using Robust.Shared.GameStates;
-
 namespace Content.Server._Stalker_DeathmatchArena.ScorestreakReward;
 
-[RegisterComponent, NetworkedComponent]
+[RegisterComponent]
 public sealed partial class ScorestreakRewardComponent : Component
 {
-    [DataField, ViewVariables(VVAccess.ReadWrite)]
-    public int MinGoodScore = 3;
+    [DataField, ViewVariables]
+    public int MinScore = 3;
 }

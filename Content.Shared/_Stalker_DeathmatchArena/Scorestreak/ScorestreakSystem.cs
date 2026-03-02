@@ -20,14 +20,16 @@ public sealed class ScorestreakSystem : EntitySystem
 
     public void SetScore(Entity<ScorestreakComponent?> entity, int value)
     {
-        if (!_scorestreakQuery.HasComponent(entity.Owner))
-            entity.Comp = AddComp<ScorestreakComponent>(entity);
+        if (entity.Comp is not { } scorestreakComponent &&
+            !_scorestreakQuery.TryGetComponent(entity.Owner, out scorestreakComponent))
+            scorestreakComponent = AddComp<ScorestreakComponent>(entity);
+        entity.Comp = scorestreakComponent;
 
-        var oldScore = entity.Comp!.Score;
+        var oldScore = scorestreakComponent.Score;
         if (oldScore == value)
             return;
 
-        entity.Comp!.Score = value;
+        scorestreakComponent.Score = value;
 
         OnScorestreakUpdated(entity!, oldScore);
     }
@@ -35,14 +37,16 @@ public sealed class ScorestreakSystem : EntitySystem
     /// <returns>New score.</returns>
     public int AddScore(Entity<ScorestreakComponent?> entity, int added)
     {
-        if (!_scorestreakQuery.HasComponent(entity.Owner))
-            entity.Comp = AddComp<ScorestreakComponent>(entity);
+        if (entity.Comp is not { } scorestreakComponent &&
+            !_scorestreakQuery.TryGetComponent(entity.Owner, out scorestreakComponent))
+            scorestreakComponent = AddComp<ScorestreakComponent>(entity);
+        entity.Comp = scorestreakComponent;
 
-        var oldScore = entity.Comp!.Score;
-        entity.Comp!.Score += added;
+        var oldScore = scorestreakComponent.Score;
+        scorestreakComponent.Score += added;
 
         OnScorestreakUpdated(entity!, oldScore);
-        return entity.Comp!.Score;
+        return scorestreakComponent.Score;
     }
 
     public int GetScorestreak(Entity<ScorestreakComponent?> entity)

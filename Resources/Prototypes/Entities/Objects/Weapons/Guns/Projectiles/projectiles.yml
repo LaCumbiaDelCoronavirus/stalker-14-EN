@@ -7,18 +7,9 @@
   - type: Sprite
     drawdepth: BelowMobs
     layers:
-    # STDA: Added new layer
-    - sprite: _Stalker_DeathmatchArena/Effects/muzzle_effect.rsi
-      state: muzzle_bullet
-      offset: 0.55, 0
-      rotation: -90
-      color: '#91919180'
-      scale: 1, 1.6
-
     - shader: unshaded
       map: ["enum.EffectLayers.Unshaded"]
       sprite: Objects/Weapons/Guns/Projectiles/projectiles.rsi
-      #color: '#ffffff66' # STDA: Added 40% alpha
       scale: 0.65, 0.65 # STDA
       state: muzzle_bullet
   - type: EffectVisuals

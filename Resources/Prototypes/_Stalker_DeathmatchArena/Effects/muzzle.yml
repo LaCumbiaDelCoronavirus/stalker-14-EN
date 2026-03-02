@@ -1,0 +1,20 @@
+- type: entity
+  id: STDAMuzzleSmokeEffect
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 0.55
+  - type: Sprite
+    drawdepth: BelowMobs
+    layers:
+    - sprite: _Stalker_DeathmatchArena/Effects/muzzle_effect.rsi
+      state: muzzle_bullet
+      offset: 1.52, 0
+      rotation: -90
+      color: '#a0a0a066'
+      scale: 1, 1.5
+  - type: EffectVisuals
+  - type: AnimationPlayer
+  - type: Tag
+    tags:
+      - HideContextMenu

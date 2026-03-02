@@ -1,3 +1,4 @@
+using System.Runtime.InteropServices;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
 using Robust.Shared.Map;
@@ -33,7 +34,18 @@ public sealed partial class GunSystem
         {
             var existing = component.Entities[^1];
             component.Entities.RemoveAt(component.Entities.Count - 1);
-            component.EntProtos.RemoveAt(component.EntProtos.Count - 1); // stalker-changes
+
+            // An unhandled exception of type 'System.ArgumentOutOfRangeException' occurred in System.Private.CoreLib.dll: 'Index was out of range. Must be non-negative and less than the size of the collection.'
+            // An unhandled exception of type 'System.ArgumentOutOfRangeException' occurred in System.Private.CoreLib.dll: 'Index was out of range. Must be non-negative and less than the size of the collection.'
+            // An unhandled exception of type 'System.ArgumentOutOfRangeException' occurred in System.Private.CoreLib.dll: 'Index was out of range. Must be non-negative and less than the size of the collection.'
+            // An unhandled exception of type 'System.ArgumentOutOfRangeException' occurred in System.Private.CoreLib.dll: 'Index was out of range. Must be non-negative and less than the size of the collection.'
+            // An unhandled exception of type 'System.ArgumentOutOfRangeException' occurred in System.Private.CoreLib.dll: 'Index was out of range. Must be non-negative and less than the size of the collection.'
+            // GG, STALKERCODERS
+            //component.EntProtos.RemoveAt(component.EntProtos.Count - 1); // stalker-changes
+            // STDA fix:
+            var epI = component.EntProtos.Count - 1;
+            if (component.EntProtos.Count <= epI)
+                component.EntProtos.RemoveAt(epI);
 
             Containers.Remove(existing, component.Container);
             EnsureShootable(existing);
