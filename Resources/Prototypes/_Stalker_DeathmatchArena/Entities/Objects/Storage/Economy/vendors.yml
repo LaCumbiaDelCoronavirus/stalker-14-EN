@@ -1,15 +1,15 @@
 - type: entity
-  parent: VendingMachineBoxesPSZMilitary
+  parent: VendingMachineBoxesPSZMilitaryOfficerEN
   id: STDAVendingMachineBoxesRoubles
   name: counterfeit rouble supply-crate
   description: Millions of roubles!
-  suffix: ST-DA
+  suffix: ST-DA, Roubles
   components:
   - type: AccessReader
     access: []
   - type: VendingMachine
     ejectDelay: 3
-    pack: STDAInventoryBoxesRoubles #EN
+    pack: STDAInventoryBoxesRoubles
     dispenseOnHitChance: 0.0
     dispenseOnHitThreshold: 2
     offState: off
@@ -18,9 +18,32 @@
 - type: vendingMachineInventory
   id: STDAInventoryBoxesRoubles
   startingInventory:
+    STDAToothStalker500: 87250
     STDARoubles60k: 87250
+
+- type: entity
+  parent: VendingMachineBoxesPSZMilitary
+  id: STDAVendingMachineBoxesEquipment
+  name: equipment supply-crate
+  description: Anything you may ever need, except for whats not in there.
+  suffix: ST-DA, Roubles
+  components:
+  - type: AccessReader
+    access: []
+  - type: VendingMachine
+    ejectDelay: 1
+    pack: STDAInventoryBoxesEquipment
+    dispenseOnHitChance: 0.0
+    dispenseOnHitThreshold: 2
+    offState: off
+    brokenState: broken
+
+- type: vendingMachineInventory
+  id: STDAInventoryBoxesEquipment
+  startingInventory:
     Binocularus: 87250
     MedkitMilitary: 87250
+    MedkitLAR: 87250
     STFlashlightSeclite: 87250
 
     # Ammo
@@ -29,6 +52,8 @@
     751M80BoxCink: 87250
     754FMJBoxCink: 87250
     39BPBoxCink: 87250
+
+## Entities
 
 - type: entity
   parent: Roubles5000
