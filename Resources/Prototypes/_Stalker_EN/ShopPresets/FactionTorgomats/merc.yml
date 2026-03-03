@@ -113,7 +113,7 @@
         STWeaponRifleL85: 2200 # T2
         STWeaponRifleM4: 3300 # T2
         STWeaponRifleSCARH: 6820 # T3
-        STWeaponRifleG36: 7500 # T3
+        #STWeaponRifleG36: 7500 # T3 #STDA
         STWeaponRifleLR300v1: 5250 # T3
 
     - name: shop-category-magazines

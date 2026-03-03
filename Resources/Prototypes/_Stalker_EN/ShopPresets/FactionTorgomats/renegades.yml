@@ -324,7 +324,7 @@
       DG05SmokeGrenade: 225
       TearGasGrenadeStalker: 750
       RGD5Grenade: 1000
-      DynamiteOne: 1000
+      #DynamiteOne: 1000 # STDA
 
   - name: shop-category-customization
     priority: 13
@@ -454,9 +454,3 @@
   # - name: shop-category-storage-and-containers
   #   priority: 7
   #   items:
-
-
-
-
-
-

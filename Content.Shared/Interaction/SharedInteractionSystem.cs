@@ -612,7 +612,7 @@ namespace Content.Shared.Interaction
         public float UnobstructedDistance(
             MapCoordinates origin,
             MapCoordinates other,
-            int collisionMask = (int) InRangeUnobstructedMask,
+            int collisionMask = (int)InRangeUnobstructedMask,
             Ignored? predicate = null)
         {
             var dir = other.Position - origin.Position;
@@ -684,7 +684,7 @@ namespace Content.Shared.Interaction
                 length = MaxRaycastRange;
             }
 
-            var ray = new CollisionRay(origin.Position, dir.Normalized(), (int) collisionMask);
+            var ray = new CollisionRay(origin.Position, dir.Normalized(), (int)collisionMask);
             var rayResults = _broadphase.IntersectRayWithPredicate(origin.MapId, ray, length, predicate.Invoke, false).ToList();
 
             return rayResults.Count == 0;
@@ -1229,6 +1229,14 @@ namespace Content.Shared.Interaction
             if (checkCanUse && !_actionBlockerSystem.CanUseHeldEntity(user, used))
                 return false;
 
+            // STDA Start
+            var stdaAttemptUseMsg = new AttemptUseInHandEvent(user);
+            RaiseLocalEvent(used, ref stdaAttemptUseMsg);
+
+            if (stdaAttemptUseMsg.Cancelled)
+                return false;
+            // STDA End
+
             var useMsg = new UseInHandEvent(user);
             RaiseLocalEvent(used, useMsg, true);
             if (useMsg.Handled)
@@ -1431,7 +1439,7 @@ namespace Content.Shared.Interaction
                 return;
 
             if (!TryComp(uidB, out MetaDataComponent? metaB) || metaB.EntityPaused)
-                return ;
+                return;
 
             // TODO Struct event
             var ev = new ContactInteractionEvent(uidB.Value);

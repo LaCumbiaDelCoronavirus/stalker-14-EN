@@ -26,3 +26,10 @@ public sealed class UseInHandEvent : HandledEntityEventArgs
         User = user;
     }
 }
+
+// STDA
+/// <summary>
+///     Raised on something being used to see if it should be cancelled.
+/// </summary>
+[ByRefEvent]
+public record struct AttemptUseInHandEvent(EntityUid User, bool Cancelled = false);
