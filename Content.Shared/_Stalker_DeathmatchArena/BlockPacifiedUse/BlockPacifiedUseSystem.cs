@@ -24,6 +24,6 @@ public sealed class BlockPacifiedUseSystem : EntitySystem
             return;
 
         args.Cancelled = true;
-        _popupSystem.PopupClient("You may not use this, you are pacified!", args.User, args.User, PopupType.MediumCaution);
+        _popupSystem.PopupClient("This item may not be used while you are pacified!", args.User, args.User, PopupType.MediumCaution);
     }
 }
