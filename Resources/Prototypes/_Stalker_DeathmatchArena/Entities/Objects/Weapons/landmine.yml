@@ -1,0 +1,14 @@
+- type: entity
+  id: STDARandomLandMineExplosiveStalker90
+  name: PFM-1 Petal Mine Spawner (90% Chance)
+  suffix: Stalker
+  parent: FlexibleMarker
+  components:
+    - type: Sprite
+      layers:
+      - state: red
+    - type: RandomSpawner
+      prototypes:
+      - LandMineExplosiveStalker
+      chance: 0.9
+      offset: 1
