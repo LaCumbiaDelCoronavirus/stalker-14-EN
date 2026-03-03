@@ -2,8 +2,8 @@ using Content.Server.Chat.Managers;
 using Content.Server.Popups;
 using Content.Shared._Stalker_DeathmatchArena.Scorestreak;
 using Content.Shared.Administration.Systems;
-using Content.Shared.IdentityManagement;
 using Content.Shared.Popups;
+using Robust.Shared.Player;
 
 namespace Content.Server._Stalker_DeathmatchArena.ScorestreakReward;
 
@@ -12,6 +12,7 @@ public sealed class ScorestreakRewardSystem : EntitySystem
     [Dependency] private readonly IChatManager _chatManager = default!;
     [Dependency] private readonly RejuvenateSystem _rejuvenateSystem = default!;
     [Dependency] private readonly PopupSystem _popupSystem = default!;
+    [Dependency] private readonly ActorSystem _actorSystem = default!;
 
     public override void Initialize()
     {
@@ -29,6 +30,9 @@ public sealed class ScorestreakRewardSystem : EntitySystem
         _popupSystem.PopupEntity("You are rejuvenated!", entity, entity, PopupType.Medium);
 
         if (args.NewScore >= entity.Comp.MinScore)
-            _chatManager.DispatchServerAnnouncement($"{Identity.Name(entity.Owner, EntityManager)} has a scorestreak of {args.NewScore}!");
+        {
+            var actName = _actorSystem.GetSession(entity.Owner)?.Name ?? $"{Name(entity.Owner)} [non-player]";
+            _chatManager.DispatchServerAnnouncement($"{actName} has a scorestreak of {args.NewScore}!");
+        }
     }
 }
