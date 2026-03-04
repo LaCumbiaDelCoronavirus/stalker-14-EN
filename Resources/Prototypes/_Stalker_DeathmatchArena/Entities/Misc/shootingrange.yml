@@ -1,0 +1,46 @@
+- type: entity
+  parent: MarkerBase
+  id: STDATriggerUrist
+  name: signal activated urist spawner
+  suffix: STDA
+  components:
+  - type: Sprite
+    layers:
+    - state: blue
+  - type: SpawnOnApproach
+    minAmount: 1
+    maxAmount: 1
+    maxOffset: 0
+    minOffset: 0
+    cooldown: 5
+    chance: 1
+    prototypes:
+    - STDAMobHumanDebug
+    restricted:
+    - STDAMobHumanDebug
+  - type: TriggerOnSignal
+  - type: DeviceLinkSink
+    ports:
+    - Trigger
+
+- type: entity
+  parent: MobHuman
+  id: STDAMobHumanDebug
+  name: Urist McRange
+  description: Goes dead at 200 damage, unlike normal PvP players which go dead at 110.
+  suffix: STDA, Debug, Anchored
+  components:
+  - type: TriggerOnMobstateChange
+    mobState:
+    - Dead
+  - type: DeleteOnTrigger
+  - type: Transform
+    anchored: true
+  - type: DamagePopup
+    allowTypeChange: true
+    damagePopupType: Combined
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      100: Critical
+      200: Dead

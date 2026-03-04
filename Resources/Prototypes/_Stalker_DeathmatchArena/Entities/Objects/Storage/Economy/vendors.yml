@@ -41,10 +41,13 @@
 - type: vendingMachineInventory
   id: STDAInventoryBoxesEquipment
   startingInventory:
-    Binocularus: 87250
     MedkitMilitary: 87250
     MedkitLAR: 87250
+
+    # Equipment
+    Binocularus: 87250
     STFlashlightSeclite: 87250
+    MedTekCartridge: 87250
 
     # Ammo
     556M855BoxCink: 87250
