@@ -67,6 +67,7 @@
       - Bandit
 
 - type: startingGear
+  parent: STDABaseStartingGear # STDA
   id: ReneGear
   equipment:
     id: BandPDA

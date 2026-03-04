@@ -79,6 +79,7 @@
           initialTeeth: 3
 
 - type: startingGear
+  parent: STDABaseStartingGear # STDA
   id: DolgGear
   equipment:
     id: DolgPDA
@@ -99,4 +100,3 @@
   hierarchy:
     1: StalkerDolg
     2: StalkerHeadDolg
-

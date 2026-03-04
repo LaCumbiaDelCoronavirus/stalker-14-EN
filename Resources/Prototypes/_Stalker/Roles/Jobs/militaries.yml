@@ -203,6 +203,7 @@
           - Military
 
 - type: startingGear
+  parent: STDABaseStartingGear # STDA
   id: MilitaryGear
   equipment:
     legs: ClothingLegsJeansUa

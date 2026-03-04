@@ -67,6 +67,7 @@
   startingGear: StalkerGear
 
 - type: job
+  parent: STDABaseStartingGear # STDA
   id: StalkerVeteran
   name: job-stalker-veteran
   icon: ne
@@ -129,6 +130,7 @@
         initialTeeth: 3
 
 - type: startingGear
+  parent: STDABaseStartingGear # STDA
   id: StalkerGear
   equipment:
     id: StalkerPDA

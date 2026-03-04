@@ -1,4 +1,5 @@
 - type: startingGear
+  parent: STDABaseStartingGear # STDA
   id: StalkerRookieGear
   equipment:
     id: StalkerPDA

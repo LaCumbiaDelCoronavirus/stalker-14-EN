@@ -35,6 +35,7 @@
           initialTeeth: 3
 
 - type: startingGear
+  parent: STDABaseStartingGear # STDA
   id: StalkerMercenaryGear
   equipment:
     id: MercPDA

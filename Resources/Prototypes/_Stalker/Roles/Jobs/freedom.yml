@@ -79,6 +79,7 @@
           initialTeeth: 3
 
 - type: startingGear
+  parent: STDABaseStartingGear # STDA
   id: FreedomGear
   equipment:
     id: FreedomPDA
@@ -99,4 +100,3 @@
   hierarchy:
     1: StalkerFreedom
     2: StalkerHeadFreedom
-
