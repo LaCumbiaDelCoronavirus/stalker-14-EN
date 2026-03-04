@@ -1,5 +1,6 @@
 using Content.Server.Database;
 using Content.Shared._Stalker_EN.PDA;
+using Content.Shared.Hands;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
 using Content.Shared.PDA;
@@ -24,7 +25,7 @@ public sealed class STPdaPasswordSystem : SharedSTPdaPasswordSystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
 
     /// <summary>Maximum password length to prevent abuse.</summary>
-    private const int MaxPasswordLength = 32;
+    private const int MaxPasswordLength = 16;
 
     public override void Initialize()
     {
@@ -36,6 +37,7 @@ public sealed class STPdaPasswordSystem : SharedSTPdaPasswordSystem
         SubscribeLocalEvent<STPdaPasswordComponent, STPdaPasswordSetMessage>(OnPasswordSet);
         SubscribeLocalEvent<STPdaPasswordComponent, STPdaPasswordOpenSettingsMessage>(OnOpenSettings);
         SubscribeLocalEvent<STPdaPasswordComponent, GotEquippedEvent>(OnPdaPasswordEquipped);
+        SubscribeLocalEvent<STPdaPasswordComponent, GotEquippedHandEvent>(OnPdaPasswordPickedUp);
     }
 
     /// <summary>
@@ -52,6 +54,20 @@ public sealed class STPdaPasswordSystem : SharedSTPdaPasswordSystem
             return;
 
         var charName = MetaData(args.Equipee).EntityName;
+        LoadPasswordAsync(ent.Owner, ent.Comp, charName);
+    }
+
+    /// <summary>
+    /// When a PDA with a password component is picked up into a hand,
+    /// attempt to reload the password from DB (handles wild/admin-spawned PDAs).
+    /// </summary>
+    private void OnPdaPasswordPickedUp(Entity<STPdaPasswordComponent> ent, ref GotEquippedHandEvent args)
+    {
+        // Already has a password loaded — don't overwrite
+        if (ent.Comp.Password is not null)
+            return;
+
+        var charName = MetaData(args.User).EntityName;
         LoadPasswordAsync(ent.Owner, ent.Comp, charName);
     }
 

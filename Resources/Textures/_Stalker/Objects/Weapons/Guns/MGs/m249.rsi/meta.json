@@ -21,18 +21,18 @@
             "directions": 4
         },
         {
-            "name": "inhand.right",
+            "name": "inhand-right",
             "directions": 4
         },
         {
             "name": "mag-0"
         },
         {
-            "name": "wield-inhand-left",
+            "name": "wielded-inhand-left",
             "directions": 4
         },
         {
-            "name": "wield-inhand-right",
+            "name": "wielded-inhand-right",
             "directions": 4
         }
     ]

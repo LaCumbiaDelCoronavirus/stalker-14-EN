@@ -78,6 +78,14 @@ namespace Content.Server.Ghost
         private EntityQuery<GhostComponent> _ghostQuery;
         private EntityQuery<PhysicsComponent> _physicsQuery;
 
+        /// <summary>
+        /// Tracks sessions currently in the SpawnGhost→Respawn flow to prevent infinite recursion.
+        /// When Respawn fails to place a player (e.g. DisallowLateJoin), it calls JoinAsObserver
+        /// which calls SpawnGhost again. This guard detects the reentrance and falls through to
+        /// normal ghost spawning instead.
+        /// </summary>
+        private readonly HashSet<ICommonSession> _respawningViaGhost = new();
+
         private static readonly ProtoId<TagPrototype> AllowGhostShownByEventTag = "AllowGhostShownByEvent";
         private static readonly ProtoId<DamageTypePrototype> AsphyxiationDamageType = "Asphyxiation";
 
@@ -472,8 +480,21 @@ namespace Content.Server.Ghost
             if (_player.TryGetSessionById(userId, out var newSession) && !HasComp<RespawnOnDeathComponent>(mind) && adminObserve != true)
             {
                 session = newSession;
-                _gameTicker.Respawn(session);
-                return null;
+
+                // Guard against infinite recursion: SpawnGhost -> Respawn -> SpawnPlayer -> JoinAsObserver -> SpawnGhost.
+                // If respawn fails to place the player, fall through to normal ghost spawning.
+                if (_respawningViaGhost.Add(session))
+                {
+                    try
+                    {
+                        _gameTicker.Respawn(session);
+                        return null;
+                    }
+                    finally
+                    {
+                        _respawningViaGhost.Remove(session);
+                    }
+                }
             }
 
             // stalker-changes-end
@@ -502,14 +523,22 @@ namespace Content.Server.Ghost
 
             if (!TryComp<GhostComponent>(ghost, out var ghostComponent))
             {
-                if (adminObserve != true)
+                // First attempt (non-admin, guard allows): delete ghost and try respawning instead.
+                if (adminObserve != true && session != null && _respawningViaGhost.Add(session))
                 {
-                    QueueDel(ghost); // clean up orphaned MobObserver to prevent entity leak
-                    if (session != null)
+                    QueueDel(ghost);
+                    try
+                    {
                         _gameTicker.Respawn(session);
-                    return null;
+                        return null;
+                    }
+                    finally
+                    {
+                        _respawningViaGhost.Remove(session);
+                    }
                 }
 
+                // Admin observe, no session, or reentrance fallback: add GhostComponent to make it work.
                 ghostComponent = EnsureComp<GhostComponent>(ghost);
             }
 

@@ -12,6 +12,7 @@ using Robust.Shared.Prototypes;
 using Robust.UnitTesting.Pool;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Formats.Webp;
+using SixLabors.ImageSharp.Memory;
 
 namespace Content.MapRenderer
 {
@@ -23,6 +24,12 @@ namespace Content.MapRenderer
 
         internal static async Task Main(string[] args)
         {
+            // stalker-en: raise ImageSharp memory group limit for large maps like STWorld (~1.4GB image).
+            // Note: PreferContiguousImageBuffers is set to false in MapPainter.Paint() because
+            // Clyde initialization overrides it back to true after this point.
+            Configuration.Default.MemoryAllocator =
+                MemoryAllocator.Create(new MemoryAllocatorOptions { AllocationLimitMegabytes = 4096 });
+
             if (!CommandLineArguments.TryParse(args, out var arguments))
                 return;
 

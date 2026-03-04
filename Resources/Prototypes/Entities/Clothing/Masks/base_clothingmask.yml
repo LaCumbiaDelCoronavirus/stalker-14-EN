@@ -3,6 +3,8 @@
   parent: Clothing
   id: ClothingMaskBase
   components:
+  - type: Trash #Stalker EN
+    time: 300
   - type: Sprite
     state: icon
   - type: Item

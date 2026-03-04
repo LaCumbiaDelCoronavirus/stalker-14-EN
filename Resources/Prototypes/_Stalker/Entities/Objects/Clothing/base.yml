@@ -9,6 +9,8 @@
   id: BlockCloak
 - type: Tag
   id: BlockGloves
+- type: Tag
+  id: HidesNose
 
 ###============------------------------------------============###
 ###============------------[New Одежда]------------============###
@@ -35,6 +37,8 @@
   suffix: ST
   abstract: true
   components:
+  - type: Trash #Stalker EN
+    time: 1800
   - type: RepositoryItem
     categoryName: repository-equipment-category
   - type: PullDoAfter

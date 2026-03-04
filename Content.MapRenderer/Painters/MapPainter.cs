@@ -211,6 +211,9 @@ namespace Content.MapRenderer.Painters
                 if (grid.LocalAABB.IsEmpty())
                     customOffset = new Vector2(-minX, -minY);
 
+                // stalker-en: Clyde initialization sets PreferContiguousImageBuffers = true,
+                // which caps allocations at 1GB. Override it here for large maps like STWorld.
+                Configuration.Default.PreferContiguousImageBuffers = false;
                 var gridCanvas = new Image<Rgba32>(w, h);
 
                 await server.WaitPost(() =>

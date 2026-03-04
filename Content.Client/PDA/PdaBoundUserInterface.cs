@@ -6,6 +6,7 @@ using Content.Shared.Containers.ItemSlots;
 using Content.Shared.PDA;
 using JetBrains.Annotations;
 using Robust.Client.UserInterface;
+using Robust.Shared.Player;
 
 namespace Content.Client.PDA
 {
@@ -13,6 +14,7 @@ namespace Content.Client.PDA
     public sealed class PdaBoundUserInterface : CartridgeLoaderBoundUserInterface
     {
         private readonly PdaSystem _pdaSystem;
+        private readonly ISharedPlayerManager _playerMgr; // stalker-en-changes
 
         [ViewVariables]
         private PdaMenu? _menu;
@@ -20,6 +22,7 @@ namespace Content.Client.PDA
         public PdaBoundUserInterface(EntityUid owner, Enum uiKey) : base(owner, uiKey)
         {
             _pdaSystem = EntMan.System<PdaSystem>();
+            _playerMgr = IoCManager.Resolve<ISharedPlayerManager>(); // stalker-en-changes
         }
 
         protected override void Open()
@@ -113,6 +116,13 @@ namespace Content.Client.PDA
             }
 
             _menu.UpdateState(updateState);
+
+            // stalker-en-changes-start: hide password button for non-owners (use entity comparison)
+            var isOwner = _playerMgr.LocalEntity.HasValue
+                && updateState.PdaOwnerInfo.PdaOwnerEntity.HasValue
+                && EntMan.GetEntity(updateState.PdaOwnerInfo.PdaOwnerEntity.Value) == _playerMgr.LocalEntity.Value;
+            _menu.SetPasswordButton.Visible = isOwner;
+            // stalker-en-changes-end
         }
 
         protected override void AttachCartridgeUI(Control cartridgeUIFragment, string? title)

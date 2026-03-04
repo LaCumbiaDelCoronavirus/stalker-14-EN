@@ -16,6 +16,7 @@
     notificationPrefix: prayer-chat-notify-monolit
     verb: prayer-verbs-pray
     verbImage: null
+  - type: Craftable # EN
 
 - type: entity
   id: StalkerBarrelBonFire

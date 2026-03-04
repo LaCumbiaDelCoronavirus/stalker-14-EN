@@ -1405,9 +1405,17 @@ namespace Content.Server.Database.Migrations.Sqlite
 
             modelBuilder.Entity("Content.Server.Database.StalkerMessengerContact", b =>
                 {
+                    b.Property<Guid>("OwnerUserId")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("owner_user_id");
+
                     b.Property<string>("OwnerCharacterName")
                         .HasColumnType("TEXT")
                         .HasColumnName("owner_character_name");
+
+                    b.Property<Guid>("ContactUserId")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("contact_user_id");
 
                     b.Property<string>("ContactCharacterName")
                         .HasColumnType("TEXT")
@@ -1417,7 +1425,7 @@ namespace Content.Server.Database.Migrations.Sqlite
                         .HasColumnType("TEXT")
                         .HasColumnName("faction_name");
 
-                    b.HasKey("OwnerCharacterName", "ContactCharacterName")
+                    b.HasKey("OwnerUserId", "OwnerCharacterName", "ContactUserId", "ContactCharacterName")
                         .HasName("PK_stalker_messenger_contacts");
 
                     b.ToTable("stalker_messenger_contacts", (string)null);
@@ -1425,6 +1433,10 @@ namespace Content.Server.Database.Migrations.Sqlite
 
             modelBuilder.Entity("Content.Server.Database.StalkerMessengerId", b =>
                 {
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("user_id");
+
                     b.Property<string>("CharacterName")
                         .HasColumnType("TEXT")
                         .HasColumnName("character_name");
@@ -1434,7 +1446,7 @@ namespace Content.Server.Database.Migrations.Sqlite
                         .HasColumnType("TEXT")
                         .HasColumnName("messenger_id");
 
-                    b.HasKey("CharacterName")
+                    b.HasKey("UserId", "CharacterName")
                         .HasName("PK_stalker_messenger_ids");
 
                     b.HasIndex("MessengerId")

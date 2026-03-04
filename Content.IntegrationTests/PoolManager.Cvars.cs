@@ -1,5 +1,6 @@
 #nullable enable
 using Content.Shared.CCVar;
+using Robust.Shared;
 
 namespace Content.IntegrationTests;
 
@@ -11,6 +12,7 @@ public static partial class PoolManager
     public static readonly (string cvar, string value)[] TestCvars =
     {
         // @formatter:off
+        (CVars.HubAdvertise.Name,             "false"), // stalker-en: strelease.toml enables this
         (CCVars.DatabaseSynchronous.Name,     "true"),
         (CCVars.DatabaseSqliteDelay.Name,     "0"),
         (CCVars.HolidaysEnabled.Name,         "false"),

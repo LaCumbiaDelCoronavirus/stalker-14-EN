@@ -7,7 +7,7 @@ namespace Content.Shared._Stalker_EN.PdaMessenger;
 /// <summary>
 /// Send a message to a channel or DM.
 /// <see cref="TargetChatId"/> is either a channel prototype ID or a DM chat ID
-/// in the format "<see cref="STMessengerChat.DmChatPrefix"/>{characterName}".
+/// in the format "<see cref="STMessengerChat.DmChatPrefix"/>{messengerId}".
 /// </summary>
 [Serializable, NetSerializable]
 public sealed class STMessengerSendEvent : CartridgeMessageEvent
@@ -46,16 +46,16 @@ public sealed class STMessengerAddContactEvent : CartridgeMessageEvent
 }
 
 /// <summary>
-/// Remove a contact by character name.
+/// Remove a contact by their unique messenger ID.
 /// </summary>
 [Serializable, NetSerializable]
 public sealed class STMessengerRemoveContactEvent : CartridgeMessageEvent
 {
-    public readonly string ContactName;
+    public readonly string ContactMessengerId;
 
-    public STMessengerRemoveContactEvent(string contactName)
+    public STMessengerRemoveContactEvent(string contactMessengerId)
     {
-        ContactName = contactName;
+        ContactMessengerId = contactMessengerId;
     }
 }
 
@@ -101,5 +101,20 @@ public sealed class STMessengerViewChatEvent : CartridgeMessageEvent
     public STMessengerViewChatEvent(string? chatId)
     {
         ChatId = chatId;
+    }
+}
+
+/// <summary>
+/// Client requests navigation to a bulletin board offer from a clickable offer link in chat.
+/// Handled by the messenger system, which raises a local event for the bulletin board to pick up.
+/// </summary>
+[Serializable, NetSerializable]
+public sealed class STMessengerNavigateToOfferEvent : CartridgeMessageEvent
+{
+    public readonly uint OfferId;
+
+    public STMessengerNavigateToOfferEvent(uint offerId)
+    {
+        OfferId = offerId;
     }
 }

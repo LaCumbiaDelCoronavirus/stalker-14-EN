@@ -3,6 +3,8 @@
   parent: Clothing
   id: ClothingEyesBase
   components:
+  - type: Trash #Stalker EN
+    time: 300
   - type: Sprite
     state: icon
   - type: Clothing

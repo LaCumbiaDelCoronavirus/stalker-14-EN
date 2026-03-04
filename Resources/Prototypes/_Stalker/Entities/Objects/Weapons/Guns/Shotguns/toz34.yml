@@ -29,7 +29,10 @@
   id: STWeaponShotgunTOZ34
   name: TOZ-34
   description: Soviet double-barreled shotgun with vertical barrel arrangement. Prized in the Zone for its reliability and powerful stopping effect against mutants.
- 
+  components:
+  - type: Trash
+    time: 1800
+
 - type: entity
   parent: STBaseWeaponShotgunTOZ34
   id: STWeaponShotgunTOZ54

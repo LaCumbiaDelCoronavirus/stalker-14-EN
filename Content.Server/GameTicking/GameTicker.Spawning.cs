@@ -432,6 +432,13 @@ namespace Content.Server.GameTicking
             }
 
             var ghost = _ghost.SpawnGhost(mind.Value, adminObserve: admin);
+
+            // stalker-changes-start: SpawnGhost may redirect to Respawn instead of spawning a ghost.
+            // When that happens it returns null and the mind has been wiped, so skip role assignment.
+            if (ghost == null)
+                return;
+            // stalker-changes-end
+
             if (makeObserver)
                 _roles.MindAddRole(mind.Value, "MindRoleObserver");
 

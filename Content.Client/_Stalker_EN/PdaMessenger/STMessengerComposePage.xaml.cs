@@ -68,23 +68,26 @@ public sealed partial class STMessengerComposePage : BoxContainer
         };
     }
 
-    public void Setup(string chatId, uint? replyToId, string? replySnippet)
+    public void Setup(string chatId, uint? replyToId, string? replySnippet, string? displayName = null, string? initialContent = null)
     {
         _chatId = chatId;
         _isDmChat = chatId.StartsWith(STMessengerChat.DmChatPrefix, StringComparison.Ordinal);
-        ContentInput.TextRope = Rope.Leaf.Empty;
+        ContentInput.TextRope = initialContent is not null ? new Rope.Leaf(initialContent) : Rope.Leaf.Empty;
         AnonymousToggle.Pressed = false;
         AnonymousToggle.Visible = !_isDmChat;
 
         _maxLength = _config.GetCVar(STCCVars.MessengerMaxMessageLength);
+        var initialLength = initialContent?.Length ?? 0;
+        var remaining = _maxLength - initialLength;
         CharCounter.Text = Loc.GetString("st-messenger-char-counter",
-            ("remaining", _maxLength), ("max", _maxLength));
-        CharCounter.FontColorOverride = null;
-        SendButton.Disabled = false;
+            ("remaining", remaining), ("max", _maxLength));
+        CharCounter.FontColorOverride = remaining < 0 ? Color.Red : null;
+        SendButton.Disabled = remaining < 0;
 
         if (_isDmChat)
         {
-            RecipientLabel.Text = chatId[STMessengerChat.DmChatPrefix.Length..];
+            // Use the display name (character name) if available, otherwise fall back to messenger ID from chat ID
+            RecipientLabel.Text = displayName ?? chatId[STMessengerChat.DmChatPrefix.Length..];
         }
         else
         {

@@ -3,6 +3,8 @@
   parent: BaseItem
   abstract: true
   components:
+  - type: Trash #Stalker EN
+    time: 1800
   - type: Sprite
     drawdepth: Items
   - type: Fixtures

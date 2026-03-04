@@ -219,7 +219,8 @@ namespace Content.Server.PDA
                     IdOwner = id?.FullName,
                     JobTitle = id?.LocalizedJobTitle,
                     StationAlertLevel = pda.StationAlertLevel,
-                    StationAlertColor = pda.StationAlertColor
+                    StationAlertColor = pda.StationAlertColor,
+                    PdaOwnerEntity = GetNetEntity(pda.PdaOwner), // stalker-en-changes
                 },
                 pda.StationName,
                 showUplink,

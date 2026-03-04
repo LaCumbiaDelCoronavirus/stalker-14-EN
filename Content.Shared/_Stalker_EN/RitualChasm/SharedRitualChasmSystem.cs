@@ -103,7 +103,7 @@ public abstract class SharedRitualChasmSystem : EntitySystem
                     continue;
                 }
 
-                _audioSystem.PlayGlobal(ritualChasmComponent.RelocateSound, Filter.Broadcast(), true);
+                _audioSystem.PlayGlobal(ritualChasmComponent.RelocateSound, Filter.BroadcastMap(_transformSystem.GetMapId(ritualChasmUid)), true);
                 if (_exitPoints.Count == 0)
                 {
                     QueueDel(uid);

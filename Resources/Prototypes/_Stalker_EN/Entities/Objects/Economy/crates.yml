@@ -437,7 +437,7 @@
     - id: Zipties
     - id: PowerCellHyper
     - id: ClothingHeadHelmetSH68
-    - id: STBaseWeaponShotgunMP153
+    - id: STWeaponShotgunMP153
     - id: ClothingBeltGreenWebbingStalker
     - id: ClothingBeltBandolierStalker
     - id: ClothingBackpackTacticOliveStalker
@@ -647,7 +647,229 @@
     sound:
       path: /Audio/Effects/unwrap.ogg
 
-# Monolith Kits - WILL BE ADDED SOON
+# Monolith Kits - WILL BE ADDED NOW BECAUSE IM DOIN IT BABEY!!!!!
+
+- type: entity
+  parent: STBaseItem
+  id: SetMonolithBuyableCrateT3Heavy
+  name: Monolith Set "T3 Heavy"
+  description: A set containing armored coveralls.
+  suffix: ST, T3, Cache
+  components:
+  - type: STWeight
+    self: 10
+  - type: Item
+    size: Ginormous
+  - type: MultiHandedItem
+  - type: Sprite
+    sprite: _Stalker/Structures/Furniture/Sets/monolith-marlya.rsi
+    state: icon
+  - type: SpawnItemsOnUse
+    items:
+    - id: ClothingOuterArmorMonolith
+    - id: ClothingMaskNeckBalaklava1
+    - id: ClothingBeltWebbingHolsterMonolith
+    - id: ClothingBackpackStalkerZaryaGreen
+    - id: PowerCellHyper
+    - id: PowerCellHyper
+    - id: STCombatKnife
+    - id: Binocularus1
+    - id: STFlashlightSeclite
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+  - type: PersonalDamage
+    damage:
+      types:
+        Radiation: 4.5
+
+- type: entity
+  parent: STBaseItem
+  id: SetMonolithBuyableCrateT2Light
+  name: Monolith Set "T2 Light"
+  description: A set containing a plate vest and kevlar coat.
+  suffix: ST, T2, Cache
+  components:
+  - type: STWeight
+    self: 10
+  - type: Item
+    size: Ginormous
+  - type: MultiHandedItem
+  - type: Sprite
+    sprite: _Stalker/Structures/Furniture/Sets/monolith-marlya.rsi
+    state: icon
+  - type: SpawnItemsOnUse
+    items:
+    - id: STClothingOuterArmorLightPlateVestBaseMonolith
+    - id: ClothingMaskGasZarya
+    - id: ClothingOuterCoatKevlarMonolith
+    - id: ClothingBeltWebbingHolsterMonolith
+    - id: ClothingBackpackStalkerZaryaBlack
+    - id: PowerCellHyper
+    - id: PowerCellHyper
+    - id: STCombatKnife
+    - id: Binocularus1
+    - id: STFlashlightSeclite
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+  - type: PersonalDamage
+    damage:
+      types:
+        Radiation: 4.5
+
+- type: entity
+  parent: STBaseItem
+  id: SetMonolithBuyableCrateSeva
+  name: Monolith Set "Seva"
+  description: A set containing a seva suit.
+  suffix: ST, T1, Cache
+  components:
+  - type: STWeight
+    self: 10
+  - type: Item
+    size: Ginormous
+  - type: MultiHandedItem
+  - type: Sprite
+    sprite: _Stalker/Structures/Furniture/Sets/monolith-marlya.rsi
+    state: icon
+  - type: SpawnItemsOnUse
+    items:
+    - id: ClothingOuterArmorSevaMonolith
+    - id: ClothingBeltWebbingHolsterMonolith
+    - id: ZoneAnomalyDetectorBMT12
+    - id: STOxygenTanksFractionalMonolith
+    - id: PowerCellHyper
+    - id: PowerCellHyper
+    - id: STCombatKnife
+    - id: Binocularus1
+    - id: STFlashlightSeclite
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+  - type: PersonalDamage
+    damage:
+      types:
+        Radiation: 4.5
+
+- type: entity
+  parent: STBaseItem
+  id: SetMonolithBuyableCrateT2Heavy
+  name: Monolith Set "T2 Heavy"
+  description: A set containing a sunrise suit and kevlar coat.
+  suffix: ST, T2, Cache
+  components:
+  - type: STWeight
+    self: 10
+  - type: Item
+    size: Ginormous
+  - type: MultiHandedItem
+  - type: Sprite
+    sprite: _Stalker/Structures/Furniture/Sets/monolith-marlya.rsi
+    state: icon
+  - type: SpawnItemsOnUse
+    items:
+    - id: ClothingOuterArmorZaryaMonolith
+    - id: ClothingMaskGasZarya
+    - id: ClothingOuterCoatKevlarMonolith
+    - id: ClothingBeltWebbingHolsterMonolith
+    - id: ClothingBackpackStalkerZaryaBlack
+    - id: PowerCellHyper
+    - id: PowerCellHyper
+    - id: STCombatKnife
+    - id: Binocularus1
+    - id: STFlashlightSeclite
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+  - type: PersonalDamage
+    damage:
+      types:
+        Radiation: 4.5
+
+- type: entity
+  parent: STBaseItem
+  id: SetMonolithBuyableCrateInfiltrator1
+  name: Monolith Set "Infiltrator Shotgunner"
+  description: A set containing standard stalker gear, a Mossberg shotgun, and an APS pistol.
+  suffix: ST, T2, Cache
+  components:
+  - type: STWeight
+    self: 10
+  - type: Item
+    size: Ginormous
+  - type: MultiHandedItem
+  - type: Sprite
+    sprite: _Stalker/Structures/Furniture/Sets/monolith-marlya.rsi
+    state: icon
+  - type: SpawnItemsOnUse
+    items:
+    - id: ClothingOuterArmourJacketStalker
+    - id: ClothingMaskGasZaryaMono
+    - id: ClothingBeltBandolierStalker
+    - id: ClothingBackpackTacticBeigeStalker
+    - id: ClothingCloakStalker
+    - id: WeaponPistolStalkerAPSBare
+    - id: BaseAPSMag
+    - id: BaseAPSMag
+    - id: BaseAPSMag
+    - id: 918PBMBox
+    - id: 918PBMBox
+    - id: STWeaponShotgunMossbergM88
+    - id: 8mmBuckshotBox
+    - id: 8mmBuckshotBox
+    - id: 8mmBuckshotBox
+    - id: 8mmBuckshotBox
+    - id: PowerCellHyper
+    - id: PowerCellHyper
+    - id: STCombatKnife
+    - id: Binocularus1
+    - id: STFlashlightSeclite
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+  - type: PersonalDamage
+    damage:
+      types:
+        Radiation: 4.5
+
+- type: entity
+  parent: STBaseItem
+  id: SetMonolithBuyableCrateInfiltrator2
+  name: Monolith Set "Infiltrator Rifleman"
+  description: A set containing standard stalker gear, an SKS rifle, and an APS pistol.
+  suffix: ST, T2, Cache
+  components:
+  - type: STWeight
+    self: 10
+  - type: Item
+    size: Ginormous
+  - type: MultiHandedItem
+  - type: Sprite
+    sprite: _Stalker/Structures/Furniture/Sets/monolith-marlya.rsi
+    state: icon
+  - type: SpawnItemsOnUse
+    items:
+    - id: ClothingOuterArmourJacketStalkerWhite
+    - id: ClothingMaskGP7
+    - id: ClothingBeltTarzanBlack
+    - id: ClothingBackpackTacticBlackStalker
+    - id: ClothingOuterCoatDoshdevik
+    - id: WeaponPistolStalkerAPSBare
+    - id: BaseAPSMag
+    - id: BaseAPSMag
+    - id: BaseAPSMag
+    - id: 918PBMBox
+    - id: 918PBMBox
+    - id: STWeaponSniperSKS
+    - id: 739FMJBox
+    - id: 739FMJBox
+    - id: PowerCellHyper
+    - id: PowerCellHyper
+    - id: STCombatKnife
+    - id: Binocularus1
+    - id: STFlashlightSeclite
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+  - type: PersonalDamage
+    damage:
+      types:
+        Radiation: 4.5
 
 # Event Kits ------------------------------------------------------------------------
 

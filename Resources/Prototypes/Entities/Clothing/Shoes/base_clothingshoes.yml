@@ -3,6 +3,8 @@
   parent: Clothing
   id: ClothingShoesBase
   components:
+  - type: Trash #Stalker EN
+    time: 1800
   - type: Clothing
     slots:
     - FEET

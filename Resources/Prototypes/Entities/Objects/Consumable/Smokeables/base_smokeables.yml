@@ -4,6 +4,8 @@
   parent: BaseItem
   abstract: true
   components:
+  - type: Trash
+    time: 900
   - type: Reactive
     groups:
       Extinguish: [ Touch ]

@@ -141,7 +141,7 @@ public sealed class SpawnOnApproachSystem : EntitySystem
             return false;
 
         var actorQuery = GetEntityQuery<ActorComponent>();
-        foreach (var uid in _lookupSystem.GetEntitiesInRange(coords, comp.MinOffset * 0.75f, flags: LookupFlags.Approximate | LookupFlags.Dynamic))
+        foreach (var uid in _lookupSystem.GetEntitiesInRange(coords, MathF.Max(comp.MinOffset * 0.75f, float.Epsilon) /* a debug assert throws if this is 0 or negative */, flags: LookupFlags.Approximate | LookupFlags.Dynamic))
         {
             if (actorQuery.HasComponent(uid))
                 return true;

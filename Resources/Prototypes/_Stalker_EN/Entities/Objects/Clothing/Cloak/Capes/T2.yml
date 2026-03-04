@@ -99,6 +99,11 @@
   components:
   - type: STWeight
     self: 1.5
+  - type: Storage
+    maxItemSize: Tiny
+    grid:
+      - 0,0,1,1
+      - 3,0,4,1
   - type: Armor
     armorClass: 2
     modifiers:

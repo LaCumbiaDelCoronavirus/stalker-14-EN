@@ -1,0 +1,39 @@
+﻿# sunrise monolith
+- type: entity
+  parent: STClothingOuterArmorZaryaBase
+  id: ClothingOuterArmorZaryaMonolith
+  name: Noonrise suit
+  description: A sunrise suit in urban camo. Originally modified for some other purpose, it was forgotten about before the Monolith found them.
+  components:
+  - type: Sprite
+    sprite: _Stalker_EN/Objects/Clothing/outerClothing/zarya_mono.rsi
+  - type: Clothing
+    sprite: _Stalker_EN/Objects/Clothing/outerClothing/zarya_mono.rsi
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHelmetZaryaMonolith
+    slot: head
+  - type: PersonalDamage
+    damage:
+      types:
+        Radiation: 18.01
+
+- type: entity
+  parent: STClothingHeadHatBase
+  id: ClothingHeadHelmetZaryaMonolith
+  name: Noonrise hood
+  categories: [ HideSpawnMenu ]
+  description: An urban camo hood.
+  components:
+  - type: Sprite
+    sprite: _Stalker_EN/Objects/Clothing/hats/zarya_mono_hood.rsi
+  - type: Clothing
+    sprite: _Stalker_EN/Objects/Clothing/hats/zarya_mono_hood.rsi
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - Headtop
+    hideOnToggle: true
+  - type: PersonalDamage
+    damage:
+      types:
+        Radiation: 18.01

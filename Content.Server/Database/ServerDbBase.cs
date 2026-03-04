@@ -2167,38 +2167,32 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
             await db.DbContext.StalkerFactionRelationProposals.ExecuteDeleteAsync();
         }
 
-        // stalker-en-changes: Messenger ID + Contact persistence
+        // stalker-en-changes: Messenger ID + Contact persistence (keyed by userId + characterName)
         public async Task<List<StalkerMessengerId>> GetAllStalkerMessengerIdsAsync()
         {
             await using var db = await GetDb();
             return await db.DbContext.StalkerMessengerIds.ToListAsync();
         }
 
-        public async Task<StalkerMessengerId?> GetStalkerMessengerIdAsync(string characterName)
+        public async Task<StalkerMessengerId?> GetStalkerMessengerIdAsync(Guid userId, string characterName)
         {
             await using var db = await GetDb();
             return await db.DbContext.StalkerMessengerIds
-                .FirstOrDefaultAsync(m => m.CharacterName == characterName);
+                .FirstOrDefaultAsync(m => m.UserId == userId && m.CharacterName == characterName);
         }
 
-        public async Task<StalkerMessengerId?> GetStalkerMessengerIdByIdAsync(string messengerId)
-        {
-            await using var db = await GetDb();
-            return await db.DbContext.StalkerMessengerIds
-                .FirstOrDefaultAsync(m => m.MessengerId == messengerId);
-        }
-
-        public async Task SetStalkerMessengerIdAsync(string characterName, string messengerId)
+        public async Task SetStalkerMessengerIdAsync(Guid userId, string characterName, string messengerId)
         {
             await using var db = await GetDb();
 
             var record = await db.DbContext.StalkerMessengerIds
-                .FirstOrDefaultAsync(m => m.CharacterName == characterName);
+                .FirstOrDefaultAsync(m => m.UserId == userId && m.CharacterName == characterName);
 
             if (record is null)
             {
                 db.DbContext.StalkerMessengerIds.Add(new StalkerMessengerId
                 {
+                    UserId = userId,
                     CharacterName = characterName,
                     MessengerId = messengerId,
                 });
@@ -2211,27 +2205,32 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
             await db.DbContext.SaveChangesAsync();
         }
 
-        public async Task<List<StalkerMessengerContact>> GetStalkerMessengerContactsAsync(string ownerName)
+        public async Task<List<StalkerMessengerContact>> GetStalkerMessengerContactsAsync(Guid ownerUserId, string ownerName)
         {
             await using var db = await GetDb();
             return await db.DbContext.StalkerMessengerContacts
-                .Where(c => c.OwnerCharacterName == ownerName)
+                .Where(c => c.OwnerUserId == ownerUserId && c.OwnerCharacterName == ownerName)
                 .ToListAsync();
         }
 
         // stalker-en-changes
-        public async Task AddStalkerMessengerContactAsync(string ownerName, string contactName, string? factionName = null)
+        public async Task AddStalkerMessengerContactAsync(Guid ownerUserId, string ownerName, Guid contactUserId, string contactName, string? factionName = null)
         {
             await using var db = await GetDb();
 
             var exists = await db.DbContext.StalkerMessengerContacts
-                .AnyAsync(c => c.OwnerCharacterName == ownerName && c.ContactCharacterName == contactName);
+                .AnyAsync(c => c.OwnerUserId == ownerUserId
+                    && c.OwnerCharacterName == ownerName
+                    && c.ContactUserId == contactUserId
+                    && c.ContactCharacterName == contactName);
 
             if (!exists)
             {
                 db.DbContext.StalkerMessengerContacts.Add(new StalkerMessengerContact
                 {
+                    OwnerUserId = ownerUserId,
                     OwnerCharacterName = ownerName,
+                    ContactUserId = contactUserId,
                     ContactCharacterName = contactName,
                     FactionName = factionName,
                 });
@@ -2240,12 +2239,15 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
         }
 
         // stalker-en-changes
-        public async Task UpdateStalkerMessengerContactFactionAsync(string ownerName, string contactName, string factionName)
+        public async Task UpdateStalkerMessengerContactFactionAsync(Guid ownerUserId, string ownerName, Guid contactUserId, string contactName, string factionName)
         {
             await using var db = await GetDb();
 
             var record = await db.DbContext.StalkerMessengerContacts
-                .FirstOrDefaultAsync(c => c.OwnerCharacterName == ownerName && c.ContactCharacterName == contactName);
+                .FirstOrDefaultAsync(c => c.OwnerUserId == ownerUserId
+                    && c.OwnerCharacterName == ownerName
+                    && c.ContactUserId == contactUserId
+                    && c.ContactCharacterName == contactName);
 
             if (record != null)
             {
@@ -2254,12 +2256,15 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
             }
         }
 
-        public async Task RemoveStalkerMessengerContactAsync(string ownerName, string contactName)
+        public async Task RemoveStalkerMessengerContactAsync(Guid ownerUserId, string ownerName, Guid contactUserId, string contactName)
         {
             await using var db = await GetDb();
 
             var record = await db.DbContext.StalkerMessengerContacts
-                .FirstOrDefaultAsync(c => c.OwnerCharacterName == ownerName && c.ContactCharacterName == contactName);
+                .FirstOrDefaultAsync(c => c.OwnerUserId == ownerUserId
+                    && c.OwnerCharacterName == ownerName
+                    && c.ContactUserId == contactUserId
+                    && c.ContactCharacterName == contactName);
 
             if (record != null)
             {

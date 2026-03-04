@@ -58,6 +58,8 @@
   name: empty tin
   description: An empty tin. Could get a bit of metal from this.
   components:
+  - type: Trash
+    time: 900
   - type: Sprite
     state: trash
   - type: Item

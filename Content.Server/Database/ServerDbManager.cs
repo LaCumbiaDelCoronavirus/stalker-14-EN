@@ -411,16 +411,15 @@ namespace Content.Server.Database
         Task DeleteStalkerFactionRelationProposalAsync(string initiatingFaction, string targetFaction);
         Task ClearAllStalkerFactionRelationProposalsAsync();
 
-        // stalker-en-changes: Messenger ID + Contact persistence
+        // stalker-en-changes: Messenger ID + Contact persistence (keyed by userId + characterName)
         Task<List<StalkerMessengerId>> GetAllStalkerMessengerIdsAsync();
-        Task<StalkerMessengerId?> GetStalkerMessengerIdAsync(string characterName);
-        Task<StalkerMessengerId?> GetStalkerMessengerIdByIdAsync(string messengerId);
-        Task SetStalkerMessengerIdAsync(string characterName, string messengerId);
-        Task<List<StalkerMessengerContact>> GetStalkerMessengerContactsAsync(string ownerName);
+        Task<StalkerMessengerId?> GetStalkerMessengerIdAsync(Guid userId, string characterName);
+        Task SetStalkerMessengerIdAsync(Guid userId, string characterName, string messengerId);
+        Task<List<StalkerMessengerContact>> GetStalkerMessengerContactsAsync(Guid ownerUserId, string ownerName);
         // stalker-en-changes
-        Task AddStalkerMessengerContactAsync(string ownerName, string contactName, string? factionName = null);
-        Task RemoveStalkerMessengerContactAsync(string ownerName, string contactName);
-        Task UpdateStalkerMessengerContactFactionAsync(string ownerName, string contactName, string factionName);
+        Task AddStalkerMessengerContactAsync(Guid ownerUserId, string ownerName, Guid contactUserId, string contactName, string? factionName = null);
+        Task RemoveStalkerMessengerContactAsync(Guid ownerUserId, string ownerName, Guid contactUserId, string contactName);
+        Task UpdateStalkerMessengerContactFactionAsync(Guid ownerUserId, string ownerName, Guid contactUserId, string contactName, string factionName);
 
         // stalker-en-changes: PDA password persistence
         Task<StalkerPdaPassword?> GetStalkerPdaPasswordAsync(string characterName);
@@ -1216,54 +1215,48 @@ namespace Content.Server.Database
             return RunDbCommand(() => _db.ClearAllStalkerFactionRelationProposalsAsync());
         }
 
-        // stalker-en-changes: Messenger ID + Contact persistence
+        // stalker-en-changes: Messenger ID + Contact persistence (keyed by userId + characterName)
         public Task<List<StalkerMessengerId>> GetAllStalkerMessengerIdsAsync()
         {
             DbReadOpsMetric.Inc();
             return RunDbCommand(() => _db.GetAllStalkerMessengerIdsAsync());
         }
 
-        public Task<StalkerMessengerId?> GetStalkerMessengerIdAsync(string characterName)
+        public Task<StalkerMessengerId?> GetStalkerMessengerIdAsync(Guid userId, string characterName)
         {
             DbReadOpsMetric.Inc();
-            return RunDbCommand(() => _db.GetStalkerMessengerIdAsync(characterName));
+            return RunDbCommand(() => _db.GetStalkerMessengerIdAsync(userId, characterName));
         }
 
-        public Task<StalkerMessengerId?> GetStalkerMessengerIdByIdAsync(string messengerId)
-        {
-            DbReadOpsMetric.Inc();
-            return RunDbCommand(() => _db.GetStalkerMessengerIdByIdAsync(messengerId));
-        }
-
-        public Task SetStalkerMessengerIdAsync(string characterName, string messengerId)
+        public Task SetStalkerMessengerIdAsync(Guid userId, string characterName, string messengerId)
         {
             DbWriteOpsMetric.Inc();
-            return RunDbCommand(() => _db.SetStalkerMessengerIdAsync(characterName, messengerId));
+            return RunDbCommand(() => _db.SetStalkerMessengerIdAsync(userId, characterName, messengerId));
         }
 
-        public Task<List<StalkerMessengerContact>> GetStalkerMessengerContactsAsync(string ownerName)
+        public Task<List<StalkerMessengerContact>> GetStalkerMessengerContactsAsync(Guid ownerUserId, string ownerName)
         {
             DbReadOpsMetric.Inc();
-            return RunDbCommand(() => _db.GetStalkerMessengerContactsAsync(ownerName));
+            return RunDbCommand(() => _db.GetStalkerMessengerContactsAsync(ownerUserId, ownerName));
         }
 
-        public Task AddStalkerMessengerContactAsync(string ownerName, string contactName, string? factionName = null)
+        public Task AddStalkerMessengerContactAsync(Guid ownerUserId, string ownerName, Guid contactUserId, string contactName, string? factionName = null)
         {
             DbWriteOpsMetric.Inc();
-            return RunDbCommand(() => _db.AddStalkerMessengerContactAsync(ownerName, contactName, factionName));
+            return RunDbCommand(() => _db.AddStalkerMessengerContactAsync(ownerUserId, ownerName, contactUserId, contactName, factionName));
         }
 
         // stalker-en-changes
-        public Task UpdateStalkerMessengerContactFactionAsync(string ownerName, string contactName, string factionName)
+        public Task UpdateStalkerMessengerContactFactionAsync(Guid ownerUserId, string ownerName, Guid contactUserId, string contactName, string factionName)
         {
             DbWriteOpsMetric.Inc();
-            return RunDbCommand(() => _db.UpdateStalkerMessengerContactFactionAsync(ownerName, contactName, factionName));
+            return RunDbCommand(() => _db.UpdateStalkerMessengerContactFactionAsync(ownerUserId, ownerName, contactUserId, contactName, factionName));
         }
 
-        public Task RemoveStalkerMessengerContactAsync(string ownerName, string contactName)
+        public Task RemoveStalkerMessengerContactAsync(Guid ownerUserId, string ownerName, Guid contactUserId, string contactName)
         {
             DbWriteOpsMetric.Inc();
-            return RunDbCommand(() => _db.RemoveStalkerMessengerContactAsync(ownerName, contactName));
+            return RunDbCommand(() => _db.RemoveStalkerMessengerContactAsync(ownerUserId, ownerName, contactUserId, contactName));
         }
 
         // stalker-en-changes: PDA password persistence

@@ -10,7 +10,7 @@ namespace Content.Shared._Stalker_EN.PdaMessenger;
 public sealed class STMessengerChat
 {
     /// <summary>
-    /// Prefix for DM chat IDs. Format: "dm:{characterName}".
+    /// Prefix for DM chat IDs. Format: "dm:{messengerId}".
     /// </summary>
     public const string DmChatPrefix = "dm:";
 
@@ -20,7 +20,7 @@ public sealed class STMessengerChat
     public const int MaxReplySnippetLength = 50;
 
     /// <summary>
-    /// Channel prototype ID or "dm:{charName}" for DMs.
+    /// Channel prototype ID or "dm:{messengerId}" for DMs.
     /// </summary>
     public readonly string Id;
 

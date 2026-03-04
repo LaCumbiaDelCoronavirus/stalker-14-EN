@@ -15,7 +15,26 @@ public sealed class ChameleonJobLoadoutTest : InteractionTest
 {
     private static readonly List<ProtoId<JobPrototype>> JobBlacklist =
     [
-
+        // stalker-changes: Stalker jobs don't use the chameleon system
+        "StalkerRookie",
+        "StalkerHeadDolg",
+        "SeraphimHead",
+        "StalkerRene",
+        "StalkerHeadBandit",
+        "StalkerGuide",
+        "StalkerDolg",
+        "SeraphimCherubim",
+        "StalkerFreedom",
+        "sci_rector",
+        "StalkerClearSky",
+        "sci_decan",
+        "StalkerHeadClearSky",
+        "StalkerHeadRene",
+        "Seraphim",
+        "StalkerHeadFreedom",
+        "StalkerBandit",
+        "sci",
+        "StalkerVeteran",
     ];
 
     [Test]

@@ -1,24 +1,25 @@
+# this seems like it was someones first yaml so im refactoring the entire thing
+# assume nothing is as it once was
+
 - type: entity
-  id: FireflyGreen3
-  name: Светлячки
-  description: Где тьма обладает всепоглощающей силой, светящиеся точки блеска привлекают внимание скитальцев.
-  suffix: Stalker, Большой
-  placement:
-    mode: SnapgridCenter
-    snap:
-    - Wall
+  id: FireflyBase
+  name: firefly
+  description: Some fireflies.
+  abstract: true
   components:
   - type: Clickable
   - type: Sprite
     sprite: _Stalker/Mobs/Peacefuls/firefly.rsi
     drawdepth: Mobs
-    layers:
-      - state: fireflygreen3
   - type: SpeedModifierContacts
     walkSpeedModifier: 0.75
     sprintSpeedModifier: 0.75
   - type: Physics
-    bodyType: Static
+    bodyType: Dynamic
+    fixedRotation: false
+  - type: RandomWalk
+    maxSpeed: 3.5
+    minSpeed: 0.5
   - type: Fixtures
     fixtures:
       fix1:
@@ -35,190 +36,95 @@
     sound:
       path: /Audio/_Stalker/Animals/firefly.ogg
   - type: TimedDespawn
-    lifetime: 600
+    lifetime: 900
+
+
+- type: entity
+  id: FireflyGreen3
+  parent: FireflyBase
+  name: Светлячки
+  description: Где тьма обладает всепоглощающей силой, светящиеся точки блеска привлекают внимание скитальцев.
+  suffix: Stalker, Большой
+  components:
+  - type: Sprite
+    sprite: _Stalker/Mobs/Peacefuls/firefly.rsi
+    drawdepth: Mobs
+    state: fireflygreen3
 
 - type: entity
   id: FireflyGreen2
+  parent: FireflyBase
   name: Светлячки
   description: Где тьма обладает всепоглощающей силой, светящиеся точки блеска привлекают внимание скитальцев.
   suffix: Stalker, Средний
-  placement:
-    mode: SnapgridCenter
-    snap:
-    - Wall
   components:
-  - type: Clickable
   - type: Sprite
     sprite: _Stalker/Mobs/Peacefuls/firefly.rsi
     drawdepth: Mobs
-    layers:
-      - state: fireflygreen2
-  - type: SpeedModifierContacts
-    walkSpeedModifier: 0.75
-    sprintSpeedModifier: 0.75
-  - type: Physics
-    bodyType: Static
-  - type: Fixtures
-    fixtures:
-      fix1:
-        shape:
-          !type:PhysShapeCircle
-  - type: PointLight
-    radius: 2
-    energy: 1
-    color: "#6cff82"
-    castShadows: true
-  - type: AmbientSound
-    volume: -7
-    range: 4
-    sound:
-      path: /Audio/_Stalker/Animals/firefly.ogg
-  - type: TimedDespawn
-    lifetime: 600
+    state: fireflygreen2
 
 - type: entity
   id: FireflyGreen1
+  parent: FireflyBase
   name: Светлячки
   description: Где тьма обладает всепоглощающей силой, светящиеся точки блеска привлекают внимание скитальцев.
   suffix: Stalker, Маленький
-  placement:
-    mode: SnapgridCenter
-    snap:
-    - Wall
   components:
-  - type: Clickable
   - type: Sprite
     sprite: _Stalker/Mobs/Peacefuls/firefly.rsi
     drawdepth: Mobs
-    layers:
-      - state: fireflygreen1
-  - type: Physics
-    bodyType: Static
-  - type: Fixtures
-    fixtures:
-      fix1:
-        shape:
-          !type:PhysShapeCircle
-  - type: PointLight
-    radius: 2
-    energy: 1
-    color: "#6cff82"
-    castShadows: true
-  - type: AmbientSound
-    volume: -7
-    range: 4
-    sound:
-      path: /Audio/_Stalker/Animals/firefly.ogg
-  - type: TimedDespawn
-    lifetime: 600
+    state: fireflygreen1
 
 - type: entity
   id: FireflyYellow3
+  parent: FireflyBase
   name: Светлячки
   description: Где тьма обладает всепоглощающей силой, светящиеся точки блеска привлекают внимание скитальцев.
   suffix: Stalker, Большой
-  placement:
-    mode: SnapgridCenter
-    snap:
-    - Wall
   components:
-  - type: Clickable
   - type: Sprite
     sprite: _Stalker/Mobs/Peacefuls/firefly.rsi
     drawdepth: Mobs
-    layers:
-      - state: fireflyyellow3
-  - type: Physics
-    bodyType: Static
-  - type: Fixtures
-    fixtures:
-      fix1:
-        shape:
-          !type:PhysShapeCircle
+    state: fireflyyellow3
   - type: PointLight
     radius: 2
     energy: 1
     color: "#ebc463"
     castShadows: true
-  - type: AmbientSound
-    volume: -7
-    range: 4
-    sound:
-      path: /Audio/_Stalker/Animals/firefly.ogg
-  - type: TimedDespawn
-    lifetime: 600
 
 - type: entity
   id: FireflyYellow2
+  parent: FireflyBase
   name: Светлячки
   description: Где тьма обладает всепоглощающей силой, светящиеся точки блеска привлекают внимание скитальцев.
   suffix: Stalker, Средний
-  placement:
-    mode: SnapgridCenter
-    snap:
-    - Wall
   components:
-  - type: Clickable
   - type: Sprite
     sprite: _Stalker/Mobs/Peacefuls/firefly.rsi
     drawdepth: Mobs
-    layers:
-      - state: fireflyyellow2
-  - type: Physics
-    bodyType: Static
-  - type: Fixtures
-    fixtures:
-      fix1:
-        shape:
-          !type:PhysShapeCircle
+    state: fireflyyellow2
   - type: PointLight
     radius: 2
     energy: 1
     color: "#ebc463"
     castShadows: true
-  - type: AmbientSound
-    volume: -7
-    range: 4
-    sound:
-      path: /Audio/_Stalker/Animals/firefly.ogg
-  - type: TimedDespawn
-    lifetime: 600
 
 - type: entity
   id: FireflyYellow1
+  parent: FireflyBase
   name: Светлячки
   description: Где тьма обладает всепоглощающей силой, светящиеся точки блеска привлекают внимание скитальцев.
   suffix: Stalker, Маленький
-  placement:
-    mode: SnapgridCenter
-    snap:
-    - Wall
   components:
-  - type: Clickable
   - type: Sprite
     sprite: _Stalker/Mobs/Peacefuls/firefly.rsi
     drawdepth: Mobs
-    layers:
-      - state: fireflyyellow1
-  - type: Physics
-    bodyType: Static
-  - type: Fixtures
-    fixtures:
-      fix1:
-        shape:
-          !type:PhysShapeCircle
+    state: fireflyyellow1
   - type: PointLight
     radius: 2
     energy: 1
     color: "#ebc463"
     castShadows: true
-  - type: AmbientSound
-    volume: -6
-    range: 4
-    sound:
-      path: /Audio/_Stalker/Animals/firefly.ogg
-  - type: TimedDespawn
-    lifetime: 600
 
 #Спавнеры
 - type: entity
@@ -245,7 +151,7 @@
         - FireflyYellow1
         - FireflyYellow2
         - FireflyYellow3
-      minStartAction: 2700
+      minStartAction: 2100
       minAmount: 3
       maxAmount: 7
       maxOffset: 9
@@ -281,7 +187,7 @@
         - FireflyGreen1
         - FireflyGreen2
         - FireflyGreen3
-      minStartAction: 2700
+      minStartAction: 2100
       minAmount: 3
       maxAmount: 7
       maxOffset: 9

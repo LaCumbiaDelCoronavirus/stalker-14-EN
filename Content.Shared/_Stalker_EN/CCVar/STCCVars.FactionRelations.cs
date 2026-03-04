@@ -22,7 +22,7 @@ public sealed partial class STCCVars
     /// </summary>
     public static readonly CVarDef<int> FactionRelationsCustomMessageMaxLength =
         CVarDef.Create("stalkeren.faction_relations.custom_message_max_length", 250,
-            CVar.SERVERONLY | CVar.REPLICATED);
+            CVar.REPLICATED);
 
     /// <summary>
     ///     Time in seconds before a pending proposal expires. 0 disables time-based expiration.

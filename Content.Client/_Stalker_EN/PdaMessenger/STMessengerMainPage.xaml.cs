@@ -21,7 +21,7 @@ public sealed partial class STMessengerMainPage : BoxContainer
     /// <summary>Raised when the user submits a messenger ID to add; arg is the messenger ID string.</summary>
     public event Action<string>? OnAddContact;
 
-    /// <summary>Raised when the user removes a contact; arg is the character name.</summary>
+    /// <summary>Raised when the user removes a contact; arg is the contact's messenger ID.</summary>
     public event Action<string>? OnRemoveContact;
 
     /// <summary>Raised when the user toggles mute on a channel; arg is the channel prototype ID.</summary>
@@ -55,22 +55,36 @@ public sealed partial class STMessengerMainPage : BoxContainer
             ChannelList.AddChild(row);
         }
 
-        // Build O(1) lookup for DM data by contact name
-        var dmByName = new Dictionary<string, STMessengerChat>(state.DirectMessages.Count);
+        // Build O(1) lookup for DM data by messenger ID (from the DM chat ID)
+        var dmByMessengerId = new Dictionary<string, STMessengerChat>(state.DirectMessages.Count);
         foreach (var dm in state.DirectMessages)
-            dmByName[dm.DisplayName] = dm;
+        {
+            // DM chat IDs are "dm:{messengerId}" — extract the messenger ID
+            if (dm.Id.StartsWith(STMessengerChat.DmChatPrefix, StringComparison.Ordinal))
+            {
+                var msgId = dm.Id[STMessengerChat.DmChatPrefix.Length..];
+                dmByMessengerId[msgId] = dm;
+            }
+        }
 
         ContactList.RemoveAllChildren();
         foreach (var contactInfo in state.Contacts)
         {
-            dmByName.TryGetValue(contactInfo.CharacterName, out var dm);
+            STMessengerChat? dm = null;
+            if (contactInfo.MessengerId is not null)
+                dmByMessengerId.TryGetValue(contactInfo.MessengerId, out dm);
+
             var unread = dm?.UnreadCount ?? 0;
-            var chatId = dm?.Id ?? STMessengerChat.DmChatPrefix + contactInfo.CharacterName;
+            var chatId = dm?.Id ?? STMessengerChat.DmChatPrefix + (contactInfo.MessengerId ?? contactInfo.CharacterName);
 
             var row = new STMessengerContactRow(
                 contactInfo.CharacterName, unread, contactInfo.MessengerId, contactInfo.FactionName);
             row.OnSelected += () => OnContactSelected?.Invoke(chatId);
-            row.OnRemove += () => OnRemoveContact?.Invoke(contactInfo.CharacterName);
+            row.OnRemove += () =>
+            {
+                if (contactInfo.MessengerId is not null)
+                    OnRemoveContact?.Invoke(contactInfo.MessengerId);
+            };
             ContactList.AddChild(row);
         }
     }

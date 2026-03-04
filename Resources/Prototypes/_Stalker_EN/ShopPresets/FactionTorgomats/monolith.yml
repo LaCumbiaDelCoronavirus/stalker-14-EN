@@ -2,14 +2,14 @@
 - type: vendingMachineInventory
   id: MonolithInventoryEN
   startingInventory:
-    SetMonolithMarlyaBuyableCrate: 10
-    SetMonolithBalaklavaBuyableCrate: 10
-    SetMonolithGasBuyableCrate: 10
-    SetMonolithOldBuyableCrate: 10
-    ClothingOuterArmorSevaMonolith: 10
-    ClothingOuterCoatKevlarMonolith: 10
+    SetMonolithBuyableCrateT3Heavy: 10
+    SetMonolithBuyableCrateT2Heavy: 10
+    SetMonolithBuyableCrateT2Light: 10
+    SetMonolithBuyableCrateSeva: 10
+    SetMonolithBuyableCrateInfiltrator1: 10
+    SetMonolithBuyableCrateInfiltrator2: 10
+    ClothingNeckScarfWhite: 10
     MonolithCrateMedkit: 10
-    STWeaponRifleAKS74Green: 10
     STWeaponRifleAKS74Winter: 10
     STWeaponRifleAKS74UWhite: 10
     STWeaponRifleL85: 10
@@ -18,15 +18,17 @@
     MonolithCrate545PC: 10
     MonolithCrate556Mag30: 10
     MonolithCrate556M855: 10
+    FoldedFlagMono: 20
+    StalkerMonolithAltarKit: 10
     BoxZiptie: 10
     ClothingHeatBagStalker: 10
     Paper: 10
     BloodyPaper: 10
     Pen: 10
-    ClothingNeckScarfWhite: 10
+    Candle: 30
+    Matchbox: 5
     MonolithInventoryRestockEN: 1
     Screwdriver: 1
-    FoldedFlagMono: 20
 
 - type: entity
   parent: BaseItem

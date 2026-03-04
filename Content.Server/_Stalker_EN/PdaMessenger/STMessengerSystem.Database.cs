@@ -19,8 +19,9 @@ public sealed partial class STMessengerSystem
             var ids = await _db.GetAllStalkerMessengerIdsAsync();
             foreach (var entry in ids)
             {
-                _messengerIdCache[entry.MessengerId] = entry.CharacterName;
-                _characterToMessengerId[entry.CharacterName] = entry.MessengerId;
+                var key = (entry.UserId, entry.CharacterName);
+                _messengerIdCache[entry.MessengerId] = key;
+                _characterToMessengerId[key] = entry.MessengerId;
             }
 
             Log.Info($"Loaded {ids.Count} messenger IDs into cache.");
@@ -32,18 +33,21 @@ public sealed partial class STMessengerSystem
     }
 
     /// <summary>
-    /// Loads or generates a messenger ID for the given character.
-    /// If the character already has an ID in the database, it is used.
+    /// Loads or generates a messenger ID for the given (userId, characterName) identity.
+    /// If the identity already has an ID in the database, it is used.
     /// Otherwise a new unique ID is generated and persisted.
     /// </summary>
     private async void LoadOrGenerateMessengerIdAsync(
         EntityUid cartridgeUid,
+        Guid userId,
         string characterName)
     {
         try
         {
+            var identityKey = (userId, characterName);
+
             // Fast path: already cached from bulk load or prior spawn
-            if (_characterToMessengerId.TryGetValue(characterName, out var cachedId))
+            if (_characterToMessengerId.TryGetValue(identityKey, out var cachedId))
             {
                 if (!Deleted(cartridgeUid) && TryComp<STMessengerServerComponent>(cartridgeUid, out var cachedServer))
                     cachedServer.MessengerId = cachedId;
@@ -51,7 +55,7 @@ public sealed partial class STMessengerSystem
                 return;
             }
 
-            var existing = await _db.GetStalkerMessengerIdAsync(characterName);
+            var existing = await _db.GetStalkerMessengerIdAsync(userId, characterName);
 
             // Entity may have been deleted while we were waiting for DB
             if (Deleted(cartridgeUid) || !TryComp<STMessengerServerComponent>(cartridgeUid, out var server))
@@ -60,8 +64,8 @@ public sealed partial class STMessengerSystem
             if (existing is not null)
             {
                 server.MessengerId = existing.MessengerId;
-                _messengerIdCache[existing.MessengerId] = characterName;
-                _characterToMessengerId[characterName] = existing.MessengerId;
+                _messengerIdCache[existing.MessengerId] = identityKey;
+                _characterToMessengerId[identityKey] = existing.MessengerId;
                 return;
             }
 
@@ -81,20 +85,20 @@ public sealed partial class STMessengerSystem
             }
 
             // Persist to DB first, then update local state (avoids stale state on DB failure)
-            await _db.SetStalkerMessengerIdAsync(characterName, newId);
+            await _db.SetStalkerMessengerIdAsync(userId, characterName, newId);
 
             // Re-check entity validity after second await
             if (Deleted(cartridgeUid) || !TryComp<STMessengerServerComponent>(cartridgeUid, out server))
             {
                 // Entity gone, but cache the ID so it persists across rounds
-                _messengerIdCache[newId] = characterName;
-                _characterToMessengerId[characterName] = newId;
+                _messengerIdCache[newId] = identityKey;
+                _characterToMessengerId[identityKey] = newId;
                 return;
             }
 
             server.MessengerId = newId;
-            _messengerIdCache[newId] = characterName;
-            _characterToMessengerId[characterName] = newId;
+            _messengerIdCache[newId] = identityKey;
+            _characterToMessengerId[identityKey] = newId;
 
             Log.Debug($"Generated messenger ID {newId} for {characterName}.");
         }
@@ -105,15 +109,16 @@ public sealed partial class STMessengerSystem
     }
 
     /// <summary>
-    /// Loads contacts from the database for the given character and populates the component.
+    /// Loads contacts from the database for the given identity and populates the component.
     /// </summary>
     private async void LoadContactsAsync(
         EntityUid cartridgeUid,
+        Guid userId,
         string characterName)
     {
         try
         {
-            var contacts = await _db.GetStalkerMessengerContactsAsync(characterName);
+            var contacts = await _db.GetStalkerMessengerContactsAsync(userId, characterName);
 
             // Entity may have been deleted while we were waiting for DB
             if (Deleted(cartridgeUid) || !TryComp<STMessengerServerComponent>(cartridgeUid, out var server))
@@ -121,10 +126,22 @@ public sealed partial class STMessengerSystem
 
             foreach (var contact in contacts)
             {
-                server.Contacts[contact.ContactCharacterName] = contact.FactionName;
+                var contactKey = (contact.ContactUserId, contact.ContactCharacterName);
+
+                // Look up the contact's messenger ID from cache
+                if (!_characterToMessengerId.TryGetValue(contactKey, out var contactMessengerId))
+                    continue; // Skip contacts whose messenger ID isn't cached yet
+
+                server.Contacts[contactMessengerId] = new STContactEntry(
+                    contact.ContactUserId, contact.ContactCharacterName, contact.FactionName);
             }
 
             Log.Debug($"Loaded {contacts.Count} contacts for {characterName}.");
+
+            // Refresh all active messenger UIs so contacts see this player's current faction.
+            // Done here (after DB loads complete) rather than in InitializeMessengerForPda
+            // to avoid a wasted broadcast before contacts are populated.
+            BroadcastUiUpdate();
         }
         catch (Exception ex)
         {
@@ -135,11 +152,14 @@ public sealed partial class STMessengerSystem
     /// <summary>
     /// Persists a new contact to the database.
     /// </summary>
-    private async void AddContactAsync(string ownerName, string contactName, string? factionName)
+    private async void AddContactAsync(
+        Guid ownerUserId, string ownerName,
+        Guid contactUserId, string contactName,
+        string? factionName)
     {
         try
         {
-            await _db.AddStalkerMessengerContactAsync(ownerName, contactName, factionName);
+            await _db.AddStalkerMessengerContactAsync(ownerUserId, ownerName, contactUserId, contactName, factionName);
         }
         catch (Exception ex)
         {
@@ -150,11 +170,14 @@ public sealed partial class STMessengerSystem
     /// <summary>
     /// Persists an updated faction name for an existing contact.
     /// </summary>
-    private async void UpdateContactFactionAsync(string ownerName, string contactName, string factionName)
+    private async void UpdateContactFactionAsync(
+        Guid ownerUserId, string ownerName,
+        Guid contactUserId, string contactName,
+        string factionName)
     {
         try
         {
-            await _db.UpdateStalkerMessengerContactFactionAsync(ownerName, contactName, factionName);
+            await _db.UpdateStalkerMessengerContactFactionAsync(ownerUserId, ownerName, contactUserId, contactName, factionName);
         }
         catch (Exception ex)
         {
@@ -165,11 +188,13 @@ public sealed partial class STMessengerSystem
     /// <summary>
     /// Removes a contact from the database.
     /// </summary>
-    private async void RemoveContactAsync(string ownerName, string contactName)
+    private async void RemoveContactAsync(
+        Guid ownerUserId, string ownerName,
+        Guid contactUserId, string contactName)
     {
         try
         {
-            await _db.RemoveStalkerMessengerContactAsync(ownerName, contactName);
+            await _db.RemoveStalkerMessengerContactAsync(ownerUserId, ownerName, contactUserId, contactName);
         }
         catch (Exception ex)
         {

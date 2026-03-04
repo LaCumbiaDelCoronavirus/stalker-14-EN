@@ -37,6 +37,7 @@ namespace Content.IntegrationTests.Tests.Doors
   components:
   - type: Door
   - type: Airlock
+    powered: true
   - type: DoorBolt
   - type: ApcPowerReceiver
     needsPower: false

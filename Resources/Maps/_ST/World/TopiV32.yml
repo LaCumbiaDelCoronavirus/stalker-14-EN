@@ -4,8 +4,8 @@ meta:
   engineVersion: 268.0.0
   forkId: ""
   forkVersion: ""
-  time: 02/26/2026 16:54:40
-  entityCount: 32934
+  time: 03/01/2026 15:39:59
+  entityCount: 32947
 maps:
 - 1
 grids:
@@ -138,6 +138,8 @@ entities:
         0,-17: 72340172838010880
         -2,-17: 13889313184898088960
         -11,-9: 9259400833882128384
+        -11,-12: 1733903658640211968
+        -10,-12: 4311744512
     - type: OccluderTree
     - type: STMapKey
       value: Topi
@@ -19426,6 +19428,47 @@ entities:
     - type: Transform
       pos: 138.5,-27.5
       parent: 1
+  - uid: 27180
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 114.5,-69.5
+      parent: 1
+  - uid: 27880
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 142.5,-35.5
+      parent: 1
+  - uid: 32927
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 142.5,-32.5
+      parent: 1
+  - uid: 32942
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 151.5,-32.5
+      parent: 1
+  - uid: 32943
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 151.5,-35.5
+      parent: 1
+  - uid: 32944
+    components:
+    - type: Transform
+      pos: 146.5,-31.5
+      parent: 1
+  - uid: 32945
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 144.5,-46.5
+      parent: 1
 - proto: AnomalyChemSource6
   entities:
   - uid: 44
@@ -19572,6 +19615,14 @@ entities:
       parent: 1
     - type: Fixtures
       fixtures: {}
+  - uid: 32946
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 134.5,-37.5
+      parent: 1
+    - type: Fixtures
+      fixtures: {}
 - proto: Banner8
   entities:
   - uid: 63
@@ -19610,6 +19661,13 @@ entities:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -147.5,-84.5
+      parent: 1
+    - type: Fixtures
+      fixtures: {}
+  - uid: 32902
+    components:
+    - type: Transform
+      pos: -77,-69.5
       parent: 1
     - type: Fixtures
       fixtures: {}
@@ -55868,11 +55926,6 @@ entities:
     components:
     - type: Transform
       pos: -14.5,-94.5
-      parent: 1
-  - uid: 7117
-    components:
-    - type: Transform
-      pos: -14.5,-95.5
       parent: 1
   - uid: 7118
     components:
@@ -112072,11 +112125,6 @@ entities:
     - type: Transform
       pos: -152.5,-51.5
       parent: 1
-  - uid: 18352
-    components:
-    - type: Transform
-      pos: -16.5,-94.5
-      parent: 1
   - uid: 18353
     components:
     - type: Transform
@@ -113590,6 +113638,16 @@ entities:
     - Tag
 - proto: HolmIndestructible
   entities:
+  - uid: 7117
+    components:
+    - type: Transform
+      pos: -16.5,-94.5
+      parent: 1
+  - uid: 18352
+    components:
+    - type: Transform
+      pos: -16.5,-93.5
+      parent: 1
   - uid: 18627
     components:
     - type: Transform
@@ -157496,6 +157554,12 @@ entities:
     - type: Transform
       pos: -146.5,-98.5
       parent: 1
+  - uid: 28308
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -78.5,-67.5
+      parent: 1
 - proto: MetalBarDoorFallout
   entities:
   - uid: 27181
@@ -157542,9 +157606,7 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -122.5,-61.5
       parent: 1
-- proto: MetalDoorFallout
-  entities:
-  - uid: 27180
+  - uid: 32939
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
@@ -161571,11 +161633,11 @@ entities:
       parent: 1
     - type: Fixtures
       fixtures: {}
-  - uid: 27880
+  - uid: 32947
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 133.5,-37.5
+      rot: 3.141592653589793 rad
+      pos: 131.5,-37.5
       parent: 1
     - type: Fixtures
       fixtures: {}
@@ -163083,6 +163145,16 @@ entities:
     components:
     - type: Transform
       pos: -79.5,-67.5
+      parent: 1
+  - uid: 32940
+    components:
+    - type: Transform
+      pos: -79.5,-68.5
+      parent: 1
+  - uid: 32941
+    components:
+    - type: Transform
+      pos: -79.5,-66.5
       parent: 1
 - proto: StalkerExplSafezoneTriggerOut
   entities:
@@ -170705,6 +170777,11 @@ entities:
       parent: 1
 - proto: STBarricadeBlock
   entities:
+  - uid: 28323
+    components:
+    - type: Transform
+      pos: -83.5,-90.5
+      parent: 1
   - uid: 29573
     components:
     - type: Transform
@@ -171288,6 +171365,7 @@ entities:
       parent: 1
     missingComponents:
     - Item
+    - Trash
     - Pullable
   - uid: 29664
     components:
@@ -171296,6 +171374,7 @@ entities:
       parent: 1
     missingComponents:
     - Item
+    - Trash
     - Pullable
   - uid: 29665
     components:
@@ -171304,6 +171383,7 @@ entities:
       parent: 1
     missingComponents:
     - Item
+    - Trash
     - Pullable
   - uid: 29666
     components:
@@ -171312,6 +171392,7 @@ entities:
       parent: 1
     missingComponents:
     - Item
+    - Trash
     - Pullable
 - proto: STCRustyElectroShieldOff
   entities:
@@ -175523,6 +175604,19 @@ entities:
       parent: 1
 - proto: STGrille
   entities:
+  - uid: 28322
+    components:
+    - type: Transform
+      pos: -83.5,-89.5
+      parent: 1
+    - type: Occluder
+    missingComponents:
+    - MeleeSound
+    - RCDDeconstructable
+    - CanBuildWindowOnTop
+    - Construction
+    - PowerConsumer
+    - Electrified
   - uid: 30477
     components:
     - type: Transform
@@ -175563,6 +175657,7 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -83.5,-90.5
       parent: 1
+    - type: Occluder
   - uid: 30484
     components:
     - type: Transform
@@ -176025,8 +176120,6 @@ entities:
       rot: -1.5707963267948966 rad
       pos: -4.4710574,-119.01116
       parent: 1
-    - type: AmbientSound
-      range: 15
     - type: PointLight
       color: '#306844FF'
 - proto: STMopItem
@@ -185134,12 +185227,6 @@ entities:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -45.5,-79.5
-      parent: 1
-  - uid: 32927
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -78.5,-67.5
       parent: 1
 - proto: WoodDoorFalloutCN
   entities:

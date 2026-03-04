@@ -19,6 +19,9 @@ public sealed partial class STPdaPasswordWindow : FancyWindow
     {
         RobustXamlLoader.Load(this);
 
+        PasswordInput.IsValid = s => s.Length <= 16;
+        NewPasswordInput.IsValid = s => s.Length <= 16;
+
         SubmitButton.OnPressed += _ =>
         {
             var password = PasswordInput.Text.Trim();

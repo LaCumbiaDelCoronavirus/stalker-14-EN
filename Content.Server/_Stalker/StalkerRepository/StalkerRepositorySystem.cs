@@ -41,7 +41,6 @@ using Content.Server._Stalker.Sponsors.SponsorManager;
 using Content.Server._Stalker_EN.Loadout;
 using Content.Shared._Stalker_EN.Loadout;
 using Content.Shared.Actions.Components;
-using Content.Shared.PDA;
 using Content.Shared.StatusEffectNew.Components;
 using Content.Shared.Verbs;
 
@@ -65,8 +64,6 @@ public sealed class StalkerRepositorySystem : EntitySystem
     [Dependency] private readonly ISharedPlayerManager _player = default!; // for getting session by mindComp
     [Dependency] private readonly LoadoutSystem _loadoutSystem = default!; // for loadout state updates
     private ISawmill _sawmill = default!;
-
-    private const string PdaCompName = "Pda"; // stalker-en-changes
 
     // caching new records in database to get them later inside sponsors stuff
     private List<string> _newRecords = new();
@@ -236,21 +233,10 @@ public sealed class StalkerRepositorySystem : EntitySystem
 
         userItems = GenerateItemsInfo(GetRecursiveContainerElements(user.Value), true);
 
-        // stalker-en-changes: hide PDAs from stash display
-        userItems.RemoveAll(i =>
-            _prototypeMan.TryIndex<EntityPrototype>(i.ProductEntity, out var proto)
-            && proto.Components.ContainsKey(PdaCompName));
-
         if (!_ui.TryOpenUi(repository, StalkerRepositoryUiKey.Key, user.Value))
             return;
 
-        // stalker-en-changes: hide pre-existing stashed PDAs (phantom weight accepted)
-        var items = new List<RepositoryItemInfo>(component.ContainedItems);
-        items.RemoveAll(i =>
-            _prototypeMan.TryIndex<EntityPrototype>(i.ProductEntity, out var proto)
-            && proto.Components.ContainsKey(PdaCompName));
-
-        _ui.SetUiState(repository, StalkerRepositoryUiKey.Key, new RepositoryUpdateState(items, userItems, component.MaxWeight));
+        _ui.SetUiState(repository, StalkerRepositoryUiKey.Key, new RepositoryUpdateState(component.ContainedItems, userItems, component.MaxWeight));
     }
 
     private void OnRequestUpdate(EntityUid uid, StalkerRepositoryComponent component,
@@ -365,10 +351,6 @@ public sealed class StalkerRepositorySystem : EntitySystem
     private void OnInteractUsing(EntityUid uid, StalkerRepositoryComponent component, InteractUsingEvent args)
     {
         if (args.Handled)
-            return;
-
-        // stalker-en-changes: PDAs cannot be stored in personal stash
-        if (HasComp<PdaComponent>(args.Used))
             return;
 
         // Block operations during loadout processing to prevent race conditions
@@ -767,10 +749,6 @@ public sealed class StalkerRepositorySystem : EntitySystem
         if (playerItem == null)
             return null;
 
-        // stalker-en-changes: PDAs cannot be stored in personal stash
-        if (HasComp<PdaComponent>(playerItem.Value))
-            return null;
-
         // if we dont have containerManager we don't need to insert it recursively
         if (!TryComp<ContainerManagerComponent>(playerItem, out var containerMan))
         {
@@ -797,8 +775,7 @@ public sealed class StalkerRepositorySystem : EntitySystem
                 allowInsertRecursively = CheckForWhitelist(entity, GenerateItemInfo(item));
                 elements.Remove(item);
                 // another large blacklist
-                if (HasComp<PdaComponent>(item) || // stalker-en-changes: do not extract PDAs from containers
-                    HasComp<SolutionComponent>(item) || // Do not insert solutions
+                if (HasComp<SolutionComponent>(item) || // Do not insert solutions
                     HasComp<InstantActionComponent>(item) || // Do not insert actions
                     HasComp<CartridgeComponent>(item) && !_tags.HasTag(item, "Dogtag") ||
                     HasComp<BallisticAmmoProviderComponent>(playerItem) && _tags.HasTag(item, "Cartridge") || // Do not insert program cartridges
@@ -940,9 +917,6 @@ public sealed class StalkerRepositorySystem : EntitySystem
         // Check unremovable components (same check as nested items in InsertToRepositoryRecursively)
         if (HasComp<UnremoveableComponent>(item) ||
             HasComp<SelfUnremovableClothingComponent>(item))
-            return false;
-
-        if (HasComp<PdaComponent>(item)) // stalker-en-changes
             return false;
 
         // Check whitelist if repository has one

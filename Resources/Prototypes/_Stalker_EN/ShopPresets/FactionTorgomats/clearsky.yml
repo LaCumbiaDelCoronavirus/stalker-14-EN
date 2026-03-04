@@ -20,7 +20,7 @@
     ZoneArtifactFlash: 1620
     ZoneArtifactAccumulator: 1620
     ZoneArtifactDiamond: 2950
-    ZoneArtifactCharger: 2950
+    ZoneArtifactCharger: 810
     ArtMoon: 3240
     ZoneArtifactTesla: 4860
     ZoneArtifactIce: 6480
@@ -47,11 +47,11 @@
     ZoneArtifactCompass: 3600
     ZoneArtifactCrucifix: 4250
     ZoneArtifactThorn: 2550
-    ZoneArtifactArf: 810
+    ZoneArtifactArf: 2550
 
     # Acidic group - 1
     ZoneArtifactToxic: 650
-    ZoneArtifactCytoplasm: 3200
+    ZoneArtifactCytoplasm: 1600
     ZoneArtifactBlood: 1600
     ZoneArtifactMeat: 3200
     ZoneArtifactKolobok: 4800
@@ -68,9 +68,9 @@
     MutantPartOldBoarHoof: 545 # T3
 
     #Bears ---------
-    MutantPartBearClaw: 230
-    MutantPartBearPaw: 445
-    MutantPartBearEye: 675
+    MutantPartBearClaw: 250
+    MutantPartBearPaw: 485
+    MutantPartBearEye: 695
     ClothingHeadBear: 800
 
     #T1 -------- Health * 1
@@ -328,6 +328,7 @@
     priority: 10
     items:
       STSkinsKitClearSky: 500
+      StalkerPDA: 250
       STCombatKnife: 25
       BoxZiptie: 50
       BoxSafebox: 300

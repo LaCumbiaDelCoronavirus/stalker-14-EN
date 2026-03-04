@@ -377,14 +377,14 @@ namespace Content.Server.Database
                 .HasKey(p => new { p.InitiatingFaction, p.TargetFaction });
 
             modelBuilder.Entity<StalkerMessengerId>()
-                .HasKey(m => m.CharacterName);
+                .HasKey(m => new { m.UserId, m.CharacterName });
 
             modelBuilder.Entity<StalkerMessengerId>()
                 .HasIndex(m => m.MessengerId)
                 .IsUnique();
 
             modelBuilder.Entity<StalkerMessengerContact>()
-                .HasKey(c => new { c.OwnerCharacterName, c.ContactCharacterName });
+                .HasKey(c => new { c.OwnerUserId, c.OwnerCharacterName, c.ContactUserId, c.ContactCharacterName });
 
             modelBuilder.Entity<StalkerPdaPassword>()
                 .HasKey(p => p.CharacterName);
@@ -1572,12 +1572,16 @@ namespace Content.Server.Database
 
     // stalker-en-changes-start: Messenger ID + Contact persistence
     /// <summary>
-    /// Stores a persistent messenger ID for a character name.
-    /// Each character gets a unique "XXX-XXX" format ID that persists across rounds.
+    /// Stores a persistent messenger ID for a (user, character name) pair.
+    /// Each user+character combination gets a unique "XXX-XXX" format ID that persists across rounds.
+    /// Composite key: (UserId, CharacterName).
     /// </summary>
     public sealed class StalkerMessengerId
     {
-        [Required, Key]
+        [Required]
+        public Guid UserId { get; set; }
+
+        [Required]
         public string CharacterName { get; set; } = default!;
 
         [Required]
@@ -1586,12 +1590,18 @@ namespace Content.Server.Database
 
     /// <summary>
     /// Stores a unidirectional contact relationship between two characters.
-    /// Composite key: (OwnerCharacterName, ContactCharacterName).
+    /// Composite key: (OwnerUserId, OwnerCharacterName, ContactUserId, ContactCharacterName).
     /// </summary>
     public sealed class StalkerMessengerContact
     {
         [Required]
+        public Guid OwnerUserId { get; set; }
+
+        [Required]
         public string OwnerCharacterName { get; set; } = default!;
+
+        [Required]
+        public Guid ContactUserId { get; set; }
 
         [Required]
         public string ContactCharacterName { get; set; } = default!;

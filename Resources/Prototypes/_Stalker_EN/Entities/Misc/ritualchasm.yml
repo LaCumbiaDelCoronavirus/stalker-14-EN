@@ -1,7 +1,7 @@
 - type: entity
   id: FloorRitualChasmEntity
   name: chasm
-  description: The darkness inside is blinding.
+  description: The darkness is blinding.
   suffix: Ritual Chasm, Renegade
   placement:
     mode: SnapgridCenter

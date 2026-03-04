@@ -21,8 +21,13 @@
       tags:
       - STArtifact
     grid:
-      - 0,0,0,0
-      - 2,0,2,0
+      - 0,3,0,4
+      - 2,3,2,4
+      - 4,3,4,4
+      - 6,0,8,1
+      - 6,3,6,4
+      - 8,3,8,4
+      - 10,3,10,4
   - type: Armor
     armorClass: 3
     modifiers:
@@ -90,7 +95,19 @@
     sprite: _Stalker/Objects/Clothing/outerClothing/renegate_il.rsi
   - type: Clothing
     sprite: _Stalker/Objects/Clothing/outerClothing/renegate_il.rsi
-
+  - type: Storage
+    maxItemSize: Large
+    blacklist:
+      tags:
+      - STArtifact
+    grid:
+      - 0,3,0,4
+      - 2,3,2,4
+      - 4,3,4,4
+      - 6,0,8,1
+      - 6,3,6,4
+      - 8,3,8,4
+      - 10,3,10,4
 
 - type: entity
   parent: STClothingOuterArmorBase
@@ -102,6 +119,19 @@
     sprite: _Stalker/Objects/Clothing/outerClothing/medium_armor_jaba.rsi
   - type: Clothing
     sprite: _Stalker/Objects/Clothing/outerClothing/medium_armor_jaba.rsi
+  - type: Storage
+    maxItemSize: Large
+    blacklist:
+      tags:
+      - STArtifact
+    grid:
+      - 0,3,0,4
+      - 2,3,2,4
+      - 4,3,4,4
+      - 6,0,8,1
+      - 6,3,6,4
+      - 8,3,8,4
+      - 10,3,10,4
 
 - type: entity
   parent: STClothingOuterArmorBase
@@ -167,7 +197,19 @@
     sprite: _Stalker/Objects/Clothing/outerClothing/deserter_armor.rsi
   - type: Clothing
     sprite: _Stalker/Objects/Clothing/outerClothing/deserter_armor.rsi
-
+  - type: Storage
+    maxItemSize: Large
+    blacklist:
+      tags:
+      - STArtifact
+    grid:
+      - 0,3,0,4
+      - 2,3,2,4
+      - 4,3,4,4
+      - 6,0,8,1
+      - 6,3,6,4
+      - 8,3,8,4
+      - 10,3,10,4
 
 - type: entity
   parent: STClothingOuterArmorBase
@@ -271,6 +313,19 @@
         Piercing: 0.65
         Radiation: 0.95
         Heat: 0.85
+  - type: Storage
+    maxItemSize: Large
+    blacklist:
+      tags:
+      - STArtifact
+    grid:
+      - 0,3,0,4
+      - 2,3,2,4
+      - 4,3,4,4
+      - 6,0,8,1
+      - 6,3,6,4
+      - 8,3,8,4
+      - 10,3,10,4
 
 - type: entity
   parent: STClothingHeadHatBase
@@ -279,10 +334,10 @@
   categories: [ HideSpawnMenu ]
   description: Не очень свободный, покуда сидит на вашей голове.
   components:
-    - type: Sprite
-      sprite: _Stalker/Objects/Clothing/hats/hood_ps5m.rsi
-    - type: Clothing
-      sprite: _Stalker/Objects/Clothing/hats/hood_ps5m.rsi
+  - type: Sprite
+    sprite: _Stalker/Objects/Clothing/hats/hood_ps5m.rsi
+  - type: Clothing
+    sprite: _Stalker/Objects/Clothing/hats/hood_ps5m.rsi
 
 - type: entity
   parent: STClothingOuterArmorBase
@@ -314,6 +369,19 @@
         Heat: 0.65
         Caustic: 0.70
         Shock: 0.65
+  - type: Storage
+    maxItemSize: Large
+    blacklist:
+      tags:
+      - STArtifact
+    grid:
+      - 0,3,0,4
+      - 2,3,2,4
+      - 4,3,4,4
+      - 6,0,8,1
+      - 6,3,6,4
+      - 8,3,8,4
+      - 10,3,10,4
 
 - type: entity
   parent: STClothingHeadHatBase

@@ -4,6 +4,8 @@
   suffix: Stalker, Torso
   abstract: true
   components:
+    - type: Trash #Stalker EN
+      time: 900
     - type: Sprite
       state: icon
     - type: Clothing

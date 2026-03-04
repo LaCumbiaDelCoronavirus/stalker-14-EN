@@ -891,5 +891,200 @@
   id: 101
   time: '2026-02-27T22:44:20.110260+00:00'
   url: https://github.com/coolmankid12345/stalker-14-EN/pull/546
+- author: Noguchi47
+  changes:
+  - message: Added various of imported instruments to Yerzhan Alimov trader in Rookie
+      Village
+    type: Add
+  id: 102
+  time: '2026-03-01T02:25:51.357750+00:00'
+  url: https://github.com/coolmankid12345/stalker-14-EN/pull/551
+- author: LaCumbiaDelCoronavirus
+  changes:
+  - message: Ruplidets trader is now locked behind renegade-access doors.
+    type: Tweak
+  - message: Sacrifices into ritualpit now only play a sound for everyone on the same
+      map.
+    type: Tweak
+  id: 103
+  time: '2026-03-01T02:26:52.253627+00:00'
+  url: https://github.com/coolmankid12345/stalker-14-EN/pull/549
+- author: Roland410
+  changes:
+  - message: Adds lights to Neutral jail
+    type: Fix
+  id: 104
+  time: '2026-03-01T14:48:45.807141+00:00'
+  url: https://github.com/coolmankid12345/stalker-14-EN/pull/553
+- author: crocodilecarousel
+  changes:
+  - message: Monolith altar kit
+    type: Add
+  - message: Monolith supply crate updated with new kits
+    type: Tweak
+  - message: Monolith now have a defib in their medical kit
+    type: Tweak
+  - message: Monolith PDA now removeable
+    type: Tweak
+  - message: Redline jacket inventory updated to two 2x2 pockets
+    type: Tweak
+  - message: SAW inhands
+    type: Fix
+  - message: Pointman standard kit now works as expected
+    type: Fix
+  id: 105
+  time: '2026-03-01T14:52:13.401188+00:00'
+  url: https://github.com/coolmankid12345/stalker-14-EN/pull/548
+- author: Roland410
+  changes:
+  - message: Replaces bandit SEVA sprites made by Wassuy.
+    type: Tweak
+  id: 106
+  time: '2026-03-01T14:54:25.660209+00:00'
+  url: https://github.com/coolmankid12345/stalker-14-EN/pull/555
+- author: Roland410
+  changes:
+  - message: Fix storage bugs and inconsistencies in cloaks and coveralls.
+    type: Fix
+  id: 107
+  time: '2026-03-01T14:57:21.421107+00:00'
+  url: https://github.com/coolmankid12345/stalker-14-EN/pull/554
+- author: teecoding
+  changes:
+  - message: Merc Board PDA cartridge for posting and browsing mercenary services
+      and job requests
+    type: Add
+  - message: Trade Board PDA cartridge for posting and browsing buy/sell offers
+    type: Add
+  - message: Clickable offer links in PDA messenger that jump straight to the relevant
+      board listing
+    type: Add
+  - message: Copy link button on board offers to share them in chat
+    type: Add
+  - message: PDA notifications and badge counts for new board posts
+    type: Add
+  - message: Offer IDs shown on board cards for easy reference
+    type: Add
+  - message: Search bar on bulletin boards
+    type: Add
+  - message: Program icons in PDA cartridge headers
+    type: Add
+  - message: PDA and messenger now work immediately when picked up by hand
+    type: Add
+  - message: PDA available for purchase in the Clear Sky shop
+    type: Add
+  - message: PDA password button only visible to the PDA's owner
+    type: Tweak
+  - message: Trading and Jobs messenger channels replaced by the dedicated Trade Board
+    type: Tweak
+  - message: Messenger messages now display with a cleaner webhook-style format
+    type: Tweak
+  - message: Messenger contacts are now tied to unique IDs instead of character names,
+      preventing impersonation
+    type: Tweak
+  - message: PDA password max length reduced to 16 characters
+    type: Tweak
+  - message: PDAs can now be stored in your personal stash
+    type: Tweak
+  - message: Trophy weight no longer counts nearby players in its calculation
+    type: Fix
+  - message: Switching between PDA programs no longer shows the wrong tab
+    type: Fix
+  - message: Messenger chat now scrolls to the bottom reliably
+    type: Fix
+  id: 108
+  time: '2026-03-01T16:15:24.722590+00:00'
+  url: https://github.com/coolmankid12345/stalker-14-EN/pull/556
+- author: Roland410
+  changes:
+  - message: Adds lighting to the CS base where I forgot.
+    type: Fix
+  id: 109
+  time: '2026-03-01T16:17:04.023469+00:00'
+  url: https://github.com/coolmankid12345/stalker-14-EN/pull/557
+- author: crocodilecarousel
+  changes:
+  - message: Bear claws are worth slightly more
+    type: Tweak
+  - message: Journalists start with a TT
+    type: Tweak
+  id: 110
+  time: '2026-03-02T04:07:02.886148+00:00'
+  url: https://github.com/coolmankid12345/stalker-14-EN/pull/560
+- author: teecoding
+  changes:
+  - message: Resolved several prototype loading errors (duplicate crate, missing tag,
+      missing textures, bad locale keys)
+    type: Fix
+  - message: Ghost no longer causes server crash when respawn fails to place a player
+    type: Fix
+  id: 111
+  time: '2026-03-02T14:10:08.348825+00:00'
+  url: https://github.com/coolmankid12345/stalker-14-EN/pull/564
+- author: TheOverwatchVoice
+  changes:
+  - message: Fixes some issues with the military base map
+    type: Add
+  id: 112
+  time: '2026-03-03T00:23:04.467458+00:00'
+  url: https://github.com/coolmankid12345/stalker-14-EN/pull/568
+- author: teecoding
+  changes:
+  - message: Fixed character dummy in lobby sometimes displaying incorrectly
+    type: Fix
+  - message: Fixed gauze stack showing wrong amount
+    type: Fix
+  - message: Balaklava and some outfits no longer have visual issues
+    type: Fix
+  - message: PDA cartridge names, flag construction steps, and loadout groups are
+      now properly translated
+    type: Add
+  - message: Some toggleable clothing was missing its storage when toggled
+    type: Fix
+  - message: Covert factions no longer expose their real faction on the bulletin board
+    type: Fix
+  id: 113
+  time: '2026-03-03T14:06:41.642879+00:00'
+  url: https://github.com/coolmankid12345/stalker-14-EN/pull/570
+- author: Roland410
+  changes:
+  - message: Rebalances new artifacts, and changes vendor prices accordingly.
+    type: Tweak
+  id: 114
+  time: '2026-03-03T23:29:28.796693+00:00'
+  url: https://github.com/coolmankid12345/stalker-14-EN/pull/542
+- author: Roland410
+  changes:
+  - message: Adds NanoTask cartridge to all PDAs, giving a task manager for your PDA,
+      which you can print and give to others.
+    type: Add
+  - message: Adds a pen to all PDAs.
+    type: Add
+  - message: Makes the flashlight on PDAs stronger.
+    type: Tweak
+  - message: Changes the English translation of PDA names and descriptions to ease
+      metagaming of them, the skins of them remain.
+    type: Tweak
+  - message: Adds ST and job role suffixes to PDAs for admins/GMs.
+    type: Tweak
+  id: 115
+  time: '2026-03-03T23:39:30.886857+00:00'
+  url: https://github.com/coolmankid12345/stalker-14-EN/pull/565
+- author: teecoding
+  changes:
+  - message: only Clear Sky is disguised as Loners on PDA; Monolith, Military, Project,
+      and SSU now show their real faction patch
+    type: Fix
+  id: 116
+  time: '2026-03-03T23:44:55.177598+00:00'
+  url: https://github.com/coolmankid12345/stalker-14-EN/pull/572
+- author: teecoding
+  changes:
+  - message: Journalists are no longer shown in the PDA faction relations app or Igor's
+      Relations tab
+    type: Tweak
+  id: 117
+  time: '2026-03-03T23:46:52.131997+00:00'
+  url: https://github.com/coolmankid12345/stalker-14-EN/pull/573
 Name: Stalker
 Order: -1
