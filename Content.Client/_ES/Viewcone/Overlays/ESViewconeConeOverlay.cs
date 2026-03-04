@@ -1,5 +1,6 @@
 using Content.Client.Eye;
 using Content.Shared._ES.Viewcone;
+using Content.Shared._Stalker.Weapon.Scoping; // STDA
 using Content.Shared.MouseRotator;
 using Robust.Client.Graphics;
 using Robust.Client.Input;
@@ -25,6 +26,7 @@ public sealed class ESViewconeConeOverlay : Overlay
 
     public static ProtoId<ShaderPrototype> ShaderPrototype = "Viewcone";
     private readonly ShaderInstance _viewconeShader;
+    private EntityQuery<ScopingComponent> _scopingQuery; // STDA
 
     private Entity<EyeComponent, ESViewconeComponent, TransformComponent>? _eyeEntity;
     private float _coneAngle;
@@ -36,6 +38,7 @@ public sealed class ESViewconeConeOverlay : Overlay
     {
         IoCManager.InjectDependencies(this);
         _viewconeShader = _proto.Index(ShaderPrototype).InstanceUnique();
+        _scopingQuery = _ent.GetEntityQuery<ScopingComponent>(); // STDA
     }
 
     protected override bool BeforeDraw(in OverlayDrawArgs args)
@@ -66,6 +69,10 @@ public sealed class ESViewconeConeOverlay : Overlay
     protected override void Draw(in OverlayDrawArgs args)
     {
         if (ScreenTexture == null || _eyeEntity == null)
+            return;
+
+        // STDA: don't do viewcone if we are scoping (yes, this sucks)
+        if (_scopingQuery.HasComponent(_eyeEntity.Value.Owner))
             return;
 
         var worldHandle = args.WorldHandle;
