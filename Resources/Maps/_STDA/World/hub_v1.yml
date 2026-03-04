@@ -264,10 +264,11 @@ entities:
       canCollide: False
       bodyType: Dynamic
     - type: LightCycle
-      minLightLevel: 0.35
+      minLightLevel: 2
+      clipLight: 3.25
       initialOffset: False
       offset: 1200
-      duration: 5400
+      duration: 300
     - type: SunShadow
     - type: SunShadowCycle
       directions:

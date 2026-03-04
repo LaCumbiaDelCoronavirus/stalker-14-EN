@@ -511471,7 +511471,8 @@ entities:
     - type: STAnomalyGeneratorTarget
       optionsId: STRostokAndWildsGenerationOptions
     - type: LightCycle
-      minLightLevel: 3
+      minLightLevel: 2
+      clipLight: 3.25
       initialOffset: False
       offset: 1200
       duration: 300

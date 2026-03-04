@@ -177,6 +177,9 @@
   description: Holy shit! It doesn't seem friendly at all.
   components:
   - type: MobMover
+  - type: NpcFactionMember
+    factions:
+    - Mutated # STDA: AllHostile -> Mutated
   - type: HTN
     rootTask:
       task: VehicleTankHostileCompound
@@ -200,7 +203,7 @@
   components:
   - type: NpcFactionMember
     factions:
-    - AllHostile
+    - Mutated # STDA: AllHostile -> Mutated
   - type: HTN
     rootTask:
       task: EnergyTurretCompound

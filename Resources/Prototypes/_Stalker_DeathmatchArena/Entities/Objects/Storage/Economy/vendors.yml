@@ -45,12 +45,13 @@
     MedkitLAR: 87250
 
     # Equipment
-    Binocularus: 87250
+    Binocularus1: 87250
     STFlashlightSeclite: 87250
     MedTekCartridge: 87250
 
     # Ammo
     556M855BoxCink: 87250
+    545PCBoxCink: 87250 # T3
     739FMJBoxCink: 87250
     751M80BoxCink: 87250
     754FMJBoxCink: 87250
