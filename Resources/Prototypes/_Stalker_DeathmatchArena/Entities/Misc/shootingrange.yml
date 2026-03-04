@@ -1,8 +1,12 @@
+## Triggers
+
+#### Basic
+
 - type: entity
   parent: MarkerBase
   id: STDATriggerUrist
   name: signal activated urist spawner
-  suffix: STDA
+  suffix: STDA, Neutral Gear
   components:
   - type: Sprite
     layers:
@@ -23,12 +27,14 @@
     ports:
     - Trigger
 
+## Mobs
+
 - type: entity
   parent: MobHuman
   id: STDAMobHumanDebug
   name: Urist McRange
   description: Goes dead at 200 damage, unlike normal PvP players which go dead at 110.
-  suffix: STDA, Debug, Anchored
+  suffix: STDA, Neutral Gear, Anchored
   components:
   - type: TriggerOnMobstateChange
     mobState:
@@ -44,3 +50,37 @@
       0: Alive
       100: Critical
       200: Dead
+  - type: Loadout
+    prototypes: [ NeutralGear ]
+
+#### Mili Gear
+
+- type: entity
+  parent: STDATriggerUrist
+  id: STDATriggerUristMiliGear
+  suffix: STDA, Mili Gear
+  components:
+  - type: SpawnOnApproach
+    prototypes:
+    - STDAMobHumanDebugRangeGear
+    restricted:
+    - STDAMobHumanDebugRangeGear
+
+## Mobs
+
+- type: entity
+  parent: STDAMobHumanDebug
+  id: STDAMobHumanDebugRangeGear
+  suffix: STDA, Mili Gear, Anchored
+  components:
+  - type: Loadout
+    prototypes: [ STDARangeGear ]
+
+- type: startingGear
+  parent: MilitaryGear
+  id: STDARangeGear
+  equipment:
+    outerClothing: STClothingOuterArmorLightPlateVestBaseANAgreenOld
+    head: ClothingHeadHelmetVityaz1C
+    gloves: ClothingHandsGlovesMercFingerless
+    cloak: ClothingOuterCoatLoyalist

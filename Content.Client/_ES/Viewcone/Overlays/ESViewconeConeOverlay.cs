@@ -86,12 +86,16 @@ public sealed class ESViewconeConeOverlay : Overlay
         _viewconeShader.SetParameter("ConeIgnoreRadius", _coneIgnoreRadius);
         _viewconeShader.SetParameter("ConeIgnoreFeather", _coneIgnoreFeather);
 
+        // STDA
+        // if (_ent.TryGetComponent<MapLightComponent>(args.MapUid, out var mapLightComponent))
+        //     _viewconeShader.SetParameter("ConeShadowColor", mapLightComponent.AmbientLightColor); // STDA
+        // else
+        //     _viewconeShader.SetParameter("ConeShadowColor", Color.White); // STDA
+        _viewconeShader.SetParameter("ConeShadowColor", Color.White); // STDA
+
         // STDA - Made ts more simple
         worldHandle.UseShader(_viewconeShader);
-        if (_ent.TryGetComponent<MapLightComponent>(args.MapUid, out var mapLightComponent))
-            worldHandle.DrawRect(viewport, mapLightComponent.AmbientLightColor);
-        else
-            worldHandle.DrawRect(viewport, Color.White);
+        worldHandle.DrawRect(viewport, Color.White);
         worldHandle.UseShader(null);
 
         //

@@ -9,6 +9,7 @@ uniform highp float ConeAngle; //= 270.0
 uniform highp float ConeFeather; //= 10.0;
 uniform highp float ConeIgnoreRadius; //= 0.5;
 uniform highp float ConeIgnoreFeather; //= 0.1;
+uniform highp vec4 ConeShadowColor;
 
 uniform highp float ViewAngle;
 
@@ -48,6 +49,7 @@ void fragment(){
 
     // Lil bit of grayscale for good measure, too
     highp float grayscale = zGrayscale(color.rgb) * (grain * grainMult + grainBase);
+    highp vec3 grayscalecolor = vec3(grayscale) * ConeShadowColor.rgb;
 
-    COLOR = vec4(mix(color.rgb, vec3(grayscale), mask * grayscaleFactor), color.a);
+    COLOR = vec4(mix(color.rgb, grayscalecolor, mask * grayscaleFactor), color.a);
 }
