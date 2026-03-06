@@ -137,9 +137,9 @@ public sealed partial class STAnomalyGenerationJob : Job<STAnomalyGenerationJobD
         var blockerAreas = new List<Box2i>();
         var entities = _entityManager.EntityQueryEnumerator<STAnomalyGeneratorSpawnBlockerComponent, TransformComponent>();
 
-        while (entities.MoveNext(out _, out var blocker, out var transform))
+        while (entities.MoveNext(out var uid, out var blocker, out var transform))
         {
-            if (transform.MapID != Options.MapId)
+            if (_transform.GetMapId(uid) != Options.MapId)
                 continue;
 
             var position = _transform.GetWorldPosition(transform);

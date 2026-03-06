@@ -1086,5 +1086,85 @@
   id: 117
   time: '2026-03-03T23:46:52.131997+00:00'
   url: https://github.com/coolmankid12345/stalker-14-EN/pull/573
+- author: teecoding
+  changes:
+  - message: Fixed inconsistent weapon damage at range caused by incorrect distance
+      calculations across grids
+    type: Fix
+  id: 118
+  time: '2026-03-04T21:17:12.501800+00:00'
+  url: https://github.com/coolmankid12345/stalker-14-EN/pull/575
+- author: teecoding
+  changes:
+  - message: Armor level modifiers now calculate correctly and no longer stack improperly
+    type: Fix
+  id: 119
+  time: '2026-03-04T21:29:19.614311+00:00'
+  url: https://github.com/coolmankid12345/stalker-14-EN/pull/576
+- author: teecoding
+  changes:
+  - message: Loadout now equips the fullest available magazine instead of a random
+      one
+    type: Fix
+  id: 120
+  time: '2026-03-04T21:46:49.437356+00:00'
+  url: https://github.com/coolmankid12345/stalker-14-EN/pull/577
+- author: teecoding
+  changes:
+  - message: Voice chat is now muffled when heard through walls, similar to whispering.
+      At longer range, walls block speech entirely.
+    type: Add
+  id: 121
+  time: '2026-03-04T21:48:33.221038+00:00'
+  url: https://github.com/coolmankid12345/stalker-14-EN/pull/578
+- author: GreenCanine
+  changes:
+  - message: Elastic bands now have their color in parentheses.
+    type: Tweak
+  id: 122
+  time: '2026-03-04T21:50:17.104748+00:00'
+  url: https://github.com/coolmankid12345/stalker-14-EN/pull/579
+- author: RebelledCombine
+  changes:
+  - message: Uploaded the seva resprite.
+    type: Tweak
+  id: 123
+  time: '2026-03-04T21:57:31.142618+00:00'
+  url: https://github.com/coolmankid12345/stalker-14-EN/pull/581
+- author: GreenCanine
+  changes:
+  - message: New clipboard for Eco!
+    type: Add
+  - message: Added clipboards to some shops.
+    type: Tweak
+  id: 124
+  time: '2026-03-05T03:50:52.304994+00:00'
+  url: https://github.com/coolmankid12345/stalker-14-EN/pull/582
+- author: RebelledCombine
+  changes:
+  - message: Replaced new battery sprites.
+    type: Tweak
+  id: 125
+  time: '2026-03-05T15:38:36.165034+00:00'
+  url: https://github.com/coolmankid12345/stalker-14-EN/pull/584
+- author: teecoding
+  changes:
+  - message: Fixed ghost bullets appearing when reloading ballistic weapons
+    type: Fix
+  - message: Fixed stash search skipping valid magazines when non-magazine items were
+      present
+    type: Fix
+  - message: Fixed ammo count mismatches when storing weapons in stashes
+    type: Fix
+  id: 126
+  time: '2026-03-05T17:41:06.629844+00:00'
+  url: https://github.com/coolmankid12345/stalker-14-EN/pull/585
+- author: TheOverwatchVoice
+  changes:
+  - message: Updates RF and DV
+    type: Add
+  id: 127
+  time: '2026-03-06T11:49:43.779282+00:00'
+  url: https://github.com/coolmankid12345/stalker-14-EN/pull/587
 Name: Stalker
 Order: -1
