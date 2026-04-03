@@ -962,7 +962,7 @@ public sealed class LoadoutSystem : EntitySystem
             slotItem.PrototypeId,
             stashLookup,
             slotItem.StorageData as IItemStalkerStorage);
-        if (stashItem == null)
+        if (stashItem == null && !repository.Comp.LoadoutsCloneItems)
             return false;
 
         // NOTE: Don't remove from stash yet - wait until equip succeeds
@@ -1066,7 +1066,7 @@ public sealed class LoadoutSystem : EntitySystem
                 nestedItem.PrototypeId,
                 stashLookup,
                 nestedItem.StorageData as IItemStalkerStorage);
-            if (stashItem == null)
+            if (stashItem == null && !repository.Comp.LoadoutsCloneItems)
                 continue;
 
             // Find container and ItemSlot (if applicable) - try multiple methods
