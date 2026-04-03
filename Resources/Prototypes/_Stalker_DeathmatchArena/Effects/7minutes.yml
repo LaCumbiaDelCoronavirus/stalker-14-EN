@@ -1,0 +1,16 @@
+- type: entity
+  id: STDA7minutes
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 10
+  - type: Sprite
+    drawdepth: Overlays
+    layers:
+    - sprite: _Stalker_DeathmatchArena/7minutes.rsi
+      state: icon
+  - type: EffectVisuals
+  - type: AnimationPlayer
+  - type: Tag
+    tags:
+    - HideContextMenu
