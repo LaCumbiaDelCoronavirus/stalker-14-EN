@@ -31,7 +31,10 @@
             state: jumpsuit-female
   - type: BlowoutTarget # stalker-changes
   - type: ZoneAnomalyActivator
-
+  - type: TriggerOnMobstateChange # STDA
+    mobState:
+    - Dead
+  - type: DeleteOnTrigger # STDA
 
 - type: entity
   parent: BaseSpeciesDummy
