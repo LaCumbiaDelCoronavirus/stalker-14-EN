@@ -4,10 +4,9 @@ using Content.Shared._Stalker_EN.Shop.Buyback;
 using Content.Shared.FixedPoint;
 using Content.Shared.GameTicking;
 using Content.Shared.Store;
+using Robust.Shared.Enums;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Timing;
-
 namespace Content.Server._Stalker.Shop;
 
 /// <summary>
@@ -16,15 +15,50 @@ namespace Content.Server._Stalker.Shop;
 /// </summary>
 public sealed partial class ShopSystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-
-    private const string BuybackIdPrefix = "st-buyback-";
     private const string BuybackCategoryLocId = "st-shop-buyback-category";
+    private const int BuybackCategoryPriority = 999;
 
     private void InitializeBuyback()
     {
         SubscribeLocalEvent<ShopComponent, STBuybackPurchaseMessage>(OnBuybackPurchase);
+        SubscribeLocalEvent<ShopComponent, ShopClosedMessage>(OnBuybackShopClosed);
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnBuybackRoundCleanup);
+        _player.PlayerStatusChanged += OnBuybackPlayerStatusChanged;
+    }
+
+    private void ShutdownBuyback()
+    {
+        _player.PlayerStatusChanged -= OnBuybackPlayerStatusChanged;
+    }
+
+    /// <summary>
+    /// Clears this player's buyback entries from the specific shop they closed.
+    /// </summary>
+    private void OnBuybackShopClosed(EntityUid uid, ShopComponent component, ShopClosedMessage msg)
+    {
+        if (msg.Actor is not { Valid: true } buyer)
+            return;
+
+        if (!TryComp<ActorComponent>(buyer, out var actor))
+            return;
+
+        component.BuybackItems.Remove(actor.PlayerSession.UserId);
+    }
+
+    /// <summary>
+    /// Clears a disconnecting player's buyback entries from all shops.
+    /// </summary>
+    private void OnBuybackPlayerStatusChanged(object? sender, SessionStatusEventArgs args)
+    {
+        if (args.NewStatus != SessionStatus.Disconnected)
+            return;
+
+        var userId = args.Session.UserId;
+        var query = EntityQueryEnumerator<ShopComponent>();
+        while (query.MoveNext(out _, out var comp))
+        {
+            comp.BuybackItems.Remove(userId);
+        }
     }
 
     private void AddBuybackEntry(
@@ -49,26 +83,20 @@ public sealed partial class ShopSystem
         }
 
         var buybackPrice = (int) Math.Ceiling(perItemSellPrice * component.BuybackPriceMultiplier);
-        var now = _timing.CurTime;
 
         for (var i = 0; i < count; i++)
         {
-            var entry = new STBuybackEntry(
-                Guid.NewGuid().ToString(),
+            entries.Add(new STBuybackEntry(
+                component.BuybackNextId++,
                 prototypeId,
                 name,
                 description,
                 perItemSellPrice,
-                buybackPrice,
-                now);
-
-            entries.Add(entry);
-
-            while (entries.Count > component.BuybackMaxItems)
-            {
-                entries.RemoveAt(0);
-            }
+                buybackPrice));
         }
+
+        if (entries.Count > component.BuybackMaxItems)
+            entries.RemoveRange(0, entries.Count - component.BuybackMaxItems);
     }
 
     private CategoryInfo? GetBuybackCategory(EntityUid user, ShopComponent component)
@@ -84,7 +112,7 @@ public sealed partial class ShopSystem
         var category = new CategoryInfo
         {
             Name = BuybackCategoryLocId,
-            Priority = 999,
+            Priority = BuybackCategoryPriority,
         };
 
         foreach (var entry in entries)
@@ -103,7 +131,7 @@ public sealed partial class ShopSystem
                 productEvent: null,
                 raiseProductEventOnUser: false,
                 purchaseAmount: 0,
-                id: BuybackIdPrefix + entry.Id,
+                id: STBuybackConstants.IdPrefix + entry.Id,
                 categories: new HashSet<ProtoId<StoreCategoryPrototype>>(),
                 originalCost: new Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2>
                 {
@@ -133,20 +161,20 @@ public sealed partial class ShopSystem
         if (!component.BuybackItems.TryGetValue(userId, out var entries))
             return;
 
-        STBuybackEntry? targetEntry = null;
         var targetIndex = -1;
         for (var i = 0; i < entries.Count; i++)
         {
             if (entries[i].Id == msg.BuybackEntryId)
             {
-                targetEntry = entries[i];
                 targetIndex = i;
                 break;
             }
         }
 
-        if (targetEntry == null || targetIndex < 0)
+        if (targetIndex < 0)
             return;
+
+        var targetEntry = entries[targetIndex];
 
         var balance = GetMoneyFromList(GetContainersElements(buyer), component);
         if (balance < targetEntry.BuybackPrice)
@@ -169,6 +197,7 @@ public sealed partial class ShopSystem
         while (query.MoveNext(out _, out var component))
         {
             component.BuybackItems.Clear();
+            component.BuybackNextId = 0;
         }
     }
 }

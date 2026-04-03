@@ -1,5 +1,3 @@
-using Robust.Shared.GameStates;
-
 namespace Content.Shared._Stalker_EN.Devices.Radar.Components;
 
 /// <summary>
@@ -7,8 +5,9 @@ namespace Content.Shared._Stalker_EN.Devices.Radar.Components;
 /// This component handles the visual radar UI, while target sources
 /// (ArtifactRadarTargetSourceComponent, AnomalyRadarTargetSourceComponent)
 /// provide the targets to display.
+/// UI state is communicated via <see cref="RadarDisplayBoundUIState"/>, not component networking.
 /// </summary>
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause]
+[RegisterComponent, AutoGenerateComponentPause]
 public sealed partial class RadarDisplayComponent : Component
 {
     /// <summary>
@@ -26,12 +25,11 @@ public sealed partial class RadarDisplayComponent : Component
     /// <summary>
     /// Next time to update the radar blips.
     /// </summary>
-    [AutoNetworkedField, AutoPausedField]
+    [AutoPausedField]
     public TimeSpan NextUpdateTime;
 
     /// <summary>
     /// Whether the radar display is currently active.
     /// </summary>
-    [AutoNetworkedField]
     public bool Enabled;
 }

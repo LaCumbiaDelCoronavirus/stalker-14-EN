@@ -19,6 +19,7 @@
   special:
     - !type:AddComponentSpecial
       components:
+      - type: PersistentCraftAccess
       - type: Access
         groups:
           - MilitaryStalker
@@ -39,6 +40,11 @@
       - type: NpcFactionMember
         factions:
         - MilitaryStalker
+      - type: Vocal # stalker EN change start
+        sounds:
+          Male: MaleHumanMilitary
+          Female: FemaleHumanMilitary
+          Unsexed: MaleHumanMilitary # stalker EN change end
 
 - type: job
   id: HeadMilitaryStalker
@@ -61,6 +67,7 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: PersistentCraftAccess
     - type: Access
       groups:
       - MilitaryStalker
@@ -81,6 +88,11 @@
     - type: NpcFactionMember
       factions:
       - MilitaryStalker
+    - type: Vocal # stalker EN change start
+      sounds:
+        Male: MaleHumanMilitary
+        Female: FemaleHumanMilitary
+        Unsexed: MaleHumanMilitary # stalker EN change end
 
 - type: job
   id: Military
@@ -103,6 +115,7 @@
   special:
     - !type:AddComponentSpecial
       components:
+      - type: PersistentCraftAccess
       - type: Access
         groups:
           - Military
@@ -120,7 +133,11 @@
       - type: NpcFactionMember
         factions:
         - Military
-
+      - type: Vocal # stalker EN change start
+        sounds:
+          Male: MaleHumanMilitary
+          Female: FemaleHumanMilitary
+          Unsexed: MaleHumanMilitary # stalker EN change end
 
 - type: job
   id: MilitaryHead
@@ -143,6 +160,7 @@
   special:
     - !type:AddComponentSpecial
       components:
+        - type: PersistentCraftAccess
         - type: Access
           groups:
             - MilitaryHead
@@ -163,6 +181,12 @@
         - type: GuardFactionController
           toggleOffAction: GuardFactionControllerOffAction
           toggleOnAction: GuardFactionControllerOnAction
+        - type: Vocal # stalker EN change start
+          sounds:
+            Male: MaleHumanMilitary
+            Female: FemaleHumanMilitary
+            Unsexed: MaleHumanMilitary # stalker EN change end
+
 - type: job
   id: MilitaryOfficer
   name: job-military-officer
@@ -184,6 +208,7 @@
   special:
     - !type:AddComponentSpecial
       components:
+        - type: PersistentCraftAccess
         - type: Access
           groups:
             - MilitaryOfficer
@@ -201,6 +226,11 @@
         - type: NpcFactionMember
           factions:
           - Military
+        - type: Vocal # stalker EN change start
+          sounds:
+            Male: MaleHumanMilitary
+            Female: FemaleHumanMilitary
+            Unsexed: MaleHumanMilitary # stalker EN change end
 
 - type: startingGear
   parent: STDABaseStartingGear # STDA

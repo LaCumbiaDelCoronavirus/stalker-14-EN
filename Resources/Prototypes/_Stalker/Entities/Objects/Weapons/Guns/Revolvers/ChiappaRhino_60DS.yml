@@ -2,7 +2,7 @@
 - type: entity
   parent: STBaseWeaponGameRevolver
   id: STWeaponRevolverChiappaRhino60DS
-  name: Chiappa Rhino 60DS
+  name: Chiappa Rhino 60DS # changed to use 357 on stalker EN
   description: Шестизарядный уникальный револьвер который отличается инновационным дизайном и высокой эффективностью на калибре .45 ACP. Имеет низкую отдачу и гораздо меньший разброс.
   components:
     - type: Sprite
@@ -12,12 +12,12 @@
       - state: icon
         map: ["enum.GunVisualLayers.Base"]
     - type: Gun
-      projectileSpeed: 40
+      projectileSpeed: 60
       minAngle:  0
       maxAngle: 20
       angleIncrease: 3
       angleDecay: 10
-      fireRate: 2
+      fireRate: 4
       selectedMode: SemiAuto
       soundGunshot:
         path: /Audio/_Stalker/Effects/Guns/revolver.ogg
@@ -26,8 +26,8 @@
     - type: RevolverAmmoProvider
       whitelist:
         tags:
-          - Cartridge45ACP
-          - STSpeedLoader45ACP
+          - Cartridge357Magnum
+          - SpeedLoader357Magnum
       proto: null
       capacity: 6
       chambers: [ null, null, null, null, null, null ]

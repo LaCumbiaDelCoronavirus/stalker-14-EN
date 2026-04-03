@@ -20,6 +20,7 @@
         # Rifles
         STWeaponRifleAKS74U: 2050
         STWeaponRifleM16: 3200
+        STWeaponRifleM16M203: 4000 # T2
         STWeaponRifleAKS74: 3800
 
     - name: shop-category-magazines
@@ -47,9 +48,9 @@
         919PSTBox: 180
         919RIPBox: 400
         # .45
-        45ACPRIPBox: 600
-        45ACPLFMJBox: 100
-        45ACPMFMJBox: 250
+        45ACPRIPBox: 450
+        45ACPLFMJBox: 90
+        45ACPMFMJBox: 200
         # 5.45
         545HPBox: 400
         545FMJBox: 270
@@ -148,6 +149,7 @@
         ClothingOuterCoatStalker: 1000
         ClothingOuterCoatLoyalistLight: 2500
         ClothingOuterCoatLoyalist: 3000
+        ClothingOuterCoatEmergencyResourcePouch: 3500
           # Gasmasks
         ClothingMaskGasM40: 200 # T2
         ClothingMaskM51: 1000
@@ -174,11 +176,11 @@
         # ZoneArtifactDetectorBear: 8000 #T4 Disabled for now
 
         # RP Items / Anomaly Destructors
-        BaseMachineAnomalyDestructorFolded: 1250
-        BaseMachineAnomalyDestructorFolded1: 1250
-        BaseMachineAnomalyDestructorFolded2: 1250
-        BaseMachineAnomalyDestructorFolded3: 1250
-        BaseMachineAnomalyDestructorFolded4: 1250
+        BaseMachineAnomalyDestructorFolded: 450
+        BaseMachineAnomalyDestructorFolded1: 450
+        BaseMachineAnomalyDestructorFolded2: 450
+        BaseMachineAnomalyDestructorFolded3: 450
+        BaseMachineAnomalyDestructorFolded4: 450
 
     - name: shop-category-utilities
       priority: 10
@@ -219,6 +221,12 @@
         STElasticRubberGreen: 50
         STElasticRubberBlue: 50
         FoldedFlagMili: 250
+        # Cameras
+        STCamera: 750
+        STCameraVintage: 1200
+        STCameraDamaged: 400
+        STCameraFilm: 150
+        STLoggingChainsaw: 1000
 
     - name: shop-category-customization
       priority: 11
@@ -243,10 +251,8 @@
         # NECK
         ClothingNeckScarfBrown: 100
         ClothingNeckScarfGray: 100
-        ClothingBandageStalkerUk: 10
-        ClothingBandageStalkerRus: 10
-        ClothingBandageStalkerArgentina: 10
         # faction
+        ClothingBandageStalkerPurple: 10
         ClothingBandageStalkerKrest: 10
         ClothingNeckScarfSci: 100
         ClothingNeckScarfUkraine: 100
@@ -318,6 +324,7 @@
         STDetectorAD2Blueprint: 1000
         STDetectorAD3Blueprint: 3000
         STZoneArtifactDetectorBushBlueprint: 3000
+        ClothingEarsPsyHelmBlueprint: 5000
         STZoneArtifactDetectorResponseBlueprint: 6000
         STZoneArtifactDetectorSpruceBlueprint: 12000
         DetectorVelesBlueprint: 10000
@@ -340,3 +347,34 @@
         # Instruments
         CardBin: 100
         PokerCardBin: 150
+
+
+    - name: Smokables #explained using D&D lifestyle expenses
+      priority: 14
+      items:
+        CigPackBub: 250 #comfortable
+        CigPackGreen: 150 #poor
+        CigPackRed: 200 #modest
+        CigPackBlue: 150 #poor
+        CigPackBlack: 200 #modest
+        CigPackMixed: 250 #comfortable
+        CigPackMarlboro: 200 #modest
+        CigPackKosmos: 100 #squalid
+
+    - name: Gardening
+      priority: 15
+      items:
+        HydroponicsToolScythe: 200
+        HydroponicsToolMiniHoe: 70
+        Bucket: 60
+        StalkerGrinder: 150
+        RobustHarvestChemistryBottleStalker: 50
+        E-Z-NutrientChemistryBottleStalker: 50
+        CannabisSeedsStalker: 70
+        STCarrotSeeds: 70
+        STTomatoSeeds: 70
+        STPotatoSeeds: 70
+        STCabbageSeeds: 70
+        STOnionSeeds: 70
+        STRiceSeeds: 70
+        STCornSeeds: 70

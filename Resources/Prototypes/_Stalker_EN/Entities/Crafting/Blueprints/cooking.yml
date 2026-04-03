@@ -177,3 +177,92 @@
   components:
   - type: STBlueprint
     blueprint: recipeFoodSTOracleGumbo
+
+# jarred
+- type: entity
+  parent: STCookingRecipe
+  id: STCookingPickledCherries
+  name: pickled cherries recipe
+  components:
+  - type: STBlueprint
+    blueprint: recipeFoodSTPickledCherries
+
+- type: entity
+  parent: STCookingRecipe
+  id: STCookingFermentedEel
+  name: fermented eel recipe
+  components:
+  - type: STBlueprint
+    blueprint: recipeFoodSTFermentedEel
+
+- type: entity
+  parent: STCookingRecipe
+  id: STCookingPreservedEel
+  name: preserved eel recipe
+  components:
+  - type: STBlueprint
+    blueprint: recipeFoodSTPreservedEel
+
+- type: entity
+  parent: STCookingRecipe
+  id: STCookingPickledEggs
+  name: pickled eggs recipe
+  components:
+  - type: STBlueprint
+    blueprint: recipeFoodSTPickledEggs
+
+- type: entity
+  parent: STCookingRecipe
+  id: STCookingPreservedFishSteak
+  name: preserved fish steaks recipe
+  components:
+  - type: STBlueprint
+    blueprint: recipeFoodSTPreservedFishSteak
+
+- type: entity
+  parent: STCookingRecipe
+  id: STCookingBerryJam
+  name: berry jam recipe
+  components:
+  - type: STBlueprint
+    blueprint: recipeFoodSTBerryJam
+
+- type: entity
+  parent: STCookingRecipe
+  id: STCookingKvass
+  name: beet kvass recipe
+  components:
+  - type: STBlueprint
+    blueprint: recipeFoodSTKvass
+
+- type: entity
+  parent: STCookingRecipe
+  id: STCookingLiverTartare
+  name: liver tartare recipe
+  components:
+  - type: STBlueprint
+    blueprint: recipeFoodSTLiverTartare
+
+- type: entity
+  parent: STCookingRecipe
+  id: STCookingRenderedSalo
+  name: rendered salo recipe
+  components:
+  - type: STBlueprint
+    blueprint: recipeFoodSTRenderedSalo
+
+- type: entity
+  parent: STCookingRecipe
+  id: STCookingPickledSausage
+  name: pickled sausage recipe
+  components:
+  - type: STBlueprint
+    blueprint: recipeFoodSTPickledSausage
+
+- type: entity
+  parent: STCookingRecipe
+  id: STCookingPreservedFishFillets
+  name: preserved fish fillets recipe
+  components:
+  - type: STBlueprint
+    blueprint: recipeFoodSTPreservedFishFillets

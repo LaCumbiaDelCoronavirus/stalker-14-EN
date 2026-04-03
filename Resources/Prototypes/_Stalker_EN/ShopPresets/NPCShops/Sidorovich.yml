@@ -86,14 +86,14 @@
     MutantPartPsiDogTail: 400
     MutantPartFrogLeg: 200
 
-    #T3 -------- Health * 3
-    MutantPartBloodsuckerTentacles: 715
-    MutantPartOraculeEye: 800
+    #T3 -------- Health * 3 Modified by Oracle
+    MutantPartBloodsuckerTentacles: 1375
+    MutantPartOraculeEye: 1050
     MutantPartZombieHand: 570
-    MutantPartPseudogiantHeart: 3800
+    MutantPartPseudogiantHeart: 6800
     ClothingMaskChimera: 1
     MutantPartChimeraTooth: 1
-    MutantPartIzlomArm: 715
+    MutantPartIzlomArm: 815
     MutantPartBurerBrain: 1500
     MutantPartControllerBrain: 2625
 
@@ -105,8 +105,24 @@
     FoodMeatSTFishFilletCooked: 25
     FoodMeatSTFishSteakCooked: 75
     FoodMeatSTEelCooked: 150
-    STFoodMeatCvarci: 5 # 15 profit per salo baby!
+    STFoodMeatCvarci: 22
     FoodMeatSTRatCooked: 5 # whatever
+    FoodMeatSTRatJerked: 10
+    FoodMeatSTDogJerkedSingle: 75
+    FoodMeatSTBoarJerkedSingle: 125
+    FoodMeatSTBearJerkedSingle: 245
+    FoodMeatSTSuckerJerkedSingle: 600
+    STFoodMeatSalo: 35
+
+    #Lumber
+    STTradePlankT1: 30
+    STTradePlankT2: 45
+    STTradePlankT3: 60
+    STTradePlankT4: 75
+    STLogStalkerT1: 15
+    STLogStalkerT2: 23
+    STLogStalkerT3: 30
+    STLogStalkerT4: 38
 
 # Cooking
     FoodSTFreshCheese: 100
@@ -131,6 +147,16 @@
     FoodSTAmbrosia: 0
     FoodSTFrogLegs: 775
     FoodSTOracleGumbo: 0
+    STFoodJarCherriesPickled: 1350
+    STFoodJarJamBerry: 1350
+    STFoodJarKvass: 2300
+    STFoodJarSalo: 350
+    STFoodJarEggs: 375
+    STFoodJarMeatSausage: 775
+    STFoodJarMeatFishFillet: 300
+    STFoodJarMeatFishSteak: 850
+    STFoodJarMeatEel: 1250
+    STFoodJarWholeEelFermented: 2100
 
     # Values
     # Dollar: 25
@@ -214,8 +240,9 @@
         725LRNPCBox: 625 # Mutant
         725PTBox: 465 # T2
         # .45
-        45ACPRIPBox: 725 # Mutant
-        45ACPLFMJBox: 250 # T2
+        45ACPLFMJBox: 100 # T1
+        45ACPRIPBox: 675 # Mutant
+        45ACPMFMJBox: 275 # T2
 
     - name: shop-category-medicine
       priority: 4
@@ -292,12 +319,16 @@
         ClothingBeltBandolierStalker: 20 # T1 - PVE
         ClothingBeltTarzanGreen: 200 # T1 - PVP
         ClothingBeltTarzanOrange: 200 # T1 - PVP
+        ClothingBeltWebbingHolsterStalkerZarya: 1000
+        ClothingBeltWebbingDoubleStalkerZaryaSmall: 1500
           # Containers
         MedkitCMSStalker: 250 # T1
         MedkitGrizzlyStalker: 850 # T2
         STClothingBeltThrowingKnifes: 350
         ClothingBeltPocketPouch: 500
         ClothingBeltHerbalistPouch: 500
+          # Other
+        ClothingBackpackForestryRig: 500
 
     - name: shop-category-raincoats-and-gasmasks
       priority: 8
@@ -337,6 +368,7 @@
     - name: shop-category-utilities
       priority: 10
       items:
+        Shovel: 100
         STCombatKnife: 25
         BoxZiptie: 50
         BoxSafebox: 300
@@ -364,7 +396,14 @@
         STElasticRubberRed: 50
         STElasticRubberGreen: 50
         STElasticRubberBlue: 50
-
+        BookCookingStalkerGuide: 200
+        BookCookingStalkerHomemade: 600
+        STRag: 10
+        # Cameras
+        STCamera: 750
+        STCameraVintage: 1200
+        STCameraDamaged: 400
+        STCameraFilm: 150
     - name: shop-category-customization
       priority: 11
       items:
@@ -385,9 +424,6 @@
         # NECK
         ClothingNeckScarfBrown: 100
         ClothingNeckScarfGray: 100
-        ClothingBandageStalkerUk: 10
-        ClothingBandageStalkerRus: 10
-        ClothingBandageStalkerArgentina: 10
         # TORSO
         ClothingTorsoTShirtPivozavr: 30
         ClothingTorsoTShirtSailorSuit: 30
@@ -467,6 +503,19 @@
         STCookingDeruny: 2000
         STCookingHrechanyky: 2000
         STCookingKebabMeat: 2000
+        STCookingPickledSausage: 2000
+
+    - name: Smokables #explained using D&D lifestyle expenses
+      priority: 14
+      items:
+        CigPackBub: 250 #comfortable
+        CigPackGreen: 150 #poor
+        CigPackRed: 200 #modest
+        CigPackBlue: 150 #poor
+        CigPackBlack: 200 #modest
+        CigPackMixed: 250 #comfortable
+        CigPackMarlboro: 200 #modest
+        CigPackKosmos: 100 #squalid
 
   sponsorCategories:
     SponsorBread:

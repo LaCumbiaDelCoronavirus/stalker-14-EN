@@ -17,6 +17,8 @@ using Robust.Shared.Physics.Systems;
 using Robust.Shared.Random;
 using Content.Shared.Examine;
 using Content.Shared.Localizations;
+using Content.Shared._Stalker_EN.Clothing;
+using Content.Shared._Stalker_EN.Clothing.Components;
 
 namespace Content.Shared.Weapons.Reflect;
 
@@ -48,6 +50,14 @@ public sealed class ReflectSystem : EntitySystem
         SubscribeLocalEvent<ReflectComponent, GotEquippedHandEvent>(OnReflectHandEquipped);
         SubscribeLocalEvent<ReflectComponent, GotUnequippedHandEvent>(OnReflectHandUnequipped);
         SubscribeLocalEvent<ReflectComponent, ExaminedEvent>(OnExamine);
+        SubscribeLocalEvent<ReflectComponent, VisorToggledEvent>(OnVisorToggled);
+        SubscribeLocalEvent<ReflectComponent, ComponentInit>(OnInit);
+    }
+
+    private void OnInit(Entity<ReflectComponent> ent, ref ComponentInit args)
+    {
+        // Store the initial reflect probability for visor toggle
+        ent.Comp.OriginalReflectProb ??= ent.Comp.ReflectProb;
     }
 
     private void OnReflectUserCollide(Entity<ReflectComponent> ent, ref ProjectileReflectAttemptEvent args)
@@ -227,6 +237,28 @@ public sealed class ReflectSystem : EntitySystem
         var msg = ContentLocalizationManager.FormatList(typeList);
 
         args.PushMarkup(Loc.GetString("reflect-component-examine", ("value", value), ("type", msg)));
+    }
+    private void OnVisorToggled(Entity<ReflectComponent> ent, ref VisorToggledEvent args)
+    {
+        if (!TryComp<HelmetVisorComponent>(ent, out var visor) || visor.VisorUpReflectProb == null)
+            return;
+
+        if (args.IsUp)
+        {
+            // Store original value and set visor up value
+            ent.Comp.OriginalReflectProb ??= ent.Comp.ReflectProb;
+            ent.Comp.ReflectProb = visor.VisorUpReflectProb.Value;
+        }
+        else
+        {
+            // Restore original value from stored value
+            if (ent.Comp.OriginalReflectProb.HasValue)
+            {
+                ent.Comp.ReflectProb = ent.Comp.OriginalReflectProb.Value;
+                ent.Comp.OriginalReflectProb = null;
+            }
+        }
+        Dirty(ent);
     }
     #endregion
 }

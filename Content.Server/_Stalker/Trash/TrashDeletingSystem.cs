@@ -1,3 +1,4 @@
+using Content.Server._Stalker_EN.Trash; // ST-EN: COM
 using Content.Server.Chat.Managers;
 using Robust.Server.Player;
 using Robust.Shared.Map;
@@ -11,6 +12,8 @@ public sealed class TrashDeletingSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly IChatManager _chat = default!;
     [Dependency] private readonly IPlayerManager _playerManager = default!;
+
+    private EntityQuery<CertifiedOrganicMapComponent> _organicQuery; // ST-EN: COM
 
     /// <summary>
     /// next time to clean up trash
@@ -36,6 +39,9 @@ public sealed class TrashDeletingSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
+
+        _organicQuery = GetEntityQuery<CertifiedOrganicMapComponent>(); // ST-EN: COM
+
         SubscribeLocalEvent<TrashComponent, ComponentInit>(OnInit);
         SubscribeLocalEvent<TrashComponent, EntParentChangedMessage>(OnChangedParent);
         _nextTimeUpdate = _timing.CurTime + TimeSpan.FromMinutes(_updateTime);
@@ -121,12 +127,15 @@ public sealed class TrashDeletingSystem : EntitySystem
         // --- Pause maps with no players ---
         foreach (var map in _mapMan.GetAllMapIds())
         {
-            if (map == MapId.Nullspace || map == new MapId(1)) // Never pause map 1
+            if (map == MapId.Nullspace)
                 continue;
 
             // Skip maps that explicitly disable pausing
             var mapEntity = _mapMan.GetMapEntityIdOrThrow(map);
             if (mapEntity != EntityUid.Invalid && EntityManager.HasComponent<NoPausingComponent>(mapEntity))
+                continue;
+
+            if (!_organicQuery.HasComponent(mapEntity)) // ST-EN: COM; Only affect maps with this component; yes i left in nopausingcomponent
                 continue;
 
             bool hasPlayer = false;

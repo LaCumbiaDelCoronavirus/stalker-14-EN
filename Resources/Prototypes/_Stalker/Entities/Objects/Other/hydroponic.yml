@@ -156,18 +156,21 @@
   components:
   - type: Tag
     tags:
+    - Lumber
     - BotanyHatchet
   - type: Sharp
   - type: Sprite
     sprite: Objects/Tools/Hydroponics/hatchet.rsi
     state: icon
   - type: MeleeWeapon
+    autoAttack: true #EN
     wideAnimationRotation: 135
     swingLeft: true
     damage:
       types:
-        Slash: 8
-        Piercing: 6
+        Slash: 10
+        Piercing: 5
+        Structural: 25
   - type: Item
     sprite: Objects/Tools/Hydroponics/hatchet.rsi
   - type: Craftable
@@ -243,3 +246,5 @@
   - type: Item
     sprite: Objects/Tools/Hydroponics/clippers.rsi
     storedRotation: -90
+  - type: RepositoryItem # stalker-en change
+    categoryName: repository-tools-category

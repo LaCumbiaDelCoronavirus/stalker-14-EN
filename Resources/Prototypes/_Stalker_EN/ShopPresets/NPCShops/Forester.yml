@@ -1,0 +1,37 @@
+- type: shopPreset
+  id: NpcForesterEN
+  minSellPrice: 5
+
+  categories:
+  - name: Smuggling
+    priority: 0
+    items:
+      CannabisSeedsStalker: 150
+
+  - name: shop-category-weapons
+    priority: 1
+    items:
+      # Melee
+      StalkerBallBat: 50
+      STThrowingknifeBlue: 250
+      # Shotguns
+      STWeaponShotgunTOZ34: 250 # T1
+      STWeaponShotgunMP133: 500 # T2
+      STWeaponShotgunMP153: 1700 # T2
+      # Pistols
+      WeaponPistolStalkerPM: 50 #T1
+      WeaponPistolStalkerTT: 50 #T1
+      STWeaponRevolverSWModel325: 500
+      WeaponPistolStalkerAPS: 900 #T2
+      STWeaponRevolverSWPC325TR: 1000
+      # SMGs
+      STWeaponSMGMP40: 1000
+      STWeaponSMGPPSh41: 2500
+      STWeaponSMGPP91: 3000
+      # Rifles
+      STWeaponRifleSaiga545: 1750 # T3
+      STWeaponRifleAKS74U: 2000
+      STWeaponRifleAKS74: 4200
+      # Snipers
+      STWeaponSniperSKS: 1850 # T2
+      STWeaponSniperMosin: 1500

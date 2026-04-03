@@ -33,7 +33,7 @@
     #   PortalName: "Bandit TEST"
     - type: DuplicateTeleport
       prefix: Kordon
-      maxWeight: 100
+      maxWeight: 500 # stalker-en change
       mapPath: /Maps/_ST/PersonalStalkerArena/StalkerMap.yml
     - type: PointLight
       color: OrangeRed

@@ -9,10 +9,12 @@
     - MobAnomalyTarget
     - MobPolymorphable
     - StripableInventoryBase
+    - MobFirePat # stalker-changes - fire patting
   id: BaseMobSpecies
   abstract: true
   components:
   - type: RDDeathScreen # stalker-changes
+  - type: RDWatcherTarget # stalker-changes
   - type: Sprite
     layers:
     - map: [ "enum.HumanoidVisualLayers.Chest" ]
@@ -36,9 +38,10 @@
     - map: [ "shoes" ]
     - map: [ "ears" ]
     - map: [ "eyes" ]
-    - map: [ "belt" ]
+    #- map: [ "belt" ]
     - map: [ "id" ]
     - map: [ "outerClothing" ]
+    - map: [ "belt" ] # stalker-changes - makes belt bags and carrier rigs visible over armor.
     - map: [ "cloak" ] # stalker-changes
     - map: [ "back" ]
     - map: [ "neck" ]

@@ -9,6 +9,12 @@
     "states": [
         {
             "name": "journal"
+        },
+        {
+            "name": "cookbook"
+        },
+        {
+            "name": "cookbookhomemade"
         }
     ]
 }

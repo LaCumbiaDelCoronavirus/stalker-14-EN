@@ -43,7 +43,7 @@
           - CraftMaterialGunpowder
   - type: Appearance
   - type: RepositoryItem
-    categoryName: repository-crafting-category
+    categoryName: repository-materials-category
 
 - type: entity
   parent: MaterialBase
@@ -54,6 +54,9 @@
   components:
   - type: STWeight
     self: 0.1
+  - type: Material
+  - type: StaticPrice
+    price: 0
   - type: Stack
     stackType: GunpowderStalker
     count: 1
@@ -82,7 +85,7 @@
       types:
         Heat: 1000
   - type: RepositoryItem
-    categoryName: repository-crafting-category
+    categoryName: repository-materials-category
   - type: Craftable
   - type: Destructible
     thresholds:
@@ -120,13 +123,16 @@
       size: Normal
       shape:
         - 0,0,2,2
+    - type: Material
+    - type: StaticPrice
+      price: 0
     - type: Sprite
       sprite: _Stalker/Objects/Tools/Craft/64.rsi
       state: hide
       scale: 0.4, 0.4
     - type: Craftable
     - type: RepositoryItem
-      categoryName: repository-crafting-category
+      categoryName: repository-materials-category
     - type: Trash
       time: 300
 
@@ -147,9 +153,12 @@
       time: 1200
     - type: Item
       size: Normal
+    - type: Material
+    - type: StaticPrice
+      price: 0
     - type: Craftable
     - type: RepositoryItem
-      categoryName: repository-crafting-category
+      categoryName: repository-materials-category
 
 - type: entity
   parent: BaseItem
@@ -163,6 +172,9 @@
       size: Normal
       shape:
         - 0,0,0,0
+    - type: Material
+    - type: StaticPrice
+      price: 0
     - type: Trash
       time: 1200
     - type: Sprite
@@ -170,7 +182,7 @@
       state: bag1
     - type: Craftable
     - type: RepositoryItem
-      categoryName: repository-crafting-category
+      categoryName: repository-materials-category
 
 - type: entity
   parent: BaseItem
@@ -185,13 +197,16 @@
       size: Normal
       shape:
         - 0,0,0,0
+    - type: Material
+    - type: StaticPrice
+      price: 0
     - type: Craftable
     - type: Sprite
       sprite: Objects/Specific/Chemistry/beaker_cryostasis.rsi
       layers:
         - state: beakernoreact
     - type: RepositoryItem
-      categoryName: repository-crafting-category
+      categoryName: repository-materials-category
 
 - type: entity
   parent: BaseItem
@@ -206,13 +221,16 @@
     size: Large
     shape:
       - 0,0,3,2
+  - type: Material
+  - type: StaticPrice
+    price: 0
   - type: Sprite
     sprite: Objects/Materials/materials.rsi
     state: cardboard
   - type: Craftable
   - type: Appearance
   - type: RepositoryItem
-    categoryName: repository-crafting-category
+    categoryName: repository-materials-category
 
 - type: entity
   id: CraftSmallCardboard
@@ -227,13 +245,16 @@
     size: Small
     shape:
       - 0,0,1,1
+  - type: Material
+  - type: StaticPrice
+    price: 0
   - type: Sprite
     sprite: Objects/Fun/figurines.rsi
     state: fig_box_unfolded
   - type: SpaceGarbage
   - type: Craftable
   - type: RepositoryItem
-    categoryName: repository-crafting-category
+    categoryName: repository-materials-category
 
 - type: entity
   id: CraftCardboardTube
@@ -248,6 +269,9 @@
     size: Small
     shape:
       - 0,0,1,0
+  - type: Material
+  - type: StaticPrice
+    price: 0
   - type: Sprite
     sprite: _Stalker/Objects/Tools/Craft/32.rsi
     state: cardboard_tube
@@ -255,7 +279,7 @@
   - type: SpaceGarbage
   - type: Craftable
   - type: RepositoryItem
-    categoryName: repository-crafting-category
+    categoryName: repository-materials-category
 
 
 - type: entity
@@ -283,7 +307,7 @@
   - type: ExplodeOnTrigger
   - type: Craftable
   - type: RepositoryItem
-    categoryName: repository-crafting-category
+    categoryName: repository-materials-category
 
 
 - type: entity
@@ -297,13 +321,16 @@
       self: 0.2
     - type: Item
       size: Tiny
+    - type: Material
+    - type: StaticPrice
+      price: 0
     - type: Sprite
       sprite: _Stalker/Objects/Tools/Craft/32.rsi
       state: fitil
       scale: 0.7, 0.7
     - type: Craftable
     - type: RepositoryItem
-      categoryName: repository-crafting-category
+      categoryName: repository-materials-category
 
 - type: entity
   parent: BaseItem
@@ -318,10 +345,13 @@
       size: Normal
       shape:
         - 0,0,2,2
+    - type: Material
+    - type: StaticPrice
+      price: 0
     - type: Sprite
       sprite: _Stalker/Objects/Tools/Craft/32.rsi
       state: bloodsuckerhide
       scale: 0.8, 0.8
     - type: Craftable
     - type: RepositoryItem
-      categoryName: repository-crafting-category
+      categoryName: repository-materials-category

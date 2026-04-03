@@ -23,9 +23,10 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 100
+        damage: 500
       behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
-
+  - type: RepositoryItem # stalker-en change
+    categoryName: repository-materials-category
 

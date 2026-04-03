@@ -14,7 +14,7 @@
       count: 1
     - type: Craftable
     - type: RepositoryItem
-      categoryName: repository-crafting-category
+      categoryName: repository-materials-category
 
 - type: entity
   parent: STBaseIngridient
@@ -31,7 +31,7 @@
       count: 1
     - type: Craftable
     - type: RepositoryItem
-      categoryName: repository-crafting-category
+      categoryName: repository-materials-category
 
 - type: entity
   parent: STBaseIngridient
@@ -48,7 +48,7 @@
       count: 1
     - type: Craftable
     - type: RepositoryItem
-      categoryName: repository-crafting-category
+      categoryName: repository-materials-category
 
 - type: entity
   parent: STBaseIngridient
@@ -65,4 +65,23 @@
       count: 1
     - type: Craftable
     - type: RepositoryItem
-      categoryName: repository-crafting-category
+      categoryName: repository-materials-category
+
+- type: entity
+  parent: STBaseIngridient
+  id: STCraftAnomalyDust
+  name: anomaly essence
+  description: Unstable anomalous substance. Used in disassembly and crafting.
+  suffix: Stalker, craft, anomaly essence
+  components:
+    - type: Sprite
+      state: core
+      sprite: Structures/Specific/Anomalies/Cores/gravity_core.rsi
+    - type: Item
+      sprite: Structures/Specific/Anomalies/Cores/gravity_core.rsi
+    - type: Stack
+      stackType: STAnomalyDust
+      count: 1
+    - type: Craftable
+    - type: RepositoryItem
+      categoryName: repository-materials-category

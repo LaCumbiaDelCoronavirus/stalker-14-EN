@@ -28,6 +28,10 @@
     STFishPallidSturgeon: 1500
     # misc
     Blunt: 35
+    STFoodJarMeatFishFillet: 550 # might be too low considering the long walk out
+    STFoodJarMeatFishSteak: 1250
+    STFoodJarMeatEel: 1750
+    STFoodJarWholeEelFermented: 2250 # he doesnt care that much
 
   categories:
     - name: shop-category-utilities
@@ -44,8 +48,16 @@
       items:
         AcousticGuitarInstrument: 500
         Blunt: 500
-    - name: Cooking
+    - name: Provisions
       priority: 2
+      items:
+        STDrinkBeerCanBaltic: 50
+        DrinkBeerBottleFull: 150
+    - name: Cooking
+      priority: 3
       items:
         STCookingFriedFish: 2000
         STCookingFrogLegs: 2000
+        STCookingPreservedFishFillets: 1000
+        STCookingPreservedFishSteak: 2000
+        STCookingPreservedEel: 3000

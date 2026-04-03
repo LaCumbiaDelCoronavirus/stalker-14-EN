@@ -1,4 +1,4 @@
-﻿using Content.Client.Gameplay;
+using Content.Client.Gameplay;
 using Content.Client.UserInterface.Controls;
 using Content.Shared.Chat;
 using Content.Shared.Chat.Prototypes;
@@ -38,6 +38,8 @@ public sealed class EmotesUIController : UIController, IOnStateChanged<GameplayS
                 new SpriteSpecifier.Texture(new ResPath("/Textures/Interface/Emotes/tactical/tachand.png"))),
             [EmoteCategory.TacticalWarn] = ("emote-menu-category-tacticalwarn",
                 new SpriteSpecifier.Texture(new ResPath("/Textures/Interface/Emotes/tactical/tachand.png"))),
+            [EmoteCategory.VoiceLine] = ("emote-menu-category-voiceline",
+                new SpriteSpecifier.Texture(new ResPath("_Stalker_EN/Interface/Emotes/stalker.png"))),
             // Stalker-EN-Changes-End
         };
 

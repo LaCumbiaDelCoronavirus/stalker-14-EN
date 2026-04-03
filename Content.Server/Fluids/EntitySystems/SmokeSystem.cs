@@ -76,7 +76,7 @@ public sealed class SmokeSystem : EntitySystem
                 continue;
 
             smoke.NextSecond += TimeSpan.FromSeconds(1);
-            SmokeReact(uid, smoke.SmokeEntity);
+            //SmokeReact(uid, smoke.SmokeEntity);
         }
     }
 

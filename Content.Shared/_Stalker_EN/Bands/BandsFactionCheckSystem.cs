@@ -1,9 +1,12 @@
 using Content.Shared._Stalker.Bands;
 using Content.Shared._Stalker.Bands.Components;
 using Content.Shared._Stalker_EN.FactionRelations;
+using Content.Shared.Administration.Managers;
 using Content.Shared.Popups;
 using Content.Shared.UserInterface;
 using Robust.Shared.Prototypes;
+
+
 
 namespace Content.Shared._Stalker_EN.Bands;
 
@@ -20,6 +23,7 @@ public sealed class BandsFactionCheckSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _protoManager = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedSTFactionResolutionSystem _factionResolution = default!;
+    [Dependency] private readonly ISharedAdminManager _adminManager = default!;
 
     public override void Initialize()
     {
@@ -31,6 +35,9 @@ public sealed class BandsFactionCheckSystem : EntitySystem
     private void OnActivatableUIOpenAttempt(Entity<BandsManagingComponent> ent, ref ActivatableUIOpenAttemptEvent args)
     {
         if (args.Cancelled)
+            return;
+        // ADMIN BYPASS
+        if (_adminManager.IsAdmin(args.User))
             return;
 
         // If this Igor has no faction set, allow anyone (generic Igor)

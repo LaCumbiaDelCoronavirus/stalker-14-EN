@@ -4,7 +4,7 @@
   id: ClothingMaskBase
   components:
   - type: Trash #Stalker EN
-    time: 300
+    time: 1800
   - type: Sprite
     state: icon
   - type: Item
@@ -13,6 +13,8 @@
     slots: [mask]
   - type: StaticPrice
     price: 25
+  - type: RepositoryItem # stalker-en change
+    categoryName: repository-equipment-category
 
 - type: entity
   abstract: true

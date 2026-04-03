@@ -29,8 +29,6 @@ public sealed class RadarControl : Control
     // Sonar sweep animation
     private const float SweepSpeed = 0.25f; // Rotations per second
     private const float BlipFadeDuration = 2.5f; // Seconds for blip to fully fade
-    private const float SweepHitThreshold = 0.15f; // Radians tolerance for sweep detection
-
     private float _lastSweepAngle;
     private float _sweepStartTime = -1f;  // Sentinel for uninitialized
 
@@ -99,11 +97,8 @@ public sealed class RadarControl : Control
         var currentTime = (float)_timing.CurTime.TotalSeconds;
         var elapsedTime = currentTime - _sweepStartTime;
 
-        // Rotating sweep: continuous rotation around full circle
+        // Rotating sweep: continuous rotation around full circle (0 to 2*PI)
         var sweepAngle = (elapsedTime * SweepSpeed * MathF.PI * 2) % (MathF.PI * 2);
-        // Adjust to -PI to PI range for comparison with blip angles
-        if (sweepAngle > MathF.PI)
-            sweepAngle -= MathF.PI * 2;
 
         // Build set of current blip IDs for cleanup
         _currentIds.Clear();
@@ -159,27 +154,29 @@ public sealed class RadarControl : Control
         _lastSweepAngle = sweepAngle;
     }
 
-    private bool DidSweepCross(float lastAngle, float currentAngle, float targetAngle)
+    private static bool DidSweepCross(float lastAngle, float currentAngle, float targetAngle)
     {
-        // Normal crossing check
-        if ((lastAngle <= targetAngle && currentAngle >= targetAngle) ||
-            (lastAngle >= targetAngle && currentAngle <= targetAngle))
+        // Normalize all angles to [0, 2*PI) for consistent comparison
+        var normLast = NormalizeAngle(lastAngle);
+        var normCurrent = NormalizeAngle(currentAngle);
+        var normTarget = NormalizeAngle(targetAngle);
+
+        if (normLast <= normCurrent)
         {
-            return true;
+            // No wraparound: target crossed if between last and current
+            return normTarget >= normLast && normTarget <= normCurrent;
         }
 
-        // Handle wraparound from PI to -PI
-        if (lastAngle > MathF.PI / 2 && currentAngle < -MathF.PI / 2)
-        {
-            if (targetAngle > lastAngle || targetAngle < currentAngle)
-                return true;
-        }
+        // Wraparound (current < last): target crossed if after last OR before current
+        return normTarget >= normLast || normTarget <= normCurrent;
+    }
 
-        // Threshold check for blips very close to sweep
-        if (MathF.Abs(currentAngle - targetAngle) < SweepHitThreshold)
-            return true;
-
-        return false;
+    private static float NormalizeAngle(float angle)
+    {
+        var result = angle % (MathF.PI * 2);
+        if (result < 0)
+            result += MathF.PI * 2;
+        return result;
     }
 
     protected override void FrameUpdate(FrameEventArgs args)

@@ -82,16 +82,16 @@
     MutantPartPseudodogTail: 510
     MutantPartSnorkFoot: 850
     MutantPartFrogLeg: 325
-    # T3 -------- Health * 3
-    MutantPartZombieHand: 1020
-    MutantPartBloodsuckerTentacles: 1275
+    # T3 -------- Health * 3 Modified by Oracle
+    MutantPartZombieHand: 1520
+    MutantPartBloodsuckerTentacles: 3275
     MutantPartOraculeEye: 2720
-    MutantPartPseudogiantHeart: 6800
-    MutantPartChimeraTooth: 1000
+    MutantPartPseudogiantHeart: 12800
+    MutantPartChimeraTooth: 1500
     ClothingMaskChimera: 1 # its gross why would they want it
-    MutantPartIzlomArm: 1150
-    MutantPartBurerBrain: 2500
-    MutantPartControllerBrain: 4375
+    MutantPartIzlomArm: 2550
+    MutantPartBurerBrain: 2800
+    MutantPartControllerBrain: 5875
 
     #Fish -------- Unc * 1.5
     #Only anomalous fish
@@ -111,6 +111,16 @@
     STJunkTag: 50
     STJunkTagWhite: 100
     STJunkTracker: 250
+
+    #Lumber
+    STTradePlankT1: 40
+    STTradePlankT2: 60
+    STTradePlankT3: 80
+    STTradePlankT4: 100
+    STLogStalkerT1: 20
+    STLogStalkerT2: 30
+    STLogStalkerT3: 40
+    STLogStalkerT4: 50
 
   categories:
     - name: Vodka

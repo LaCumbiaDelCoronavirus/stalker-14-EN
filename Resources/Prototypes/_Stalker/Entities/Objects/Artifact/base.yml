@@ -31,13 +31,14 @@
       - STArtifact
     - type: Material
     - type: RepositoryItem
-      categoryName: repository-artifact-category
+      categoryName: repository-artifacts-category
     - type: Craftable
     - type: Currency
       price:
         Roubles: 1
         Dollar: 1
         Hryvnias: 0 # EN
+        ArtifactShards: 1 # EN
 
 - type: entity
   parent: BaseArtifact
@@ -58,3 +59,5 @@
       containers:
         storagebase: !type:Container
           ents: []
+    - type: RepositoryItem
+      categoryName: repository-artifacts-category

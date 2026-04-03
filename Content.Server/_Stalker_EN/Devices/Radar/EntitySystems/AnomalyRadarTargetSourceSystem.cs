@@ -16,6 +16,8 @@ public sealed class AnomalyRadarTargetSourceSystem : EntitySystem
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly TransformSystem _transform = default!;
 
+    private readonly HashSet<Entity<ZoneAnomalyComponent>> _anomalyBuffer = new();
+
     public override void Initialize()
     {
         base.Initialize();
@@ -32,10 +34,10 @@ public sealed class AnomalyRadarTargetSourceSystem : EntitySystem
         if (args.UserGridUid != null)
             TryComp(args.UserGridUid.Value, out userGrid);
 
-        var entities = _entityLookup.GetEntitiesInRange<ZoneAnomalyComponent>(
-            args.UserMapCoords, entity.Comp.DetectionRange);
+        _anomalyBuffer.Clear();
+        _entityLookup.GetEntitiesInRange(args.UserMapCoords, entity.Comp.DetectionRange, _anomalyBuffer, LookupFlags.Uncontained);
 
-        foreach (var target in entities)
+        foreach (var target in _anomalyBuffer)
         {
             if (!target.Comp.Detected)
                 continue;
@@ -49,31 +51,11 @@ public sealed class AnomalyRadarTargetSourceSystem : EntitySystem
             var diff = targetWorldPos - args.UserWorldPos;
             var distance = diff.Length();
 
-            // Calculate angle in grid-local space for consistency across restarts
-            float radarAngle;
-            if (userGrid != null && args.UserGridUid != null)
-            {
-                // Convert positions to grid-local coordinates
-                var userLocalPos = _map.WorldToLocal(args.UserGridUid.Value, userGrid, args.UserWorldPos);
-                var targetLocalPos = _map.WorldToLocal(args.UserGridUid.Value, userGrid, targetWorldPos);
-                var localDiff = targetLocalPos - userLocalPos;
+            if (distance > entity.Comp.DetectionRange)
+                continue;
 
-                // Angle in grid-local space (consistent regardless of grid rotation)
-                var localAngle = new Angle(localDiff);
-                radarAngle = (float)(Math.PI / 2 - localAngle.Theta);
-            }
-            else
-            {
-                // Fallback to world-space if not on a grid
-                var worldAngle = new Angle(diff);
-                radarAngle = (float)(Math.PI / 2 - worldAngle.Theta);
-            }
-
-            // Normalize to -PI to PI range
-            while (radarAngle > MathF.PI)
-                radarAngle -= MathF.PI * 2;
-            while (radarAngle < -MathF.PI)
-                radarAngle += MathF.PI * 2;
+            var radarAngle = RadarAngleHelper.CalculateRadarAngle(
+                _map, args.UserGridUid, userGrid, args.UserWorldPos, targetWorldPos);
 
             args.Blips.Add(new RadarBlip(
                 GetNetEntity(target),

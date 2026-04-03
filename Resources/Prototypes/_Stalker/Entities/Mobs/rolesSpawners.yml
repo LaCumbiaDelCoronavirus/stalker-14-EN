@@ -256,6 +256,7 @@
       bandIcon: greh
     - type: Loadout
       prototypes: [ StalkerGrehGear ]
+    - type: PsyEffectImmune
 
 - type: entity
   name: кукла член Чистого Неба (переименуй меня)
@@ -435,10 +436,20 @@
     - type: PersonalDamageBlock
     - type: Damageable
       damageContainer: Biological
+      damageModifierSet: Monolith # Stalker EN change
     - type: STAnomalyTipsViewing
     - type: AutoImplant
       implants:
       - STSeraBombImplant
+    - type: IntrinsicRadioReceiver # Stalker EN change start
+    - type: IntrinsicRadioTransmitter
+      channels:
+      - Monolith
+    - type: ActiveRadio
+      channels:
+      - Monolith
+      # Stalker EN change end
+    - type: PsyEffectImmune
 
 - type: entity
   name: кукла СБУ (переименуй меня)

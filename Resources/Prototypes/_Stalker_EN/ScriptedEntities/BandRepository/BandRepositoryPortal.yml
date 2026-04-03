@@ -1,7 +1,7 @@
 - type: entity
   parent: BandRepositoryBase
   id: PortalBandMilitiaRepository
-  suffix: 500
+  suffix: 2000
   name: Militia Shared Repository
   description: Shared repository for members of the Militia
   components:
@@ -9,7 +9,7 @@
     access: [["MilitiaAccess"]]
   - type: StalkerBandTeleport
     portalName: _PortalBandMilitiaRepository
-    repositoryWeight: 500
+    repositoryWeight: 2000
 
 - type: bandLoader
   id: BandLoaderBaseEN

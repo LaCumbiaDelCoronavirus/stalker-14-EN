@@ -85,14 +85,24 @@
     MutantPartSnorkFoot: 315
     MutantPartFrogLeg: 90
 
-    #T3 -------- Health * 3
-    MutantPartBloodsuckerTentacles: 470
-    MutantPartOraculeEye: 1000
-    MutantPartPseudogiantHeart: 2500
-    MutantPartZombieHand: 380
-    MutantPartIzlomArm: 525
+    #T3 -------- Health * 3 Modified by Oracle
+    MutantPartBloodsuckerTentacles: 1770
+    MutantPartOraculeEye: 1200
+    MutantPartPseudogiantHeart: 3500
+    MutantPartZombieHand: 480
+    MutantPartIzlomArm: 625
     MutantPartBurerBrain: 1000
     MutantPartControllerBrain: 2000
+
+    #Lumber
+    STTradePlankT1: 40
+    STTradePlankT2: 60
+    STTradePlankT3: 80
+    STTradePlankT4: 100
+    STLogStalkerT1: 20
+    STLogStalkerT2: 30
+    STLogStalkerT3: 40
+    STLogStalkerT4: 50
 
   categories:
     - name: shop-category-weapons
@@ -104,6 +114,9 @@
         STWeaponShotgunBenelliM4Super90: 1200 # T3
         STWeaponShotgunSPAS: 2200 # T3
         # Pistols
+        STWeaponPistolP99: 400
+        STWeaponPistolUSP: 1500
+        STWeaponPistolM1911: 800
         WeaponPistolStalkerGlock: 200
         STWeaponRevolverSWPC325TR: 350
         STWeaponRevolverRugerRedhawk: 650
@@ -125,6 +138,7 @@
         556Mag45: 400
         556Mag30: 330
         # 9.19
+        P99Mag15: 120
         BaseMP5Mag: 260
         BaseTEC9Mag: 120
         BaseGlockMag10: 100
@@ -135,7 +149,10 @@
         751Mag20: 400
         751Mag30: 500
         # .45
+        USPMag12: 170
+        M1911Mag7: 100
         STSpeedLoader45ACPEmpty: 90
+        STSpeedLoader357MagnumEmpty: 120
 
     - name: shop-category-ammunition
       priority: 3
@@ -149,9 +166,9 @@
         919PSTBox: 200 # T2
         919PBMBox: 1425 # T3
         # .45
-        45ACPLFMJBox: 100 # T1
-        45ACPMFMJBox: 250 # T2
-        45ACPAPBox: 1950 # T3
+        45ACPLFMJBox: 110 # T1
+        45ACPMFMJBox: 220 # T2
+        45ACPAPBox: 1500 # T3
         # 5.56
         556FMJBox: 300
         556M855Box: 1650 # T3
@@ -159,6 +176,10 @@
         # 7.51
         751M80Box: 1950 # T3
         751UNBox: 850 # Mutant
+        # .357
+        MagazineBox357Magnum: 300 # T2
+        MagazineBox357MagnumAP: 1400 # T3
+        MagazineBox357MagnumHP: 600 # Mutant
 
     - name: shop-category-medicine
       priority: 4
@@ -220,6 +241,8 @@
         ClothingBeltTarzanGreen: 200
         ClothingBeltTarzanOrange: 200
         ClothingBeltTarzanBlack: 200
+        ClothingBeltWebbingHolsterMerc: 1000
+        ClothingBeltWebbingHolsterMerc2: 1000
         # Medical Storage
         MedkitCMSStalker: 450
         MedkitGrizzlyStalker: 850
@@ -281,6 +304,11 @@
         ClothingBackpackDuffelGreenStalkerHydroponic: 500
         ExtendedEmergencyOxygenTankFilledStalker: 50
         FoldedFlagMerc: 250
+        # Cameras
+        STCamera: 750
+        STCameraVintage: 1200
+        STCameraDamaged: 400
+        STCameraFilm: 150
 
     - name: shop-category-modules
       priority: 11
@@ -328,9 +356,6 @@
         ClothingMaskNeckBalaklava3: 10
         # NECK
         ClothingNeckScarfGray: 100
-        ClothingBandageStalkerUk: 10
-        ClothingBandageStalkerRus: 10
-        ClothingBandageStalkerArgentina: 10
         # faction
         ClothingBandageStalkerMerc: 10
         ClothingNeckMantleMerc: 100
@@ -383,3 +408,15 @@
         ClothingShoesBootsMerc: 30
         ClothingShoesSwat: 35
         ClothingShoesBootsCombat: 30
+
+    - name: Smokables #explained using D&D lifestyle expenses
+      priority: 15
+      items:
+        CigPackBub: 250 #comfortable
+        CigPackGreen: 150 #poor
+        CigPackRed: 200 #modest
+        CigPackBlue: 150 #poor
+        CigPackBlack: 200 #modest
+        CigPackMixed: 250 #comfortable
+        CigPackMarlboro: 200 #modest
+        CigPackKosmos: 100 #squalid

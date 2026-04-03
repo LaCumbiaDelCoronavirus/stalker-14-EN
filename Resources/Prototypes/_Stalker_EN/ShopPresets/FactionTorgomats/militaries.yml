@@ -1,4 +1,4 @@
-﻿- type: shopPreset
+- type: shopPreset
   id: MilitaryPremiumShopPresetEN # PENDING REWORK
   minSellPrice: 0
   itemsForSale:
@@ -53,6 +53,16 @@
   minSellPrice: 5
   itemsForSale:
     TradeBox: 1
+
+    #Lumber
+    STTradePlankT1: 40
+    STTradePlankT2: 60
+    STTradePlankT3: 80
+    STTradePlankT4: 100
+    STLogStalkerT1: 20
+    STLogStalkerT2: 30
+    STLogStalkerT3: 40
+    STLogStalkerT4: 50
   categories:
   - name: shop-category-weapons
     priority: 1
@@ -70,8 +80,9 @@
       STWeaponSniperSVDS: 11000
       # Smg
       STWeaponSMGPP91: 750
-      STWeaponSMGPP19: 1700
+      STWeaponSMGPP19: 2000
       STWeaponSMGPP1901: 1500
+      STWeaponSMGPP2000: 1650
       # Other
       STWeaponRifleAK103: 5000
       STWeaponRifleAK203: 6500
@@ -82,6 +93,7 @@
       STWeaponRifleAKM: 3000
       #STWeaponRifleASVAL: 15000 Fuck the ASVAL
       STWeaponSniperVSS: 12000
+      STWeaponRevolverSWPC325TR: 350
 
   - name: shop-category-magazines
     priority: 2
@@ -108,6 +120,7 @@
       BasePMMag: 70
       TTMag: 98
       BaseAPSMag: 100
+      STSpeedLoader357MagnumEmpty: 60
 
   - name: shop-category-ammunition
     priority: 3
@@ -141,6 +154,9 @@
       # 7.54
       754FMJBox: 675
       754HPBox: 1015
+      # .357
+      MagazineBox357Magnum: 260 # T2
+      MagazineBox357MagnumAP: 500 # T3
 
   - name: shop-category-armor
     priority: 4
@@ -212,7 +228,7 @@
       HandheldGPSBasic: 50
       Paper: 2
       Pen: 5
-      Binocularus1: 2500
+      Binocularus1: 1000
       BoxFlare: 60
       ClothingBackpackDuffelGreenStalkerHydroponic: 500
       Beaker: 40
@@ -227,6 +243,12 @@
       STElasticRubberRed: 50
       STElasticRubberGreen: 50
       STElasticRubberBlue: 50
+      # Cameras
+      STCamera: 750
+      STCameraVintage: 1200
+      STCameraDamaged: 400
+      STCameraFilm: 150
+      STLoggingChainsaw: 1000
 
   - name: shop-category-provisions
     priority: 9
@@ -277,7 +299,7 @@
   - name: shop-category-customization
     priority: 12
     items:
-      ClothingBandageStalkerRed: 5
+      ClothingBandageStalkerUk: 10
       ClothingHeadHatBeaniehat: 10
       ClothingMaskNeckFacemask: 10
       ClothingMaskNeckBalaklava1: 10
@@ -333,6 +355,18 @@
       ClothingTorsoTurtlenecksGorka6B: 50
       ClothingTorsoTurtlenecksKhakiTurtleneck: 50
       ClothingTorsoTurtlenecksMatrosska: 50
+
+  - name: Smokables #explained using D&D lifestyle expenses
+    priority: 13
+    items:
+      CigPackBub: 250 #comfortable
+      CigPackGreen: 150 #poor
+      CigPackRed: 200 #modest
+      CigPackBlue: 150 #poor
+      CigPackBlack: 200 #modest
+      CigPackMixed: 250 #comfortable
+      CigPackMarlboro: 200 #modest
+      CigPackKosmos: 100 #squalid
 
 - type: shopPreset
   id: OKSOPShopPresetEN # OKSOP REWORK IN-PROGRESS
@@ -487,6 +521,7 @@
       ClothingBackpackDuffelBlackTacticStalker: 1000 # T4
       # Belts
       ClothingBeltGreenWebbingStalker: 250
+      ClothingBeltWebbingOfficerStalker: 400
       ClothingBeltBandolierStalker: 20 # T1 - PVE
       ClothingBeltTarzanBlack: 200 # T1 - PVP
       ClothingBeltTarzanGreen: 200 # T1 - PVP
@@ -531,7 +566,7 @@
       Paper: 2
       Pen: 5
       BoxFolderClipboardEmpty: 20 # Clipboard
-      Binocularus1: 2500
+      Binocularus1: 1000
       BoxFlare: 60
       ClothingBackpackDuffelGreenStalkerHydroponic: 500
       Beaker: 40
@@ -547,6 +582,11 @@
       STElasticRubberRed: 50
       STElasticRubberGreen: 50
       STElasticRubberBlue: 50
+      # Cameras
+      STCamera: 750
+      STCameraVintage: 1200
+      STCameraDamaged: 400
+      STCameraFilm: 150
 
   - name: shop-category-modules
     priority: 11

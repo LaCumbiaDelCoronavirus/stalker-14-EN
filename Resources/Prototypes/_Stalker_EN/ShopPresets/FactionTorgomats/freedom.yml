@@ -77,12 +77,25 @@
     FoodSTMeatStew: 900
     FoodSTKebabMeat: 450
     FoodSTFrogLegs: 750
+    STFoodJarSalo: 750
+
+    #Lumber
+    STTradePlankT1: 40
+    STTradePlankT2: 60
+    STTradePlankT3: 80
+    STTradePlankT4: 100
+    STLogStalkerT1: 20
+    STLogStalkerT2: 30
+    STLogStalkerT3: 40
+    STLogStalkerT4: 50
 
   categories:
     - name: shop-category-weapons
       priority: 1
       items:
         # Pistols
+        STWeaponPistolP99: 600
+        STWeaponPistolM1911: 1000
         STWeaponRevolverRugerRedhawk: 850
         STWeaponRevolverSWPC325TR: 400
         WeaponPistolStalkerGlock: 400
@@ -92,12 +105,15 @@
         STWeaponShotgunSPAS: 2000 # T3
         # SMGs
         STWeaponSMGMP5: 1800 # T3
+        STWeaponSMGThompson: 3800
         # Nato Rifles
         STWeaponRifleL85: 2100 # T2
         STWeaponRifleSCARH: 6000 # T3
         STWeaponRifleM16: 4000 # T2
+        STWeaponRifleM16M203: 5000 # T2
         STWeaponRifleFAL: 1750 # T3
         STWeaponRifleFALo: 8000 # T3
+        STWeaponRifleGalil: 7000 # T3
         # Snipers
         STWeaponSniperMosin: 1200
         #STWeaponSniperSVDSGrass: 8400 Removed for early wipe
@@ -106,6 +122,8 @@
     - name: shop-category-magazines
       priority: 2
       items:
+        P99Mag15: 180
+        M1911Mag7: 140
         Base556Mag10: 80
         556Mag20: 220
         556Mag30: 400
@@ -120,6 +138,8 @@
         739Mag30: 500
         545Mag30: 400
         545Mag20: 200
+        BaseTommyGunMag: 350
+        TommyGunDrum2: 1600
 
     - name: shop-category-ammunition
       priority: 3
@@ -148,10 +168,10 @@
         # 7.54
         754FMJBox: 2500 # T3
         # .45
-        45ACPLFMJBox: 100 # T1
-        45ACPMFMJBox: 400 # T2
-        45ACPAPBox: 1950 # T3
-        45ACPRIPBox: 800 # Mutant
+        45ACPLFMJBox: 110 # T1
+        45ACPMFMJBox: 550 # T2
+        45ACPAPBox: 1500 # T3
+        45ACPRIPBox: 500 # Mutant
 
     - name: shop-category-medicine
       priority: 4
@@ -219,6 +239,7 @@
           # Belts
         ClothingBeltBandolierStalker: 20 # T1 - PVE
         ClothingBeltWebbingHolsterFreedomDefender: 600
+        ClothingBeltWebbingDoubleFreedomVeterSmall: 1000
 
     - name: shop-category-raincoats-and-gasmasks
       priority: 8
@@ -290,6 +311,11 @@
         STElasticRubberGreen: 50
         STElasticRubberBlue: 50
         FoldedFlagFree: 250
+        # Cameras
+        STCamera: 750
+        STCameraVintage: 1200
+        STCameraDamaged: 400
+        STCameraFilm: 150
 
     - name: shop-category-modules
       priority: 11
@@ -329,12 +355,8 @@
         ClothingMaskNeckBalaklava3: 10
         # NECK
         ClothingNeckScarfBrown: 100
-        ClothingBandageStalkerUk: 10
-        ClothingBandageStalkerRus: 10
-        ClothingBandageStalkerArgentina: 10
         # faction
         ClothingBandageStalkerGreen: 10
-        ClothingBandageStalkerPeace: 10
         ClothingNeckScarfFreedom: 100
         # TORSO
         ClothingTorsoTShirtPivozavr: 30
@@ -392,3 +414,21 @@
         AcousticGuitarInstrument: 250
         AccordionInstrument: 250
         HarmonicaInstrument: 250
+
+    - name: shop-category-blueprints
+      priority: 15
+      items:
+        STCookingRenderedSalo: 2000
+        STCookingPickledEggs: 2000
+
+    - name: Smokables #explained using D&D lifestyle expenses
+      priority: 16
+      items:
+        CigPackBub: 250 #comfortable
+        CigPackGreen: 150 #poor
+        CigPackRed: 200 #modest
+        CigPackBlue: 150 #poor
+        CigPackBlack: 200 #modest
+        CigPackMixed: 250 #comfortable
+        CigPackMarlboro: 200 #modest
+        CigPackKosmos: 100 #squalid

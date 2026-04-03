@@ -3,6 +3,7 @@ using Content.Server.Administration.Logs;
 using Content.Server.CartridgeLoader;
 using Content.Shared._Stalker.Bands;
 using Content.Shared._Stalker_EN.BulletinBoard;
+using Content.Shared._Stalker_EN.CharacterRank;
 using Content.Shared._Stalker_EN.FactionRelations;
 using Content.Shared._Stalker_EN.PdaMessenger;
 using Content.Shared.CartridgeLoader;
@@ -203,6 +204,7 @@ public sealed class STBulletinBoardSystem : EntitySystem
             return;
 
         var posterFaction = ResolveFaction(args.Actor);
+        var posterRankIcon = ResolveRankIcon(args.Actor);
         var posterMessengerId = _messenger.GetMessengerId(server.OwnerUserId, server.OwnerCharacterName);
 
         var offer = new STBulletinOffer(
@@ -212,13 +214,14 @@ public sealed class STBulletinBoardSystem : EntitySystem
             server.OwnerCharacterName,
             posterMessengerId,
             posterFaction,
+            posterRankIcon,
             description,
             _timing.CurTime);
 
         storage[offer.Id] = offer;
         _globalOfferIndex[offer.Id] = board.BoardTypeId;
 
-        _adminLogger.Add(LogType.Action, LogImpact.Low,
+        _adminLogger.Add(LogType.STBulletinBoard, LogImpact.Low,
             $"{ToPrettyString(args.Actor):player} posted bulletin board [{board.BoardTypeId}] {post.Category}: " +
             $"desc=\"{description}\"");
 
@@ -248,7 +251,7 @@ public sealed class STBulletinBoardSystem : EntitySystem
         storage.Remove(withdraw.OfferId);
         _globalOfferIndex.Remove(withdraw.OfferId);
 
-        _adminLogger.Add(LogType.Action, LogImpact.Low,
+        _adminLogger.Add(LogType.STBulletinBoard, LogImpact.Low,
             $"{ToPrettyString(args.Actor):player} withdrew bulletin board [{boardTypeId}] offer #{withdraw.OfferId}");
 
         BroadcastUiUpdate(boardTypeId);
@@ -285,7 +288,7 @@ public sealed class STBulletinBoardSystem : EntitySystem
         var draftMessage = STBulletinOffer.FormatRef(draftPrefix, contact.OfferId);
         _messenger.OpenDm(loaderUid, messengerUid.Value, contact.PosterMessengerId, draftMessage);
 
-        _adminLogger.Add(LogType.Action, LogImpact.Low,
+        _adminLogger.Add(LogType.STBulletinBoard, LogImpact.Low,
             $"{ToPrettyString(args.Actor):player} opened DM from bulletin board with: " +
             $"{contact.PosterMessengerId} (offer #{contact.OfferId})");
     }
@@ -601,6 +604,17 @@ public sealed class STBulletinBoardSystem : EntitySystem
             return false;
 
         return IsBandMember(ownerMob, restrictions.RequiredBandForPrimary);
+    }
+
+    /// <summary>
+    /// Resolves the rank icon prototype ID for an entity via STCharacterRankComponent.
+    /// </summary>
+    private string? ResolveRankIcon(EntityUid uid)
+    {
+        if (!TryComp<STCharacterRankComponent>(uid, out var rank))
+            return null;
+
+        return rank.RankIconId;
     }
 
     /// <summary>

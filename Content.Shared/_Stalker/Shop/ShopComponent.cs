@@ -53,5 +53,12 @@ public sealed partial class ShopComponent : Component
     /// Not networked -- only the server needs to know the full buyback state.
     /// The client receives buyback items as a regular shop category.
     /// </summary>
+    [ViewVariables]
     public Dictionary<NetUserId, List<STBuybackEntry>> BuybackItems = new();
+
+    /// <summary>
+    /// Server-only: monotonically increasing counter for buyback entry IDs.
+    /// </summary>
+    [ViewVariables(VVAccess.ReadWrite)]
+    public uint BuybackNextId;
 }

@@ -34,7 +34,7 @@ public sealed partial class ZoneAnomalyDetectorComponent : Component
     /// consuming the interaction event before the UI system can open.
     /// </summary>
     [DataField]
-    public bool ToggleOnInteract = true; // stalker-changes
+    public bool ToggleOnInteract = true; // stalker-en-changes
 }
 
 [RegisterComponent]

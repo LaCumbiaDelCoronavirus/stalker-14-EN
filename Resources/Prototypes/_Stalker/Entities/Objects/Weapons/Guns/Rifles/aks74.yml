@@ -148,7 +148,7 @@
   - type: STWeaponAccuracy
     accuracyMultiplier: 1.45
 
-- type: entity
+- type: entity #Stalker EN changes
   parent: STBaseWeaponRifleAKS74
   id: STWeaponRifleA545Dolg
   name: A-545 "Pledge"
@@ -164,10 +164,10 @@
   - type: Gun
     minAngle: 45
     maxAngle: 90
-    angleIncrease: 0.8
-    fireRate: 8.5
+    angleIncrease: 1.2
+    fireRate: 7.5
   - type: STWeaponAccuracy
-    accuracyMultiplier: 1.6
+    accuracyMultiplier: 1.5
 
 - type: entity
   parent: STBaseWeaponRifleAKS74
@@ -383,6 +383,6 @@
           tags:
             - STCartridge545
   - type: STWeaponDamageFalloff
-    falloffMultiplier: 1.2
+    falloffMultiplier: 0.8
   - type: STWeaponAccuracy
-    accuracyMultiplier: 0.9
+    accuracyMultiplier: 1.5

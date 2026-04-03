@@ -4,19 +4,19 @@
   id: STBaseWeaponShotgunSawedOf
   components:
   - type: Sprite
-    sprite: Objects/Weapons/Guns/Shotguns/sawn.rsi
+    sprite: _Stalker_EN/Objects/Weapons/Guns/Shotguns/SawnOff_TOZ_34.rsi
   - type: Clothing
-    sprite: Objects/Weapons/Guns/Shotguns/sawn.rsi
+    sprite: _Stalker_EN/Objects/Weapons/Guns/Shotguns/SawnOff_TOZ_34.rsi
   - type: Item
-    sprite: Objects/Weapons/Guns/Shotguns/sawn.rsi
+    sprite: _Stalker_EN/Objects/Weapons/Guns/Shotguns/SawnOff_TOZ_34.rsi
     size: Small
-    heldPrefix: sawn
+
   - type: STWeight
     self: 2.0
   - type: Gun
     minAngle: 30
     maxAngle: 80
-    fireRate: 2
+    fireRate: 4
     angleIncrease: 15
     angleDecay: 75
   - type: BallisticAmmoProvider

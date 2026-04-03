@@ -1,4 +1,4 @@
-- type: entity
+- type: entity # Stalker_EN Changes
   abstract: true
   parent: STBaseWeaponSMG
   id: STBaseWeaponSMGThompson
@@ -16,12 +16,12 @@
   - type: Clothing
     sprite: _Stalker/Objects/Weapons/Guns/SMGs/tommygun.rsi
   - type: Gun
-    minAngle: 50
-    maxAngle: 90
-    angleIncrease: 2.5
-    angleDecay: 8
-    fireRate: 12
-    selectedMode: Burst
+    minAngle: 40
+    maxAngle: 85
+    angleIncrease: 1.7
+    angleDecay: 10
+    fireRate: 8
+    selectedMode: FullAuto
     availableModes:
     - Burst
     - FullAuto
@@ -62,4 +62,4 @@
   parent: STBaseWeaponSMGThompson
   id: STWeaponSMGThompson
   name: Thompson Submachine Gun
-  description: The iconic Thompson submachine gun (nicknamed "Tommy Gun") chambered in 9х19. Its distinctive drum magazine and dual grips make it instantly recognizable, though its weight and recoil present challenges in Zone conditions.
+  description: The iconic Thompson submachine gun (nicknamed "Tommy Gun") chambered in 45 ACP. Its distinctive drum magazine and dual grips make it instantly recognizable, though its weight and recoil present challenges in Zone conditions.

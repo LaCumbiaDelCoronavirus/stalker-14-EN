@@ -19,6 +19,7 @@
   special:
     - !type:AddComponentSpecial
       components:
+      - type: PersistentCraftAccess
       - type: Access
         groups:
           - Sci
@@ -36,6 +37,11 @@
       - type: NpcFactionMember
         factions:
         - Sci
+      - type: Vocal # stalker EN change start
+        sounds:
+          Male: MaleHumanEcologists
+          Female: FemaleHumanEcologists
+          Unsexed: MaleHumanEcologists # stalker EN change end
 
 - type: job
   id: StalkerHeadEcologist
@@ -58,6 +64,7 @@
   special:
     - !type:AddComponentSpecial
       components:
+        - type: PersistentCraftAccess
         - type: Access
           tags:
             - SciHead
@@ -75,4 +82,8 @@
         - type: NpcFactionMember
           factions:
           - Sci
-
+        - type: Vocal # stalker EN change start
+          sounds:
+            Male: MaleHumanEcologists
+            Female: FemaleHumanEcologists
+            Unsexed: MaleHumanEcologists # stalker EN change end

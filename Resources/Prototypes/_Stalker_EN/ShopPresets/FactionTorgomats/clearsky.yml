@@ -87,13 +87,13 @@
     MutantPartFrogLeg: 230
 
     #T3 -------- Health * 3
-    MutantPartBloodsuckerTentacles: 1015
-    MutantPartOraculeEye: 2160
-    MutantPartPseudogiantHeart: 5400
-    MutantPartZombieHand: 810
+    MutantPartBloodsuckerTentacles: 2750
+    MutantPartOraculeEye: 1800
+    MutantPartPseudogiantHeart: 9050
+    MutantPartZombieHand: 1000
     ClothingMaskChimera: 1
     MutantPartChimeraTooth: 1
-    MutantPartIzlomArm: 915
+    MutantPartIzlomArm: 1650
     MutantPartBurerBrain: 2000
     MutantPartControllerBrain: 3500
 
@@ -128,13 +128,32 @@
     STJunkTagWhite: 400
     STJunkTracker: 1000
 
+    #Lumber
+    STTradePlankT1: 40
+    STTradePlankT2: 60
+    STTradePlankT3: 80
+    STTradePlankT4: 100
+    STLogStalkerT1: 20
+    STLogStalkerT2: 30
+    STLogStalkerT3: 40
+    STLogStalkerT4: 50
+
   categories:
   - name: shop-category-weapons
     priority: 1
     items:
+      # Melee
+      StalkerBallBat: 50
+      STThrowingknifeYellow: 300
       # Pistols
+      STWeaponPistolHiPower: 400
+      STWeaponPistolP99: 500
+      STWeaponPistolM1911Chrome: 1000
+      STWeaponPistolUSP: 1700
       WeaponPistolStalkerTT: 300
       WeaponPistolStalkerGlock: 250
+      WeaponPistolStalkerAPS: 800
+      STWeaponRevolverChiappaRhino60DS: 2200
       # Shotguns
       STWeaponShotgunMP155T: 45 #T0.5
       STWeaponShotgunTOZ34: 225 # T2
@@ -147,10 +166,12 @@
       # Rifles
       STWeaponRifleL85Forecaster: 2100
       STWeaponRifleFAL: 1500
-      STWeaponRifleM16: 3100
+      STWeaponRifleM4: 2800
       STWeaponRifleM14: 3750
       STWeaponRifleAKS74: 3500
       STWeaponRifleAKM: 3500
+      STWeaponRifleStalkerAK105SwampThing: 4000
+      STMetroWeaponRifleVSV: 5000
       # Snipers
       STWeaponSniperVepr: 4000
 
@@ -161,22 +182,34 @@
       Base545Mag10: 50 #T1
       545Mag20: 200 #T2
       545Mag30: 325 #T2
-      # 7,62x51 and 56
+      # 5.56x45
       Base556Mag10: 80
       556Mag20: 225
       556Mag30: 350
+      # 7.62x39
       Base739Mag10: 100
+      739Mag30: 350
+      # 7.62x54
       Base754Mag5: 200 #T1
+      754Mag10: 500
+      # 7.62x51
       Base751Mag10: 200
       751Mag20: 400
       # Smg
       BaseMP5Mag: 160
       BizonMag: 750
+      BizonMag919: 800
       # Other
-      BaseTEC9Mag: 120
+      HiPowerMag13: 120
+      P99Mag15: 140
+      M1911Mag7: 120
+      USPMag12: 200
       BaseGlockMag10: 100
+      GlockMag17: 200
       TTMag: 75
       BaseAPSMag: 100
+      STSpeedLoader45ACPEmpty: 120
+      STSpeedLoader357MagnumEmpty: 180
 
   - name: shop-category-ammunition
     priority: 3
@@ -185,29 +218,46 @@
       6mmBuckshotBox: 320 # T1
       7mmBuckshotBox: 75 # T0
       # 7.25
+      725LRNPCBox: 625 # Mutant
       725PBox: 100 # T1
       725PTBox: 250 # T2
       725PSTBox: 1450 # T3
+      # 9.18
+      918PGJBox: 100 # T1
+      918PSTBox: 560 # T2
+      918SP7Box: 625 # Mutant
+      918PBMBox: 1425 # T3
       # 9.19
+      919RIPBox: 625 # Mutant
       919PSOGJBox: 100 # T1
       919PSTBox: 500 # T2
       919PBMBox: 1450 # T3
+      # .45
+      45ACPLFMJBox: 110 # T1
+      45ACPMFMJBox: 550 # T2
+      45ACPRIPBox: 700 # Mutant
+      45ACPAPBox: 1500 # T3
       # 5.45
+      545HPBox: 725 # Mutant
       545PCBox: 1650 # T3
-      545FMJBox: 250 # T2
+      545FMJBox: 650 # T2
       # 5.56
-      556FMJBox: 250 # T2
+      556WarmagBox: 725 # Mutant
+      556FMJBox: 650 # T2
       556M855Box: 1650 # T3
       # 7.39
+      739HPBox: 850 # Mutant
       739FMJBox: 1950 # T3
       # 7.51
+      751UNBox: 850 # Mutant
       751M80Box: 1950 # T3
       # 7.54
+      754HPBox: 850 # Mutant
       754FMJBox: 2500 # T3
-      # 9.18
-      918PGJBox: 100 # T1
-      918PSTBox: 200 # T2
-      918PBMBox: 1450 # T3
+      # .357
+      MagazineBox357Magnum: 600 # T2
+      MagazineBox357MagnumAP: 1500 # T3
+      MagazineBox357MagnumHP: 800 # Mutant
 
   - name: shop-category-medicine
     priority: 4
@@ -226,7 +276,7 @@
       MedkitScience: 350
       MedkitElite: 500
       MedkitLAR: 450
-      STPillboxShiza: 10000
+      STPillboxShiza: 5000
 
   - name: shop-category-provisions
     priority: 5
@@ -276,6 +326,9 @@
       ClothingBackpackDuffelMilitaryOlive: 1300 # T4
       # Belts
       ClothingBeltBandolierStalker: 20 # T1 - PVE
+      STClothingBeltThrowingKnifes: 350
+      ClothingBeltWebbingHolsterStalkerZarya: 500
+      ClothingBeltWebbingDoubleStalkerZaryaSmall: 1000
       # Containers
       MedkitCMSStalker: 450 # T1
       MedkitGrizzlyStalker: 850 # T2
@@ -341,7 +394,7 @@
       HandheldGPSBasic: 50
       Paper: 2
       Pen: 5
-      Binocularus1: 2500
+      Binocularus1: 1000
       BoxFlare: 60
       ClothingBackpackDuffelGreenStalkerHydroponic: 500
       Beaker: 40
@@ -358,6 +411,12 @@
       STElasticRubberGreen: 50
       STElasticRubberBlue: 50
       FoldedFlagCS: 250
+      # Cameras
+      STCamera: 750
+      STCameraVintage: 1200
+      STCameraDamaged: 400
+      STCameraFilm: 150
+      STLoggingChainsaw: 1000
 
   - name: shop-category-modules
     priority: 11
@@ -371,6 +430,10 @@
       STModuleSilencerSMGT1: 600
       STModuleSniperSightT1: 600
       STModuleSilencerSniperT1: 600
+      STModuleSilencerRiflesT2Ru: 2800
+      STModuleSilencerRiflesT2Nato: 2800
+      STModuleSilencerSniperT2: 2800
+      STModuleSilencerSMGT2: 2800
 
   - name: shop-category-customization
     priority: 12
@@ -394,9 +457,6 @@
       # NECK
       ClothingNeckScarfBrown: 100
       ClothingNeckScarfGray: 100
-      ClothingBandageStalkerUk: 10
-      ClothingBandageStalkerRus: 10
-      ClothingBandageStalkerArgentina: 10
       # faction
       ClothingBandageStalkerBlue: 10
       ClothingNeckScarfWhite: 100
@@ -462,3 +522,15 @@
     items:
       DetectorVelesBlueprint: 6500
       DetectorSvarogBlueprint: 20000
+
+  - name: Smokables #explained using D&D lifestyle expenses
+    priority: 14
+    items:
+      CigPackBub: 250 #comfortable
+      CigPackGreen: 150 #poor
+      CigPackRed: 200 #modest
+      CigPackBlue: 150 #poor
+      CigPackBlack: 200 #modest
+      CigPackMixed: 250 #comfortable
+      CigPackMarlboro: 200 #modest
+      CigPackKosmos: 100 #squalid

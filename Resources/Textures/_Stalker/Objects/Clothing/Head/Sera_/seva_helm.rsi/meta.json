@@ -1,5 +1,7 @@
 {
   "version": 1,
+  "license": "CC-BY-NC-SA-3.0",
+  "copyright": "Stalker14 CLA, author: neki5h / gr0x and belay5",
   "size": {
     "x": 32,
     "y": 32
@@ -18,6 +20,9 @@
     },
     {
       "name": "icon-flash"
+    },
+    {
+      "name": "equipped-HELMET"
     }
   ]
 }

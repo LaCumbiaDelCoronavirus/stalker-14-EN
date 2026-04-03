@@ -425,6 +425,51 @@ namespace Content.Server.Database
         Task<StalkerPdaPassword?> GetStalkerPdaPasswordAsync(string characterName);
         Task SetStalkerPdaPasswordAsync(string characterName, string password);
         Task RemoveStalkerPdaPasswordAsync(string characterName);
+
+        // stalker-en-changes: News articles
+        Task<List<StalkerNewsArticle>> GetRecentStalkerNewsArticlesAsync(int limit);
+        Task<int> AddStalkerNewsArticleAsync(StalkerNewsArticle article);
+        Task DeleteStalkerNewsArticleAsync(int articleId);
+        Task<List<StalkerNewsComment>> GetStalkerNewsCommentsAsync(List<int> articleIds);
+        Task<int> AddStalkerNewsCommentAsync(StalkerNewsComment comment);
+
+        // stalker-en-changes: News article photos
+
+        /// <summary>
+        /// Stores a news article photo blob in the database.
+        /// </summary>
+        Task AddStalkerNewsArticlePhotoAsync(StalkerNewsArticlePhoto photo);
+
+        /// <summary>
+        /// Retrieves a news article photo by its unique identifier.
+        /// </summary>
+        Task<StalkerNewsArticlePhoto?> GetStalkerNewsArticlePhotoAsync(Guid photoId);
+
+        /// <summary>
+        /// Deletes a news article photo by its unique identifier.
+        /// </summary>
+        Task DeleteStalkerNewsArticlePhotoAsync(Guid photoId);
+
+        /// <summary>
+        /// Saves a news article and its optional photo in a single database transaction.
+        /// </summary>
+        Task<int> AddStalkerNewsArticleWithPhotoAsync(StalkerNewsArticle article, StalkerNewsArticlePhoto? photo);
+
+        // stalker-en-changes: News reactions
+        Task<List<StalkerNewsReaction>> GetStalkerNewsReactionsAsync(int targetType, List<int> targetIds);
+        Task<bool> ToggleStalkerNewsReactionAsync(int targetType, int targetId, Guid userId, string reactionId);
+        Task DeleteStalkerNewsReactionsByTargetAsync(int targetType, int targetId);
+
+        // stalker-en-changes-start: Character rank persistence
+        Task<StalkerCharacterRank?> GetStalkerCharacterRankAsync(Guid userId, string characterName);
+        Task UpdateStalkerCharacterRankTimesAsync(IReadOnlyCollection<(Guid UserId, string CharacterName, TimeSpan Time)> updates);
+        // stalker-en-changes-end
+
+        // stalker-en-changes-start: Persistent craft profile persistence
+        Task<StalkerPersistentCraftProfile?> GetStalkerPersistentCraftProfileAsync(Guid userId, string characterName);
+        Task SetStalkerPersistentCraftProfileAsync(Guid userId, string characterName, string profileJson);
+        Task DeleteAllStalkerPersistentCraftProfilesAsync();
+        // stalker-en-changes-end
         #endregion
     }
     /// <summary>
@@ -1277,6 +1322,128 @@ namespace Content.Server.Database
             DbWriteOpsMetric.Inc();
             return RunDbCommand(() => _db.RemoveStalkerPdaPasswordAsync(characterName));
         }
+
+        // stalker-en-changes: News articles
+        public Task<List<StalkerNewsArticle>> GetRecentStalkerNewsArticlesAsync(int limit)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetRecentStalkerNewsArticlesAsync(limit));
+        }
+
+        public Task<int> AddStalkerNewsArticleAsync(StalkerNewsArticle article)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.AddStalkerNewsArticleAsync(article));
+        }
+
+        public Task DeleteStalkerNewsArticleAsync(int articleId)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.DeleteStalkerNewsArticleAsync(articleId));
+        }
+
+        public Task<List<StalkerNewsComment>> GetStalkerNewsCommentsAsync(List<int> articleIds)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetStalkerNewsCommentsAsync(articleIds));
+        }
+
+        public Task<int> AddStalkerNewsCommentAsync(StalkerNewsComment comment)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.AddStalkerNewsCommentAsync(comment));
+        }
+
+        // stalker-en-changes: News article photos
+
+        /// <summary>
+        /// Stores a news article photo blob in the database.
+        /// </summary>
+        public Task AddStalkerNewsArticlePhotoAsync(StalkerNewsArticlePhoto photo)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.AddStalkerNewsArticlePhotoAsync(photo));
+        }
+
+        /// <summary>
+        /// Retrieves a news article photo by its unique identifier.
+        /// </summary>
+        public Task<StalkerNewsArticlePhoto?> GetStalkerNewsArticlePhotoAsync(Guid photoId)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetStalkerNewsArticlePhotoAsync(photoId));
+        }
+
+        /// <summary>
+        /// Deletes a news article photo by its unique identifier.
+        /// </summary>
+        public Task DeleteStalkerNewsArticlePhotoAsync(Guid photoId)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.DeleteStalkerNewsArticlePhotoAsync(photoId));
+        }
+
+        /// <summary>
+        /// Saves a news article and its optional photo in a single database transaction.
+        /// </summary>
+        public Task<int> AddStalkerNewsArticleWithPhotoAsync(StalkerNewsArticle article, StalkerNewsArticlePhoto? photo)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.AddStalkerNewsArticleWithPhotoAsync(article, photo));
+        }
+
+        // stalker-en-changes: News reactions
+        public Task<List<StalkerNewsReaction>> GetStalkerNewsReactionsAsync(int targetType, List<int> targetIds)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetStalkerNewsReactionsAsync(targetType, targetIds));
+        }
+
+        public Task<bool> ToggleStalkerNewsReactionAsync(int targetType, int targetId, Guid userId, string reactionId)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.ToggleStalkerNewsReactionAsync(targetType, targetId, userId, reactionId));
+        }
+
+        public Task DeleteStalkerNewsReactionsByTargetAsync(int targetType, int targetId)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.DeleteStalkerNewsReactionsByTargetAsync(targetType, targetId));
+        }
+
+        // stalker-en-changes-start: Character rank persistence
+        public Task<StalkerCharacterRank?> GetStalkerCharacterRankAsync(Guid userId, string characterName)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetStalkerCharacterRankAsync(userId, characterName));
+        }
+
+        public Task UpdateStalkerCharacterRankTimesAsync(IReadOnlyCollection<(Guid UserId, string CharacterName, TimeSpan Time)> updates)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.UpdateStalkerCharacterRankTimesAsync(updates));
+        }
+        // stalker-en-changes-end
+
+        // stalker-en-changes-start: Persistent craft profile persistence
+        public Task<StalkerPersistentCraftProfile?> GetStalkerPersistentCraftProfileAsync(Guid userId, string characterName)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetStalkerPersistentCraftProfileAsync(userId, characterName));
+        }
+
+        public Task SetStalkerPersistentCraftProfileAsync(Guid userId, string characterName, string profileJson)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.SetStalkerPersistentCraftProfileAsync(userId, characterName, profileJson));
+        }
+
+        public Task DeleteAllStalkerPersistentCraftProfilesAsync()
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.DeleteAllStalkerPersistentCraftProfilesAsync());
+        }
+        // stalker-en-changes-end
 
         public Task SetStalkerBandAsync(ProtoId<STBandPrototype> band, float rewardPoints)
         {

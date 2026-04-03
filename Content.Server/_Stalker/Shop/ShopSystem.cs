@@ -69,6 +69,12 @@ public sealed partial class ShopSystem : SharedShopSystem
         InitializeBulkBuy(); // stalker-14-en
     }
 
+    public override void Shutdown()
+    {
+        base.Shutdown();
+        ShutdownBuyback(); // stalker-changes-en: unsubscribe player status events
+    }
+
     #region UI updates
     private void OnAfterInsert(StorageAfterInsertItemIntoLocationEvent args)
     {
@@ -206,17 +212,26 @@ public sealed partial class ShopSystem : SharedShopSystem
         var userItems = GetContainerItemsWithoutMoney(user.Value, component);
         var userListings = GetListingData(userItems, component, proto.SellingItems, proto.MinSellPrice); //stalker-14-en change
 
-        var money = GetMoneyFromList(GetContainersElements(user.Value), component);
+        // stalker-en-changes: use caller-provided balance when available to prevent stale QueueDel'd entities from inflating balance
+        var money = sellBuyBalance ?? GetMoneyFromList(GetContainersElements(user.Value), component);
 
         component.CurrentBalance = money;
 
         _sawmill.Debug($"Sent balance to client: {component.CurrentBalance}");
 
         // stalker-changes-en: inject buyback category into the categories sent to client
-        var allCategories = new List<CategoryInfo>(categories);
         var buybackCategory = GetBuybackCategory(user.Value, component);
+        List<CategoryInfo> allCategories;
         if (buybackCategory != null)
+        {
+            allCategories = new List<CategoryInfo>(categories.Count + 1);
+            allCategories.AddRange(categories);
             allCategories.Add(buybackCategory);
+        }
+        else
+        {
+            allCategories = categories;
+        }
 
         var state = new ShopUpdateState(
             money,
@@ -769,6 +784,7 @@ public sealed partial class ShopSystem : SharedShopSystem
         }
     }
 
+    // stalker-en-changes start: fix dupe bug — zero stack count before queue-delete
     private void SubtractBalance(EntityUid uid, ShopComponent component, int change)
     {
         var elements = GetContainersElements(uid);
@@ -782,19 +798,19 @@ public sealed partial class ShopSystem : SharedShopSystem
 
             if (stack.Count > change)
             {
-                // I just can't adjust stacks through their native systems
-                var old = stack.Count;
-                stack.Count -= change;
-
-                var ev = new StackCountChangedEvent(old, stack.Count);
-                RaiseLocalEvent(element, ev);
+                _stack.SetCount(element, stack.Count - change);
                 return;
             }
 
-            QueueDel(element);
-            change -= stack.Count;
+            var consumed = stack.Count;
+            _stack.SetCount(element, 0);
+            change -= consumed;
+
+            if (change <= 0)
+                return;
         }
     }
+    // stalker-en-changes end
     #endregion
 
     #region Helpers

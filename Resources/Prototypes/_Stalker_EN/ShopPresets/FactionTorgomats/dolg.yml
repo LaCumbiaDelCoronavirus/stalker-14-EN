@@ -23,15 +23,25 @@
     MutantPartBearPaw: 780
     MutantPartFrogLeg: 400
 
-    #T3 -------- Health * 3
-    MutantPartBloodsuckerTentacles: 1520
-    MutantPartOraculeEye: 3240
-    MutantPartPseudogiantHeart: 8100
-    MutantPartZombieHand: 1215
+    #T3 -------- Health * 3 Modified by Oracle
+    MutantPartBloodsuckerTentacles: 4700
+    MutantPartOraculeEye: 3600
+    MutantPartPseudogiantHeart: 18100
+    MutantPartZombieHand: 2000
     ClothingHeadBear: 1500
-    MutantPartIzlomArm: 1200
-    MutantPartBurerBrain: 2000
-    MutantPartControllerBrain: 3500
+    MutantPartIzlomArm: 3750
+    MutantPartBurerBrain: 3500
+    MutantPartControllerBrain: 6500
+
+    #Lumber
+    STTradePlankT1: 40
+    STTradePlankT2: 60
+    STTradePlankT3: 80
+    STTradePlankT4: 100
+    STLogStalkerT1: 20
+    STLogStalkerT2: 30
+    STLogStalkerT3: 40
+    STLogStalkerT4: 50
 
   categories:
     - name: shop-category-weapons
@@ -51,11 +61,13 @@
         STWeaponRifleOC14: 5650
         STWeaponRifleAK103: 8000
         STWeaponRifleAKM: 6000
-        # STWeaponRifleA545Dolg: 7500 Removed till PvP Update
+        STWeaponRifleStalkerAK12Dolg: 6000
+        STWeaponRifleA545Dolg: 7500
         # SMGs
         STWeaponSMGPP91: 1200
         STWeaponSMGStalkerCP2Veresk: 2000
         STWeaponSMGPP19: 3000
+        STWeaponSMGPP2000OTS: 2500
         # Snipers
         STWeaponSniperMosin: 1200
         STWeaponSniperSKS: 1500
@@ -242,6 +254,11 @@
         STElasticRubberGreen: 50
         STElasticRubberBlue: 50
         FoldedFlagDuty: 250
+        # Cameras
+        STCamera: 750
+        STCameraVintage: 1200
+        STCameraDamaged: 400
+        STCameraFilm: 150
 
     - name: shop-category-modules
       priority: 11
@@ -283,9 +300,6 @@
         ClothingMaskNeckBalaklava3: 10
         # NECK
         ClothingNeckScarfGray: 100
-        ClothingBandageStalkerUk: 10
-        ClothingBandageStalkerRus: 10
-        ClothingBandageStalkerArgentina: 10
         # faction
         ClothingBandageStalkerRed: 10
         ClothingNeckScarfDuty: 100
@@ -339,3 +353,15 @@
         ClothingShoesBootsMerc: 30
         ClothingShoesSwat: 35
         ClothingShoesBootsCombat: 30
+
+    - name: Smokables #explained using D&D lifestyle expenses
+      priority: 14
+      items:
+        CigPackBub: 250 #comfortable
+        CigPackGreen: 150 #poor
+        CigPackRed: 200 #modest
+        CigPackBlue: 150 #poor
+        CigPackBlack: 200 #modest
+        CigPackMixed: 250 #comfortable
+        CigPackMarlboro: 200 #modest
+        CigPackKosmos: 100 #squalid

@@ -25,7 +25,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 100
+        damage: 500
       behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
@@ -55,7 +55,7 @@
   - type: Craftable
   - type: Appearance
   - type: RepositoryItem
-    categoryName: repository-crafting-category
+    categoryName: repository-materials-category
 
 - type: entity
   parent: STSheetMetalBase
@@ -78,7 +78,7 @@
   - type: Craftable
   - type: Appearance
   - type: RepositoryItem
-    categoryName: repository-crafting-category
+    categoryName: repository-materials-category
 
 - type: entity
   parent: STSheetMetalBase
@@ -101,7 +101,7 @@
   - type: Craftable
   - type: Appearance
   - type: RepositoryItem
-    categoryName: repository-crafting-category
+    categoryName: repository-materials-category
 
 - type: entity
   parent: STSheetMetalBase
@@ -124,7 +124,7 @@
   - type: Craftable
   - type: Appearance
   - type: RepositoryItem
-    categoryName: repository-crafting-category
+    categoryName: repository-materials-category
 
 - type: entity
   parent: STSheetMetalBase
@@ -147,4 +147,4 @@
   - type: Craftable
   - type: Appearance
   - type: RepositoryItem
-    categoryName: repository-crafting-category
+    categoryName: repository-materials-category

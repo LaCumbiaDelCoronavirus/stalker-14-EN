@@ -79,7 +79,7 @@
   components:
   - type: DuplicateTeleport
     prefix: PB
-    maxWeight: 350
+    maxWeight: 500 # stalker-en change
 
 - type: entity
   parent: StalkerDuplicateTeleportBase
@@ -91,7 +91,7 @@
   - type: NoobDenyer # stalker-changes
   - type: DuplicateTeleport
     prefix: RedForest
-    maxWeight: 200
+    maxWeight: 500 # stalker-en change
   - type: AccessReader
     denyTags:
       - Military
@@ -111,7 +111,7 @@
   - type: DuplicateTeleport
     prefix: Military
     mapPath: /Maps/_ST/PersonalStalkerArena/BandStalkerArenaV1.yml
-    maxWeight: 150
+    maxWeight: 500 # stalker-en change
   - type: AccessReader
     access: [["MilitaryBarraks"]]
 
@@ -126,7 +126,7 @@
   - type: DuplicateTeleport
     prefix: Sci
     mapPath: /Maps/_ST/PersonalStalkerArena/BandStalkerArenaV1.yml
-    maxWeight: 150
+    maxWeight: 500 # stalker-en change
   - type: AccessReader
     access: [["SciBase"]]
 
@@ -141,7 +141,7 @@
   - type: DuplicateTeleport
     prefix: Bandit
     mapPath: /Maps/_ST/PersonalStalkerArena/BandStalkerArenaV1.yml
-    maxWeight: 150
+    maxWeight: 500 # stalker-en change
   - type: AccessReader
     access: [["Bandit"]]
 
@@ -156,7 +156,7 @@
   - type: DuplicateTeleport
     prefix: Seraphims
     mapPath: /Maps/_ST/PersonalStalkerArena/BandStalkerArenaV1.yml
-    maxWeight: 150
+    maxWeight: 500 # stalker-en change
   - type: AccessReader
     access: [["Seraphims"]]
 
@@ -171,7 +171,7 @@
   - type: DuplicateTeleport
     prefix: Dolg
     mapPath: /Maps/_ST/PersonalStalkerArena/BandStalkerArenaV1.yml
-    maxWeight: 150
+    maxWeight: 500 # stalker-en change
   - type: AccessReader
     access: [["Dolg"] , ["DolgNovice"]]
 
@@ -186,7 +186,7 @@
   - type: DuplicateTeleport
     prefix: Freedom
     mapPath: /Maps/_ST/PersonalStalkerArena/BandStalkerArenaV1.yml
-    maxWeight: 150
+    maxWeight: 500 # stalker-en change
   - type: AccessReader
     access: [["Freedom"] , ["FreedomNovice"]]
 
@@ -201,7 +201,7 @@
   - type: DuplicateTeleport
     prefix: Renegat
     mapPath: /Maps/_ST/PersonalStalkerArena/BandStalkerArenaV1.yml
-    maxWeight: 150
+    maxWeight: 500 # stalker-en change
   - type: AccessReader
     access: [["Renegat"]]
 
@@ -216,7 +216,7 @@
   - type: DuplicateTeleport
     prefix: Covenant
     mapPath: /Maps/_ST/PersonalStalkerArena/BandStalkerArenaV1.yml
-    maxWeight: 150
+    maxWeight: 500 # stalker-en change
   - type: AccessReader
     access: [["Covenant"]]
 
@@ -231,7 +231,7 @@
   - type: DuplicateTeleport
     prefix: Anomalist
     mapPath: /Maps/_ST/PersonalStalkerArena/BandStalkerArenaV1.yml
-    maxWeight: 150
+    maxWeight: 500 # stalker-en change
   - type: AccessReader
     access: [["Anomalist"]]
 
@@ -246,7 +246,7 @@
   - type: DuplicateTeleport
     prefix: Kordon
     mapPath: /Maps/_ST/PersonalStalkerArena/BandStalkerArenaV1.yml
-    maxWeight: 150
+    maxWeight: 500 # stalker-en change
   - type: AccessReader
     access: [["Merc"]]
 
@@ -261,7 +261,7 @@
   - type: DuplicateTeleport
     prefix: Greh
     mapPath: /Maps/_ST/PersonalStalkerArena/BandStalkerArenaV1.yml
-    maxWeight: 350
+    maxWeight: 500 # stalker-en change
   - type: AccessReader
     access: [["Greh"]]
 
@@ -276,7 +276,7 @@
   - type: DuplicateTeleport
     prefix: CN
     mapPath: /Maps/_ST/PersonalStalkerArena/BandStalkerArenaV1.yml
-    maxWeight: 150
+    maxWeight: 500 # stalker-en change
   - type: AccessReader
     access: [["CN"]]
 
@@ -291,7 +291,7 @@
   - type: DuplicateTeleport
     prefix: Poisk
     mapPath: /Maps/_ST/PersonalStalkerArena/BandStalkerArenaV1.yml
-    maxWeight: 150
+    maxWeight: 500 # stalker-en change
   - type: AccessReader
     access: [["Poisk"]]
 
@@ -306,7 +306,7 @@
   - type: DuplicateTeleport
     prefix: Neutral
     mapPath: /Maps/_ST/PersonalStalkerArena/BandStalkerArenaV1.yml
-    maxWeight: 150
+    maxWeight: 500 # stalker-en change
   - type: AccessReader
     access: [["Neutral"]]
 
@@ -321,7 +321,7 @@
   - type: DuplicateTeleport
     prefix: Deserter
     mapPath: /Maps/_ST/PersonalStalkerArena/BandStalkerArenaV1.yml
-    maxWeight: 150
+    maxWeight: 500 # stalker-en change
 
 - type: entity
   id: StalkerDublicateJaba
@@ -334,7 +334,7 @@
   - type: DuplicateTeleport
     prefix: Jaba
     mapPath: /Maps/_ST/PersonalStalkerArena/BandStalkerArenaV1.yml
-    maxWeight: 150
+    maxWeight: 500 # stalker-en change
   - type: AccessReader
     access: [["Jaba"]]
 
@@ -349,7 +349,7 @@
   - type: DuplicateTeleport
     prefix: Mechanic
     mapPath: /Maps/_ST/PersonalStalkerArena/BandStalkerArenaV1.yml
-    maxWeight: 150
+    maxWeight: 500 # stalker-en change
 
 - type: entity
   id: StalkerDublicateProject
@@ -362,7 +362,7 @@
   - type: DuplicateTeleport
     prefix: Project
     mapPath: /Maps/_ST/PersonalStalkerArena/BandStalkerArenaV1.yml
-    maxWeight: 150
+    maxWeight: 500 # stalker-en change
 
 - type: entity
   id: StalkerDublicateBar
@@ -374,7 +374,7 @@
   - type: NoobDenyer # stalker-changes
   - type: DuplicateTeleport
     prefix: Bar
-    maxWeight: 150
+    maxWeight: 500 # stalker-en change
 
 - type: entity
   id: StalkerDublicateBoloto
@@ -385,7 +385,7 @@
   components:
   - type: DuplicateTeleport
     prefix: Boloto
-    maxWeight: 150
+    maxWeight: 500 # stalker-en change
 
 - type: duplicateSymbols
   id: DublicateSymbols

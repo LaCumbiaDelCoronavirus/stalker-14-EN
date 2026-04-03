@@ -12,3 +12,5 @@ New ingredients go in Object/Consumable/Food/ingredients.yml or other relevant y
 Most foods that would reasonably be in a bowl should have a bowl in the recipe, and return it as trash once eaten.
 
 If you just want something to be cookable on a fire, refer to the meat.yml for examples of how it works.
+
+If you add a recipe that doesn't need the cooking station, please add it to Resources/Locale/en-US/_Stalker_EN/paper/cooking-guide.ftl

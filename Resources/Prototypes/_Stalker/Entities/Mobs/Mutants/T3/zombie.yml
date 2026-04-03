@@ -43,6 +43,10 @@
         - trigger:
             !type:DamageTrigger
             damage: 110
+          behaviors:
+            - !type:PlaySoundBehavior
+              sound:
+                collection: STZombieDeath # stalker EN change
     - type: MovementSpeedModifier
       baseWalkSpeed: 0.7
       baseSprintSpeed: 1.3
@@ -53,7 +57,7 @@
     - type: DatasetVocalizer
       dataset: SayStalkerZombie
     - type: Speech
-      speechSounds: Alto
+      speechSounds: STZombie # stalker EN change
     - type: Vocal
       sounds:
         Male: MaleHuman
@@ -85,6 +89,7 @@
           true
     - type: RechargeBasicEntityAmmo
       rechargeCooldown: 1.2
+      rechargeSound: null
     - type: BasicEntityAmmoProvider
       proto: Bullet545PC
       capacity: 8
@@ -125,6 +130,11 @@
           maxAmount: 1
           prob: 1
     # Stalker-EN start
+    - type: EmitSoundOnTrigger
+      sound:
+       collection: STZombieSpotted
+       params:
+         variation: 0.125
     - type: STMobVariantConfig
       variants:
       - chance: 0.08
@@ -213,6 +223,8 @@
       capacity: 5
       count: 1
     - type: Gun
+      soundGunshot:
+        path: /Audio/_Stalker/Effects/Guns/l85.ogg
       fireRate: 5
       useKey: false
       selectedMode: FullAuto
@@ -242,6 +254,8 @@
       capacity: 7
       count: 5
     - type: Gun
+      soundGunshot:
+        path: /Audio/_Stalker/Effects/Guns/l85.ogg
       fireRate: 8
       useKey: false
       selectedMode: FullAuto
@@ -271,6 +285,8 @@
       capacity: 10
       count: 1
     - type: Gun
+      soundGunshot:
+        path: /Audio/_Stalker/Effects/Guns/n_mp5_shot.ogg
       fireRate: 9
       useKey: false
       selectedMode: FullAuto
@@ -300,6 +316,8 @@
       capacity: 10
       count: 1
     - type: Gun
+      soundGunshot:
+        path: /Audio/_Stalker/Effects/Guns/n_mp5_shot.ogg
       fireRate: 9
       useKey: false
       selectedMode: FullAuto

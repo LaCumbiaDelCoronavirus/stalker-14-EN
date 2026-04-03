@@ -838,6 +838,24 @@ namespace Content.Server.Database.Migrations.Sqlite
                         .HasColumnType("INTEGER")
                         .HasColumnName("pref_unavailable");
 
+                    b.Property<string>("STAliasAdjective")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("TEXT")
+                        .HasColumnName("stalias_adjective");
+
+                    b.Property<string>("STAliasColor")
+                        .IsRequired()
+                        .HasMaxLength(16)
+                        .HasColumnType("TEXT")
+                        .HasColumnName("stalias_color");
+
+                    b.Property<string>("STAliasNoun")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("TEXT")
+                        .HasColumnName("stalias_noun");
+
                     b.Property<string>("Sex")
                         .IsRequired()
                         .HasColumnType("TEXT")
@@ -1329,6 +1347,26 @@ namespace Content.Server.Database.Migrations.Sqlite
                     b.ToTable("stalker_bands", (string)null);
                 });
 
+            modelBuilder.Entity("Content.Server.Database.StalkerCharacterRank", b =>
+                {
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("user_id");
+
+                    b.Property<string>("CharacterName")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("character_name");
+
+                    b.Property<TimeSpan>("TimeSpent")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("time_spent");
+
+                    b.HasKey("UserId", "CharacterName")
+                        .HasName("PK_stalker_character_ranks");
+
+                    b.ToTable("stalker_character_ranks", (string)null);
+                });
+
             modelBuilder.Entity("Content.Server.Database.StalkerFaction", b =>
                 {
                     b.Property<int>("Id")
@@ -1453,6 +1491,188 @@ namespace Content.Server.Database.Migrations.Sqlite
                         .IsUnique();
 
                     b.ToTable("stalker_messenger_ids", (string)null);
+                });
+
+            modelBuilder.Entity("Content.Server.Database.StalkerNewsArticle", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("stalker_news_articles_id");
+
+                    b.Property<string>("Author")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("author");
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("content");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("created_at");
+
+                    b.Property<int>("EmbedColor")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("embed_color");
+
+                    b.Property<Guid?>("PhotoId")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("photo_id");
+
+                    b.Property<long>("PublishTimeTicks")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("publish_time_ticks");
+
+                    b.Property<int>("RoundId")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("round_id");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("title");
+
+                    b.HasKey("Id")
+                        .HasName("PK_stalker_news_articles");
+
+                    b.ToTable("stalker_news_articles", (string)null);
+                });
+
+            modelBuilder.Entity("Content.Server.Database.StalkerNewsArticlePhoto", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("stalker_news_article_photos_id");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("created_at");
+
+                    b.Property<byte[]>("PhotoData")
+                        .IsRequired()
+                        .HasColumnType("BLOB")
+                        .HasColumnName("photo_data");
+
+                    b.Property<Guid>("PhotoId")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("photo_id");
+
+                    b.HasKey("Id")
+                        .HasName("PK_stalker_news_article_photos");
+
+                    b.HasIndex("PhotoId")
+                        .IsUnique();
+
+                    b.ToTable("stalker_news_article_photos", (string)null);
+                });
+
+            modelBuilder.Entity("Content.Server.Database.StalkerNewsComment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("stalker_news_comments_id");
+
+                    b.Property<int>("ArticleId")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("article_id");
+
+                    b.Property<string>("Author")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("author");
+
+                    b.Property<string>("AuthorFaction")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("author_faction");
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("content");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("created_at");
+
+                    b.Property<long>("PostedTimeTicks")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("posted_time_ticks");
+
+                    b.Property<int>("RoundId")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("round_id");
+
+                    b.HasKey("Id")
+                        .HasName("PK_stalker_news_comments");
+
+                    b.HasIndex("ArticleId");
+
+                    b.ToTable("stalker_news_comments", (string)null);
+                });
+
+            modelBuilder.Entity("Content.Server.Database.StalkerNewsReaction", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("stalker_news_reactions_id");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("created_at");
+
+                    b.Property<string>("ReactionId")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("reaction_id");
+
+                    b.Property<int>("TargetId")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("target_id");
+
+                    b.Property<int>("TargetType")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("target_type");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("user_id");
+
+                    b.HasKey("Id")
+                        .HasName("PK_stalker_news_reactions");
+
+                    b.HasIndex("TargetType", "TargetId");
+
+                    b.HasIndex("TargetType", "TargetId", "UserId", "ReactionId")
+                        .IsUnique();
+
+                    b.ToTable("stalker_news_reactions", (string)null);
+                });
+
+            modelBuilder.Entity("Content.Server.Database.StalkerPersistentCraftProfile", b =>
+                {
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("user_id");
+
+                    b.Property<string>("CharacterName")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("character_name");
+
+                    b.Property<string>("ProfileJson")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("profile_json");
+
+                    b.HasKey("UserId", "CharacterName")
+                        .HasName("PK_stalker_persistent_craft_profiles");
+
+                    b.ToTable("stalker_persistent_craft_profiles", (string)null);
                 });
 
             modelBuilder.Entity("Content.Server.Database.StalkerPdaPassword", b =>

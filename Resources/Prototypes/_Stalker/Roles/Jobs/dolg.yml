@@ -19,6 +19,7 @@
   special:
     - !type:AddComponentSpecial
       components:
+        - type: PersistentCraftAccess
         - type: NpcFactionMember
           factions:
           - Duty
@@ -36,6 +37,11 @@
           pullingItemTag: PliersStalker
           teethCount: 3
           initialTeeth: 3
+        - type: Vocal # stalker EN change start
+          sounds:
+            Male: MaleHumanDuty
+            Female: FemaleHumanDuty
+            Unsexed: MaleHumanDuty # stalker EN change end
 
 - type: job
   id: StalkerHeadDolg
@@ -58,6 +64,7 @@
   special:
     - !type:AddComponentSpecial
       components:
+        - type: PersistentCraftAccess
         - type: NpcFactionMember
           factions:
           - Duty
@@ -77,6 +84,11 @@
           pullingItemTag: PliersStalker
           teethCount: 3
           initialTeeth: 3
+        - type: Vocal # stalker EN change start
+          sounds:
+            Male: MaleHumanDuty
+            Female: FemaleHumanDuty
+            Unsexed: MaleHumanDuty # stalker EN change end
 
 - type: startingGear
   parent: STDABaseStartingGear # STDA

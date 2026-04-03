@@ -1,4 +1,4 @@
-ent-Puh1 = Burning Fluff
+ent-Puh1 = Burnt Fuzz
     .desc = Best not to code this.
     .suffix = ST, Mapping
 ent-Puh2 = { ent-Puh1 }

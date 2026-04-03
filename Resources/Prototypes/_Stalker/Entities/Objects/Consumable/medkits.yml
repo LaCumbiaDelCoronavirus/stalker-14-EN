@@ -11,6 +11,8 @@
     self: 0.2
   - type: Trash
     time: 1200
+  - type: RepositoryItem # stalker-en change
+    categoryName: repository-medicine-category
 
 - type: entity
   parent: STBaseHealingItem
@@ -246,7 +248,7 @@
         Blunt: -0
         Compression: -0
     bloodlossModifier: -10
-    delay: 4
+    delay: 1
     healingBeginSound:
       path: "/Audio/Items/Medical/brutepack_begin.ogg"
     healingEndSound:

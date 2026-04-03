@@ -12,15 +12,15 @@
   - type: Clothing
     sprite: _Stalker/Objects/Weapons/Guns/Rifles/galil.rsi
   - type: Gun
-    fireRate: 8
+    fireRate: 7.4
     soundGunshot:
       path: /Audio/_Stalker/Effects/Guns/sks_shoot.ogg
       params:
         volume: -2
     minAngle: 50
     maxAngle: 100
-    angleIncrease: 1.5
-    selectedMode: Burst
+    angleIncrease: 1.2
+    selectedMode: FullAuto
     availableModes:
     - Burst
     - SemiAuto
@@ -64,4 +64,4 @@
   parent: STBaseWeaponRifleGalil
   id: STWeaponRifleGalil
   name: galil ARM
-  description: Israeli assault rifle designed for harsh climates. Appears in the Zone via Middle-Eastern mercenaries. Hardy as a camel, with burst-fire more accurate than most automatic rifles.
+  description: Israeli assault rifle designed for harsh climates. Appears in the Zone via smugglers in the middle east. Hardy as a camel, with burst-fire more accurate than most automatic rifles.

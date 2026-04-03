@@ -22,7 +22,11 @@ public sealed class STMessengerSendEvent : CartridgeMessageEvent
     /// </summary>
     public readonly bool IsAnonymous;
 
-    public STMessengerSendEvent(string targetChatId, string content, uint? replyToId = null, bool isAnonymous = false)
+    public STMessengerSendEvent(
+        string targetChatId,
+        string content,
+        uint? replyToId = null,
+        bool isAnonymous = false)
     {
         TargetChatId = targetChatId;
         Content = content;
@@ -116,5 +120,20 @@ public sealed class STMessengerNavigateToOfferEvent : CartridgeMessageEvent
     public STMessengerNavigateToOfferEvent(uint offerId)
     {
         OfferId = offerId;
+    }
+}
+
+/// <summary>
+/// Client requests navigation to a news article from a clickable news link in chat.
+/// Handled by the messenger system, which raises a local event for the news cartridge to pick up.
+/// </summary>
+[Serializable, NetSerializable]
+public sealed class STMessengerNavigateToNewsEvent : CartridgeMessageEvent
+{
+    public readonly int ArticleId;
+
+    public STMessengerNavigateToNewsEvent(int articleId)
+    {
+        ArticleId = articleId;
     }
 }

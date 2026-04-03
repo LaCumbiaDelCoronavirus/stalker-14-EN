@@ -1,0 +1,39 @@
+- type: entity
+  parent: NPCDoll
+  id: NPCForesterEN
+  name: Forester [→   ←]
+  description: An old man who's seen more than most Stalkers possibly could.
+  suffix: ST, EN-TRADER
+  components:
+  - type: Sprite
+    sprite: _Stalker_EN/NPC/Forester.rsi
+    state: forester
+  - type: Physics
+    bodyType: Static
+  - type: DatasetVocalizer
+    dataset: NPCStalkerSidorAds
+  - type: ActivatableUI
+    key: enum.ShopUiKey.Key
+    singleUser: true
+  - type: UserInterface
+    interfaces:
+      enum.ShopUiKey.Key:
+        type: ShopBoundUserInterface
+  - type: Shop
+    moneyId: Roubles
+    shopPresetId: NpcForesterEN
+  - type: TypingIndicator
+    proto: robot
+  - type: TTS # Corvax-TTS
+    voice: TrainingRobot
+  - type: Speech
+    speechVerb: Robotic
+    speechSounds: Alto
+  - type: IntrinsicRadioReceiver
+  - type: IntrinsicRadioTransmitter
+    channels:
+    - Binary
+  - type: ActiveRadio
+    channels:
+    - Binary
+    - Common

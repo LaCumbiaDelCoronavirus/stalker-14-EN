@@ -20,8 +20,9 @@ public sealed class RadarDisplaySystem : EntitySystem
     [Dependency] private readonly AppearanceSystem _appearance = default!;
     [Dependency] private readonly PopupSystem _popup = default!;
 
-    // Reusable list to avoid allocations per update
+    // Reusable buffers to avoid allocations per update
     private readonly List<RadarBlip> _blipBuffer = new();
+    private readonly HashSet<Entity<ZoneAnomalyComponent>> _closestAnomalyBuffer = new();
 
     public override void Initialize()
     {
@@ -95,7 +96,13 @@ public sealed class RadarDisplaySystem : EntitySystem
             detector.NextBeepTime = _timing.CurTime;
 
         UpdateAppearance(entity);
-        SendUIUpdate(entity, user);
+
+        // Send a state-only update (no blip collection) so the UI reflects the toggle
+        _blipBuffer.Clear();
+        float? closestAnomalyDistance = null;
+        if (detector.Enabled)
+            closestAnomalyDistance = GetClosestAnomalyDistance(user, detector);
+        SendRadarState(entity, closestAnomalyDistance);
     }
 
     private void ToggleRadar(Entity<RadarDisplayComponent> entity, EntityUid user)
@@ -117,7 +124,11 @@ public sealed class RadarDisplaySystem : EntitySystem
         }
         else
         {
-            SendUIUpdate(entity, user);
+            _blipBuffer.Clear();
+            float? closestAnomalyDistance = null;
+            if (TryComp<ZoneAnomalyDetectorComponent>(entity, out var det) && det.Enabled)
+                closestAnomalyDistance = GetClosestAnomalyDistance(user, det);
+            SendRadarState(entity, closestAnomalyDistance);
         }
     }
 
@@ -164,34 +175,10 @@ public sealed class RadarDisplaySystem : EntitySystem
         UpdateAppearance(entity);
     }
 
-    private void SendUIUpdate(Entity<RadarDisplayComponent> entity, EntityUid? user = null)
-    {
-        var hasAnomalyDetector = TryComp<ZoneAnomalyDetectorComponent>(entity, out var detector);
-        var anomalyEnabled = hasAnomalyDetector && detector!.Enabled;
-        _blipBuffer.Clear();
-
-        float? closestAnomalyDistance = null;
-        if (anomalyEnabled && user != null)
-            closestAnomalyDistance = GetClosestAnomalyDistance(user.Value, detector!);
-
-        // Check for radar capability components
-        var hasArtifactDetection = HasComp<ArtifactRadarTargetSourceComponent>(entity);
-        var hasAnomalyDetection = HasComp<AnomalyRadarTargetSourceComponent>(entity);
-
-        var deviceName = Name(entity);
-        var state = new RadarDisplayBoundUIState(
-            _blipBuffer,
-            entity.Comp.DisplayRange,
-            entity.Comp.Enabled,
-            hasAnomalyDetector,
-            anomalyEnabled,
-            deviceName,
-            hasArtifactDetection,
-            hasAnomalyDetection,
-            closestAnomalyDistance);
-        _ui.SetUiState(entity.Owner, RadarDisplayUiKey.Key, state);
-    }
-
+    /// <summary>
+    /// Finds the closest anomaly within the detector's beep range.
+    /// Used only by non-blip code paths (toggle handlers).
+    /// </summary>
     private float? GetClosestAnomalyDistance(EntityUid user, ZoneAnomalyDetectorComponent detector)
     {
         var xformQuery = GetEntityQuery<TransformComponent>();
@@ -201,8 +188,11 @@ public sealed class RadarDisplaySystem : EntitySystem
         var userMapCoords = _transform.GetMapCoordinates(userXform);
         var userWorldPos = _transform.GetWorldPosition(userXform, xformQuery);
 
+        _closestAnomalyBuffer.Clear();
+        _entityLookup.GetEntitiesInRange(userMapCoords, detector.Distance, _closestAnomalyBuffer);
+
         float? closestDistance = null;
-        foreach (var ent in _entityLookup.GetEntitiesInRange<ZoneAnomalyComponent>(userMapCoords, detector.Distance))
+        foreach (var ent in _closestAnomalyBuffer)
         {
             if (!ent.Comp.Detected || ent.Comp.DetectedLevel > detector.Level)
                 continue;
@@ -213,6 +203,27 @@ public sealed class RadarDisplaySystem : EntitySystem
         }
 
         return closestDistance;
+    }
+
+    /// <summary>
+    /// Builds and sends the radar UI state from the current <see cref="_blipBuffer"/> contents.
+    /// </summary>
+    private void SendRadarState(Entity<RadarDisplayComponent> entity, float? closestAnomalyDistance)
+    {
+        var hasAnomalyDetector = TryComp<ZoneAnomalyDetectorComponent>(entity, out var detector);
+        var anomalyEnabled = hasAnomalyDetector && detector!.Enabled;
+
+        var state = new RadarDisplayBoundUIState(
+            new List<RadarBlip>(_blipBuffer),
+            entity.Comp.DisplayRange,
+            entity.Comp.Enabled,
+            hasAnomalyDetector,
+            anomalyEnabled,
+            Name(entity),
+            HasComp<ArtifactRadarTargetSourceComponent>(entity),
+            HasComp<AnomalyRadarTargetSourceComponent>(entity),
+            closestAnomalyDistance);
+        _ui.SetUiState(entity.Owner, RadarDisplayUiKey.Key, state);
     }
 
     #endregion
@@ -276,29 +287,24 @@ public sealed class RadarDisplaySystem : EntitySystem
             _blipBuffer);
         RaiseLocalEvent(entity, ref ev);
 
-        var hasAnomalyDetector = TryComp<ZoneAnomalyDetectorComponent>(entity, out var detector);
-        var anomalyEnabled = hasAnomalyDetector && detector!.Enabled;
-
+        // Derive closest anomaly distance from the blips we already collected,
+        // avoiding a redundant spatial query.
         float? closestAnomalyDistance = null;
-        if (anomalyEnabled)
-            closestAnomalyDistance = GetClosestAnomalyDistance(user, detector!);
+        if (TryComp<ZoneAnomalyDetectorComponent>(entity, out var detector) && detector.Enabled)
+        {
+            var detectorRange = detector.Distance;
+            foreach (var blip in _blipBuffer)
+            {
+                if (blip.Type != RadarBlipType.Anomaly)
+                    continue;
+                if (blip.Distance > detectorRange)
+                    continue;
+                if (blip.Distance < (closestAnomalyDistance ?? float.MaxValue))
+                    closestAnomalyDistance = blip.Distance;
+            }
+        }
 
-        // Check for radar capability components
-        var hasArtifactDetection = HasComp<ArtifactRadarTargetSourceComponent>(entity);
-        var hasAnomalyDetection = HasComp<AnomalyRadarTargetSourceComponent>(entity);
-
-        var deviceName = Name(entity);
-        var state = new RadarDisplayBoundUIState(
-            _blipBuffer,
-            entity.Comp.DisplayRange,
-            entity.Comp.Enabled,
-            hasAnomalyDetector,
-            anomalyEnabled,
-            deviceName,
-            hasArtifactDetection,
-            hasAnomalyDetection,
-            closestAnomalyDistance);
-        _ui.SetUiState(entity.Owner, RadarDisplayUiKey.Key, state);
+        SendRadarState(entity, closestAnomalyDistance);
     }
 
     #endregion

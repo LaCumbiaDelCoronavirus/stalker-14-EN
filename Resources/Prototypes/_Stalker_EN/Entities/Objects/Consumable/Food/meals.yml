@@ -1,7 +1,46 @@
 # if adding new craftable recipes, refer to _cooking.txt
 
 # breads
-# oops i didnt do any
+# this sucks and theres probably a better way to do it
+- type: lightCraftingRecipe
+  id: STJellyToastCraft1
+  results:
+  - FoodBreadJellySlice
+  - STFoodJarJamBerry2
+  steps:
+    firstIngredient: STFoodBreadPlainSlice
+    secondIngredient: STFoodJarJamBerry
+    time: 2
+
+- type: lightCraftingRecipe
+  id: STJellyToastCraft2
+  results:
+  - FoodBreadJellySlice
+  - STFoodJarJamBerry3
+  steps:
+    firstIngredient: STFoodBreadPlainSlice
+    secondIngredient: STFoodJarJamBerry2
+    time: 2
+
+- type: lightCraftingRecipe
+  id: STJellyToastCraft3
+  results:
+  - FoodBreadJellySlice
+  - STFoodJarJamBerry4
+  steps:
+    firstIngredient: STFoodBreadPlainSlice
+    secondIngredient: STFoodJarJamBerry3
+    time: 2
+
+- type: lightCraftingRecipe
+  id: STJellyToastCraft4
+  results:
+  - FoodBreadJellySlice
+  - STDrinkJar
+  steps:
+    firstIngredient: STFoodBreadPlainSlice
+    secondIngredient: STFoodJarJamBerry4
+    time: 2
 
 # soups
 - type: entity
@@ -208,7 +247,7 @@
 
 - type: entity
   name: deruny
-  parent: FoodSTDeruny
+  parent: FoodBase
   id: FoodSTDerunySingle
   suffix: Stalker, Food
   description: What's better than fried potatoes?
@@ -268,7 +307,7 @@
 
 - type: entity
   name: hrechanyky
-  parent: FoodSTHrechanyky
+  parent: FoodBase
   id: FoodSTHrechanykySingle
   suffix: Stalker, Food
   description: What's better than fried buckwheat and meat?
@@ -329,7 +368,7 @@
 
 - type: entity
   name: syrnyky
-  parent: FoodSTSyrnyky
+  parent: FoodBase
   id: FoodSTSyrnykySingle
   suffix: Stalker, Food
   description: What's better than fried cheese?
@@ -534,7 +573,7 @@
 
 - type: entity
   name: plain cake slice
-  parent: FoodSTCakePlain
+  parent: FoodBase
   id: FoodSTCakePlainSlice
   suffix: Stalker, Food
   description: A slice of plain white cake.
@@ -596,7 +635,7 @@
 
 - type: entity
   name: berry cake slice
-  parent: FoodSTCakeBerry
+  parent: FoodBase
   id: FoodSTCakeBerrySlice
   suffix: Stalker, Food
   description: A slice of cake with a berry filling.
@@ -832,3 +871,485 @@
         - ReagentId: THC
           Quantity: 15
   - type: Craftable
+
+# jarred and preserved goods
+- type: entity
+  name: jarred food
+  parent: FoodBase
+  id: STFoodJarBase
+  suffix: Stalker, Food
+  description: A jar of something.
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: _Stalker_EN/Objects/Consumable/Drinks/jar.rsi
+    state: icon
+    scale: 0.7,0.7
+  - type: Edible
+    trash:
+    - STDrinkJar
+  - type: STWeight
+    self: 2
+  - type: Item
+    size: Small
+    shape:
+    - 0,0,0,1
+  - type: DamageOnLand
+    damage:
+      types:
+        Blunt: 5
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Blunt: 5
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 20
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: GlassBreak
+          params:
+            volume: -8
+      - !type:SpillBehavior { }
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          ShardGlass:
+            min: 1
+            max: 1
+      - !type:SpillBehavior { }
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Craftable
+
+- type: entity
+  name: jarred cherries
+  parent: STFoodJarBase
+  id: STFoodJarCherriesFresh
+  description: Cherries freshly pitted and jarred to be pickled. They'll need to be left out for a while before they're ready.
+  components:
+  - type: Sprite
+    sprite: _Stalker_EN/Objects/Consumable/Food/jarred.rsi
+    state: cherries
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 30
+        reagents:
+        - ReagentId: Vinegar
+          Quantity: 10
+        - ReagentId: JuiceCherry
+          Quantity: 15
+        - ReagentId: Sugar
+          Quantity: 5
+  - type: TimedDespawn
+    lifetime: 900 # 15 min
+  - type: SpawnOnDespawn
+    prototype: STFoodJarCherriesPickled
+
+- type: entity
+  name: pickled cherries
+  parent: STFoodJarBase
+  id: STFoodJarCherriesPickled
+  description: Tart pickled cherries infused with herbs and spices. Perfect for varenyky or just for snacking.
+  components:
+  - type: Sprite
+    sprite: _Stalker_EN/Objects/Consumable/Food/jarred.rsi
+    state: cherries2
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 30
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 10
+        - ReagentId: JuiceCherry
+          Quantity: 15
+        - ReagentId: Sugar
+          Quantity: 5
+
+- type: entity
+  name: jarred eel
+  parent: STFoodJarBase
+  id: STFoodJarWholeEelFresh
+  description: A fresh whole eel set in vinegar and spices. It'll take a long time to ferment.
+  components:
+  - type: Sprite
+    sprite: _Stalker_EN/Objects/Consumable/Food/jarred.rsi
+    state: eel1
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 30
+        reagents:
+        - ReagentId: Vinegar
+          Quantity: 10
+        - ReagentId: UncookedAnimalProteins
+          Quantity: 15
+        - ReagentId: Sugar
+          Quantity: 5
+  - type: TimedDespawn
+    lifetime: 2700 # 45 min
+  - type: SpawnOnDespawn
+    prototype: STFoodJarWholeEelFermented
+
+- type: entity
+  name: fermented eel
+  parent: STFoodJarBase
+  id: STFoodJarWholeEelFermented
+  description: A whole fermented eel considered to be a delicacy by some.
+  components:
+  - type: Sprite
+    sprite: _Stalker_EN/Objects/Consumable/Food/jarred.rsi
+    state: eel2
+  - type: FlavorProfile
+    flavors:
+    - fishy
+    - sour
+    - salty
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 30
+        reagents:
+        - ReagentId: TableSalt
+          Quantity: 10
+        - ReagentId: Protein
+          Quantity: 15
+        - ReagentId: Sugar
+          Quantity: 5
+
+- type: entity
+  name: preserved eel cuts
+  parent: STFoodJarBase
+  id: STFoodJarMeatEel
+  description: Jarred eel meat preserved in oil and herbs.
+  components:
+  - type: Sprite
+    sprite: _Stalker_EN/Objects/Consumable/Food/jarred.rsi
+    state: eelmeat
+  - type: FlavorProfile
+    flavors:
+    - fishy
+    - savory
+    - oily
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 30
+        reagents:
+        - ReagentId: TableSalt
+          Quantity: 10
+        - ReagentId: Protein
+          Quantity: 20
+        - ReagentId: Sugar
+          Quantity: 5
+
+- type: entity
+  name: pickled eggs
+  parent: STFoodJarBase
+  id: STFoodJarEggs
+  description: Pickled eggs bobbing up and down in sweet vinegar.
+  components:
+  - type: Sprite
+    sprite: _Stalker_EN/Objects/Consumable/Food/jarred.rsi
+    state: eggs
+  - type: FlavorProfile
+    flavors:
+    - egg
+    - sour
+    - sweet
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 30
+        reagents:
+        - ReagentId: TableSalt
+          Quantity: 10
+        - ReagentId: Nutriment
+          Quantity: 20
+        - ReagentId: Sugar
+          Quantity: 5
+
+- type: entity
+  name: preserved fish steaks
+  parent: STFoodJarBase
+  id: STFoodJarMeatFishSteak
+  description: Jarred fish steaks preserved in oil and herbs.
+  components:
+  - type: Sprite
+    sprite: _Stalker_EN/Objects/Consumable/Food/jarred.rsi
+    state: fishsteak
+  - type: FlavorProfile
+    flavors:
+    - fishy
+    - savory
+    - oily
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 30
+        reagents:
+        - ReagentId: TableSalt
+          Quantity: 10
+        - ReagentId: Protein
+          Quantity: 20
+        - ReagentId: Sugar
+          Quantity: 5
+
+- type: entity
+  name: berry jam
+  parent: STFoodJarBase
+  id: STFoodJarJamBerry
+  description: Sweet berry preserves made with berries from the zone.
+  components:
+  - type: Sprite
+    sprite: _Stalker_EN/Objects/Consumable/Food/jarred.rsi
+    state: jamberry1
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 30
+        reagents:
+        - ReagentId: StalkerJuiceBrusnika
+          Quantity: 5
+        - ReagentId: StalkerJuiceKlubnika
+          Quantity: 5
+        - ReagentId: StalkerOilMalina
+          Quantity: 10
+        - ReagentId: Sugar
+          Quantity: 10
+
+# this sucks dont look at me
+- type: entity
+  name: berry jam
+  parent: STFoodJarBase
+  id: STFoodJarJamBerry2
+  description: Sweet berry preserves made with berries from the zone.
+  components:
+  - type: Sprite
+    sprite: _Stalker_EN/Objects/Consumable/Food/jarred.rsi
+    state: jamberry2
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 20
+        reagents:
+        - ReagentId: StalkerJuiceBrusnika
+          Quantity: 5
+        - ReagentId: StalkerJuiceKlubnika
+          Quantity: 5
+        - ReagentId: StalkerOilMalina
+          Quantity: 5
+        - ReagentId: Sugar
+          Quantity: 5
+
+- type: entity
+  name: berry jam
+  parent: STFoodJarBase
+  id: STFoodJarJamBerry3
+  description: Sweet berry preserves made with berries from the zone.
+  components:
+  - type: Sprite
+    sprite: _Stalker_EN/Objects/Consumable/Food/jarred.rsi
+    state: jamberry3
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: StalkerJuiceBrusnika
+          Quantity: 2
+        - ReagentId: StalkerJuiceKlubnika
+          Quantity: 2
+        - ReagentId: StalkerOilMalina
+          Quantity: 4
+        - ReagentId: Sugar
+          Quantity: 2
+
+- type: entity
+  name: berry jam
+  parent: STFoodJarBase
+  id: STFoodJarJamBerry4
+  description: Sweet berry preserves made with berries from the zone.
+  components:
+  - type: Sprite
+    sprite: _Stalker_EN/Objects/Consumable/Food/jarred.rsi
+    state: jamberry4
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 5
+        reagents:
+        - ReagentId: StalkerJuiceBrusnika
+          Quantity: 1
+        - ReagentId: StalkerJuiceKlubnika
+          Quantity: 1
+        - ReagentId: StalkerOilMalina
+          Quantity: 2
+        - ReagentId: Sugar
+          Quantity: 1
+
+- type: entity
+  name: unfermented kvass
+  parent: STFoodJarBase
+  id: STFoodJarKvassUnfermented
+  description: A fresh jar of beet kvass. It could take a while to ferment so give it some time, it ferments with intent.
+  components:
+  - type: Sprite
+    sprite: _Stalker_EN/Objects/Consumable/Food/jarred.rsi
+    state: kvass1
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 40
+        reagents:
+        - ReagentId: Water
+          Quantity: 10
+        - ReagentId: Sugar
+          Quantity: 15
+        - ReagentId: TableSalt
+          Quantity: 5
+        - ReagentId: Nutriment
+          Quantity: 10
+  - type: TimedDespawn
+    lifetime: 2700 # 45 min
+  - type: SpawnOnDespawn
+    prototype: STFoodJarKvass
+
+- type: entity
+  name: kvass
+  parent: STFoodJarBase
+  id: STFoodJarKvass
+  description: Kvass, ready to use for any occasion.
+  components:
+  - type: Sprite
+    sprite: _Stalker_EN/Objects/Consumable/Food/jarred.rsi
+    state: kvass2
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 40
+        reagents:
+        - ReagentId: Vinegar
+          Quantity: 10
+        - ReagentId: Sugar
+          Quantity: 15
+        - ReagentId: TableSalt
+          Quantity: 5
+        - ReagentId: Nutriment
+          Quantity: 10
+
+- type: entity
+  name: liver tartare
+  parent: STFoodJarBase
+  id: STFoodJarMeatLiver
+  description: Spiced and jarred uh... liver, from... something...
+  components:
+  - type: Sprite
+    sprite: _Stalker_EN/Objects/Consumable/Food/jarred.rsi
+    state: liver
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 30
+        reagents:
+        - ReagentId: Protein
+          Quantity: 15
+        - ReagentId: Fat
+          Quantity: 10
+        - ReagentId: TableSalt
+          Quantity: 5
+
+- type: entity
+  name: rendered salo
+  parent: STFoodJarBase
+  id: STFoodJarSalo
+  description: Rendered salo, ready for cooking or using as grease.
+  components:
+  - type: Sprite
+    sprite: _Stalker_EN/Objects/Consumable/Food/jarred.rsi
+    state: salo
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 30
+        reagents:
+        - ReagentId: Fat
+          Quantity: 30
+
+- type: entity
+  name: sausage
+  parent: STFoodJarBase
+  id: STFoodJarMeatSausageUnpickled
+  description: Sliced sausages in pickling spices. It needs to be left out for a little bit.
+  components:
+  - type: Sprite
+    sprite: _Stalker_EN/Objects/Consumable/Food/jarred.rsi
+    state: sausage1
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 30
+        reagents:
+        - ReagentId: Protein
+          Quantity: 10
+        - ReagentId: TableSalt
+          Quantity: 10
+        - ReagentId: Sugar
+          Quantity: 10
+  - type: TimedDespawn
+    lifetime: 600 # 10 min
+  - type: SpawnOnDespawn
+    prototype: STFoodJarMeatSausage
+
+- type: entity
+  name: pickled sausage
+  parent: STFoodJarBase
+  id: STFoodJarMeatSausage
+  description: A tasty jar of pickled sausages.
+  components:
+  - type: Sprite
+    sprite: _Stalker_EN/Objects/Consumable/Food/jarred.rsi
+    state: sausage2
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 30
+        reagents:
+        - ReagentId: Protein
+          Quantity: 20
+        - ReagentId: TableSalt
+          Quantity: 5
+        - ReagentId: Sugar
+          Quantity: 5
+
+- type: entity
+  name: preserved fish fillets
+  parent: STFoodJarBase
+  id: STFoodJarMeatFishFillet
+  description: Jarred fish fillets preserved in oil and herbs.
+  components:
+  - type: Sprite
+    sprite: _Stalker_EN/Objects/Consumable/Food/jarred.rsi
+    state: whitefish
+  - type: FlavorProfile
+    flavors:
+    - fishy
+    - savory
+    - oily
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 30
+        reagents:
+        - ReagentId: TableSalt
+          Quantity: 10
+        - ReagentId: Protein
+          Quantity: 20
+        - ReagentId: Sugar
+          Quantity: 5

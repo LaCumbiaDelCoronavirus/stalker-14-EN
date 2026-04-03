@@ -10,16 +10,17 @@
             <LineEdit Name="SearchLine" HorizontalExpand="True"/>
             <Button Name="SearchClearButton" Text="{Loc 'repository-ui-search-clear-button'}"/>
         </BoxContainer>
-        <BoxContainer Name="ItemsContainer" Orientation="Horizontal" VerticalExpand="True" HorizontalExpand="True" SizeFlagsStretchRatio="3">
+        <!-- stalker-en-changes -->
+        <BoxContainer Orientation="Horizontal" VerticalExpand="True" HorizontalExpand="True" SizeFlagsStretchRatio="3">
             <ScrollContainer
                 Name="StoreListingsScroll"
                 HScrollEnabled="False"
                 HorizontalExpand="True"
                 SizeFlagsStretchRatio="2"
                 VerticalExpand="True">
-                <GridContainer Name="ContainedItems" Columns="2" SizeFlagsStretchRatio="3" >
-                    <!--  Items are added here by code  -->
-                </GridContainer>
+                <!-- stalker-en-changes -->
+                <GridContainer Name="ItemContainer" HorizontalExpand="True"/>
+                <!-- stalker-en-changes-end -->
             </ScrollContainer>
             <BoxContainer HorizontalExpand="True" VerticalExpand="True" Orientation="Vertical" SizeFlagsStretchRatio="1">
                 <TextureRect Name="ItemTexture" Stretch="KeepAspect"/>

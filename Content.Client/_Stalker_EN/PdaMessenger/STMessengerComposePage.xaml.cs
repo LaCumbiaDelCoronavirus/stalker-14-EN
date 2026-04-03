@@ -31,7 +31,6 @@ public sealed partial class STMessengerComposePage : BoxContainer
 
     private int _maxLength;
     private string _chatId = string.Empty;
-    private bool _isDmChat;
 
     public STMessengerComposePage()
     {
@@ -71,10 +70,9 @@ public sealed partial class STMessengerComposePage : BoxContainer
     public void Setup(string chatId, uint? replyToId, string? replySnippet, string? displayName = null, string? initialContent = null)
     {
         _chatId = chatId;
-        _isDmChat = chatId.StartsWith(STMessengerChat.DmChatPrefix, StringComparison.Ordinal);
+        var isDmChat = chatId.StartsWith(STMessengerChat.DmChatPrefix, StringComparison.Ordinal);
         ContentInput.TextRope = initialContent is not null ? new Rope.Leaf(initialContent) : Rope.Leaf.Empty;
         AnonymousToggle.Pressed = false;
-        AnonymousToggle.Visible = !_isDmChat;
 
         _maxLength = _config.GetCVar(STCCVars.MessengerMaxMessageLength);
         var initialLength = initialContent?.Length ?? 0;
@@ -84,16 +82,17 @@ public sealed partial class STMessengerComposePage : BoxContainer
         CharCounter.FontColorOverride = remaining < 0 ? Color.Red : null;
         SendButton.Disabled = remaining < 0;
 
-        if (_isDmChat)
+        if (isDmChat)
         {
             // Use the display name (character name) if available, otherwise fall back to messenger ID from chat ID
             RecipientLabel.Text = displayName ?? chatId[STMessengerChat.DmChatPrefix.Length..];
+            AnonymousToggle.Visible = false;
         }
         else
         {
-            RecipientLabel.Text = _protoManager.TryIndex<STMessengerChannelPrototype>(chatId, out var proto)
-                ? Loc.GetString(proto.Name)
-                : chatId;
+            var hasProto = _protoManager.TryIndex<STMessengerChannelPrototype>(chatId, out var proto);
+            RecipientLabel.Text = hasProto ? Loc.GetString(proto!.Name) : chatId;
+            AnonymousToggle.Visible = hasProto && proto!.AllowAnonymous;
         }
 
         if (replyToId is not null && replySnippet is not null)

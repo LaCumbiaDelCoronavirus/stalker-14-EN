@@ -42,9 +42,11 @@ public sealed class ShopBoundUserInterface : BoundUserInterface
         _menu.OnListingButtonPressed += (_, listing, sell, balance, count) =>
         {
             // stalker-changes-en: route buyback purchases to the dedicated message
-            if (!sell && listing.ID != null && listing.ID.StartsWith("st-buyback-"))
+            if (!sell && listing.ID != null && listing.ID.StartsWith(STBuybackConstants.IdPrefix))
             {
-                var buybackId = listing.ID.Substring("st-buyback-".Length);
+                if (!uint.TryParse(listing.ID.Substring(STBuybackConstants.IdPrefix.Length), out var buybackId))
+                    return;
+
                 SendMessage(new STBuybackPurchaseMessage(buybackId, balance));
                 return;
             }
