@@ -14,6 +14,10 @@ contraband_examine = false
 role_whitelist = false
 maxcharacterslots = 1
 
+# Rules timer
+[rules]
+time = 5
+
 [shuttle]
 auto_call_time = 0
 emergency = false
@@ -22,7 +26,7 @@ preload_grids = false
 camera_rotation_locked = true
 
 [pointing]
-cooldown_seconds = 0.08
+cooldown_seconds = 0.067
 [ic]
 flavor_text = true
 punctuation = false
