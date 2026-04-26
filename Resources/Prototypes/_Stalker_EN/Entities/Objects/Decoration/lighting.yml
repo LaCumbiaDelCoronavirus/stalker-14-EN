@@ -1,0 +1,42 @@
+- type: entity
+  id: STFakeUnpoweredSmallLight
+  name: small light
+  description: The filament inside the bulb has long been cold.
+  suffix: Fake, Always Off
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Wallmount
+  components:
+  - type: Transform
+    anchored: true
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.4,0.35,0.4,0.5"
+        density: 190
+        mask:
+        - None
+        layer:
+        - TabletopMachineLayer
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Sprite
+    sprite: Structures/Wallmounts/Lighting/light_small.rsi
+    drawdepth: WallMountedItems
+    layers:
+    - state: base
+
+- type: entity
+  parent: STFakeUnpoweredSmallLight
+  id: STFakeBrokenSmallLight
+  description: The bulb is shattered.
+  suffix: Fake, Broken
+  components:
+  - type: Sprite
+    layers:
+    - state: broken
