@@ -9,7 +9,8 @@
     drawdepth: Items
     layers:
     - state: lantern
-    - state: lantern-on
+    - sprite: _Stalker_EN/Objects/Tools/lantern.rsi # lantern-on in original rsi is the entire lantern sprite + on sprite presumably because oldss13GODS didnt have emissives
+      state: lantern-on-overlay
       shader: unshaded
   - type: PointLight
     radius: 3
