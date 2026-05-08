@@ -43,6 +43,19 @@ public sealed class LeaderboardSystem : EntitySystem
         _ = DoLoadAsync();
     }
 
+    public bool TryResetLeaderboard()
+    {
+        if (_busy)
+            return false;
+
+        _currentHighestScores.Clear();
+        _queuedWrites.Clear();
+        _nextText = BuildScore();
+        _ = DoSaveAsync();
+
+        return true;
+    }
+
     public override void Shutdown()
     {
         DoSaveAsync().Wait(); // we wait
@@ -82,17 +95,6 @@ public sealed class LeaderboardSystem : EntitySystem
     {
         base.Update(frameTime);
 
-        if (!_dataLoaded ||
-            _busy)
-            return;
-
-        // Assumed that rn, nothing is busy and data is loaded
-        while (_queuedWrites.TryPop(out var write))
-        {
-            var (writtenUserId, writtenScore) = write;
-            _currentHighestScores[writtenUserId] = writtenScore;
-        }
-
         if (_nextText is { } text)
         {
             _nextText = null;
@@ -103,6 +105,17 @@ public sealed class LeaderboardSystem : EntitySystem
                 overrideComponent.Text = text;
                 Dirty(uid, overrideComponent);
             }
+        }
+
+        if (!_dataLoaded ||
+            _busy)
+            return;
+
+        // Assumed that rn, nothing is busy and data is loaded
+        while (_queuedWrites.TryPop(out var write))
+        {
+            var (writtenUserId, writtenScore) = write;
+            _currentHighestScores[writtenUserId] = writtenScore;
         }
 
         if (_gameTiming.CurTime < _nextUpdate)
@@ -123,11 +136,15 @@ public sealed class LeaderboardSystem : EntitySystem
         var highestScores = _currentHighestScores.ToList().OrderBy(kv => kv.Value).ToList();
 
         var text = "Killstreak Leaderboard:\n";
-        for (var i = 1; i <= Math.Min(highestScores.Count, TopDisplayed); i++)
+        var count = Math.Min(highestScores.Count, TopDisplayed);
+        for (var i = 1; i <= count; i++)
         {
             var profile = highestScores[^i];
             text += $"{i}.  {_cachedUsernames.GetValueOrDefault(profile.Key) ?? "Unknown BEAST"}: {profile.Value}\n";
         }
+
+        if (count == 0)
+            text += "Nobody!";
 
         return text;
     }
@@ -160,6 +177,7 @@ public sealed class LeaderboardSystem : EntitySystem
     private async Task LoadUsernameAsync(Guid userId)
     {
         var data = await _playerLocator.LookupIdAsync(new NetUserId(userId));
-        _cachedUsernames.TryAdd(userId, data?.Username ?? ("USER-" + userId.ToString()));
+        var username = data?.Username ?? ("USER-" + userId.ToString());
+        _cachedUsernames.AddOrUpdate(userId, username, (oldKey, oldVal) => username);
     }
 }
