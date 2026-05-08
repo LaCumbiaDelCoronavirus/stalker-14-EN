@@ -90,10 +90,32 @@ public abstract class SharedHumanoidAppearanceSystem : EntitySystem
             return;
         }
 
+        // Stalker-EN-Change: Preserve custom colors from YAML before loading profile
+        var preservedSkinColor = humanoid.SkinColor;
+        var preservedEyeColor = humanoid.EyeColor;
+        var hasCustomSkinColor = humanoid.HasCustomSkinColor;
+        var hasCustomEyeColor = humanoid.HasCustomEyeColor;
+
         if (string.IsNullOrEmpty(humanoid.Initial)
             || !_proto.Resolve(humanoid.Initial, out HumanoidProfilePrototype? startingSet))
         {
             LoadProfile(uid, HumanoidCharacterProfile.DefaultWithSpecies(humanoid.Species), humanoid);
+
+            // Stalker-EN-Change: Restore custom colors if they were set in YAML
+            if (hasCustomSkinColor)
+            {
+                humanoid.SkinColor = preservedSkinColor;
+            }
+            if (hasCustomEyeColor)
+            {
+                humanoid.EyeColor = preservedEyeColor;
+            }
+
+            if (hasCustomSkinColor || hasCustomEyeColor)
+            {
+                Dirty(uid, humanoid);
+            }
+            // Stalker-EN-Change end
             return;
         }
 
@@ -104,6 +126,22 @@ public abstract class SharedHumanoidAppearanceSystem : EntitySystem
         }
 
         LoadProfile(uid, startingSet.Profile, humanoid);
+
+        // Stalker-EN-Change: Restore custom colors if they were set in YAML
+        if (hasCustomSkinColor)
+        {
+            humanoid.SkinColor = preservedSkinColor;
+        }
+        if (hasCustomEyeColor)
+        {
+            humanoid.EyeColor = preservedEyeColor;
+        }
+
+        if (hasCustomSkinColor || hasCustomEyeColor)
+        {
+            Dirty(uid, humanoid);
+        }
+        // Stalker-EN-Change end
     }
 
     private void OnExamined(EntityUid uid, HumanoidAppearanceComponent component, ExaminedEvent args)
@@ -565,4 +603,26 @@ public abstract class SharedHumanoidAppearanceSystem : EntitySystem
 
         return Loc.GetString("identity-age-old");
     }
+
+    // stalker-en-start
+    /// <summary>
+    /// Applies Zombified-specific appearance (skin/eye colors and name prefix).
+    /// </summary>
+    public void ApplyZombifiedAppearance(EntityUid entity, string originalName)
+    {
+        if (TryComp<HumanoidAppearanceComponent>(entity, out var humanoidAppearance))
+        {
+            humanoidAppearance.SkinColor = Color.FromHex("#9C9794FF");
+            humanoidAppearance.EyeColor = Color.FromHex("#EBEBEB");
+            Dirty(entity, humanoidAppearance);
+        }
+
+        if (TryComp<MetaDataComponent>(entity, out var metaData))
+        {
+            var metaSystem = EntityManager.System<MetaDataSystem>();
+            metaSystem.SetEntityName(entity, $"Zombified {originalName}");
+        }
+    }
+    // stalker-en-end
+
 }

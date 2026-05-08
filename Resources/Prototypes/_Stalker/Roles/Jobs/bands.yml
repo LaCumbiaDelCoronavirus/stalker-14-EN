@@ -19,7 +19,7 @@
   special:
     - !type:AddComponentSpecial
       components:
-        - type: PersistentCraftAccess
+        #- type: PersistentCraftAccess
         - type: Access
           tags:
             - Bandit
@@ -44,7 +44,7 @@
             Female: FemaleHumanBandit
             Unsexed: MaleHumanBandit
         - type: CheekiBreeki # stalker EN change end
-          
+
 - type: job
   id: StalkerHeadBandit
   name: job-head-bandit
@@ -66,7 +66,7 @@
   special:
     - !type:AddComponentSpecial
       components:
-        - type: PersistentCraftAccess
+        #- type: PersistentCraftAccess
         - type: Access
           tags:
           - Bandit
@@ -107,7 +107,7 @@
   id: STBanditsBand
   name: Bandits
   factionId: Bandit
-  maxMembers: 11
+  maxMembers: 16
   managingRankId: 2
   hierarchy:
     1: StalkerBandit

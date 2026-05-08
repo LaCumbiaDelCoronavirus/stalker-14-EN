@@ -108,6 +108,8 @@
       SledgehammerRenegats: 500
       StalkerBallBat: 120
         # Guns
+      #20gauge
+      STBaseWeaponShotgunTOZ106: 500 # T1
       # 7mm
       STWeaponShotgunMP155T: 45 #T0.5
       STWeaponShotgunTOZ34: 200 # T1
@@ -126,16 +128,6 @@
       STWeaponSniperSKS: 1700
       STWeaponSMGVZ61: 700
 
-    #Lumber
-      STTradePlankT1: 40
-      STTradePlankT2: 60
-      STTradePlankT3: 80
-      STTradePlankT4: 100
-      STLogStalkerT1: 20
-      STLogStalkerT2: 30
-      STLogStalkerT3: 40
-      STLogStalkerT4: 50
-
   - name: shop-category-magazines
     priority: 2
     items:
@@ -150,6 +142,8 @@
       MP40Mag: 100 #T1
       BaseMP5Mag: 160
       # Other
+      Base2070Mag: 30
+      TOZ106Mag5: 100
       SpeedLoaderRemingtonMagnumEmpty: 150
       BaseTEC9Mag: 60
       STSpeedLoader45ACPEmpty: 150
@@ -160,6 +154,9 @@
   - name: shop-category-ammunition
     priority: 3
     items:
+      #20gauge
+      62mmBuckshotBox: 30 #T0
+      75mmBuckshotBox: 250 #T1
       # 7mm
       6mmBuckshotBox: 320 # T1
       7mmBuckshotBox: 75 # T0
@@ -223,6 +220,7 @@
       FoodTinMRE: 120
       DrinkLemonadehBottleFull: 50
       STFoodMeatSalami: 350
+      HerculesBottleFull: 200
 
   - name: shop-category-armor
     priority: 6
@@ -249,12 +247,12 @@
       # BackPacks
       ClothingBackpackDuffelGreenStalker: 30 # T1
       ClothingBackpackTacticBeigeStalker: 450 # T2
-      ClothingBackpackMercStalker: 850 # T3
+      ClothingBackpackMercStalker: 750 # T3 - PVE
+      ClothingBackpackDuffelCommonStalker: 1000 # T3 - PVP
       # Belts
       ClothingBeltBandolierStalker: 20 # T1 - PVE
       ClothingBeltTarzanOrange: 200 # T1 - PVP
       ClothingBeltWebbingHolsterStalkerZarya: 500
-      ClothingBeltWebbingDoubleStalkerZaryaSmall: 1000
       # Containers
       MedkitCMSStalker: 400 # T1
       MedkitGrizzlyStalker: 1000 # T2
@@ -276,8 +274,8 @@
       ClothingOuterCoatLoyalist: 3000
       ClothingOuterCoatRenegat: 2000 # T3 Cheaper cause let a renegade be drippy
       # Gasmasks
-      ClothingMaskGasRenegats: 100 # T1
-      ClothingMaskGP5: 200 # T2
+      ClothingMaskGasRenegats: 400 # T1
+      STClothingMaskGasPPM88: 1500 # T2
 
   - name: shop-category-research-equipment
     priority: 9
@@ -320,9 +318,9 @@
       ClothingHeatBagStalker: 100
       CasseteTwentyDonateRadio: 500
       CasseteRenegade: 500
-      STElasticRubberRed: 50
-      STElasticRubberGreen: 50
-      STElasticRubberBlue: 50
+      STElasticRubberRed: 1
+      STElasticRubberGreen: 1
+      STElasticRubberBlue: 1
       FoldedFlagRene: 250
       STRag: 10
       # Cameras
@@ -337,6 +335,7 @@
     items:
       STModuleScopeRiflesT1Ru: 600
       STModuleSilencerRiflesT1Ru: 400
+      STModuleSilencerPistolT1: 400
       STModuleShotgunChokeT1: 200
       STModuleSMGGripT1: 600
       STModuleSniperSightT1: 600

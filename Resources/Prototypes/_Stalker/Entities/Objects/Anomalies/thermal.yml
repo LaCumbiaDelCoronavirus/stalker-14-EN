@@ -7,6 +7,10 @@
     icon:
       sprite: /Textures/_Stalker/Interface/Overlays/anomaly_tips.rsi
       state: fiery
+  - type: ParticleEmitter # EN start
+    effect:
+      - BurnerSpark
+      - BurnerSmoke # EN end
 
 - type: entity
   parent: ZoneAnomalyBaseThermal
@@ -44,10 +48,13 @@
       castShadows: true
       enabled: false
     - type: AmbientSound
-      volume: -16
-      range: 8
+      volume: -6 # EN end
+      range: 4
       sound:
-        path: /Audio/_Stalker/Effects/fireball_idle.ogg
+        path: /Audio/_Stalker_EN/Effects/Anomalies/fire_idle.ogg 
+    - type: ZoneAnomalyEffectPlaySound
+      sound: /Audio/_Stalker_EN/Effects/Anomalies/fireball_blow.ogg
+      volume: -3 # EN start
     - type: GenericVisualizer
       visuals:
         enum.ZoneAnomalyVisuals.Layer:
@@ -74,6 +81,10 @@
         - id: ZoneArtifactFlame
           tier: 3
           ratio: 5
+    - type: ParticleEmitter # EN start
+      effect:
+        - BurnerSpark
+        - BurnerSmoke # EN end
 
 - type: entity
   parent: ZoneAnomalyJarka
@@ -122,6 +133,10 @@
         - id: ZoneArtifactCristall
           tier: 4
           ratio: 5
+    - type: ParticleEmitter # EN start
+      effect:
+        - BurnerSparkThin
+        - BurnerSmoke # EN end
 
 - type: entity
   parent: ZoneAnomalyBaseThermal
@@ -159,10 +174,13 @@
       castShadows: true
       enabled: false
     - type: AmbientSound
-      volume: -16
-      range: 8
+      volume: -6 # EN start
+      range: 4
       sound:
-        path: /Audio/_Stalker/Effects/fireball_idle.ogg
+        path: /Audio/_Stalker_EN/Effects/Anomalies/fire_idle.ogg
+    - type: ZoneAnomalyEffectPlaySound
+      sound: /Audio/_Stalker_EN/Effects/Anomalies/fireball_blow.ogg
+      volume: -3 # EN
     - type: GenericVisualizer
       visuals:
         enum.ZoneAnomalyVisuals.Layer:
@@ -198,6 +216,10 @@
         - id: ZoneArtifactRoot
           tier: 4
           ratio: 5
+    - type: ParticleEmitter # EN start
+      effect:
+        - BurnerSpark
+        - BurnerSmoke # EN end
 
 - type: entity
   parent: ZoneAnomalyJarka
@@ -214,8 +236,22 @@
     - type: ZoneAnomaly
       detectedLevel: 0
       preparingDelay: 0
-      activationDelay: 4
+      activationDelay: 9 # EN
       chargeTime: 0
+    - type: AmbientSound # EN start
+      volume: -6
+      range: 4
+      sound:
+        path: /Audio/_Stalker_EN/Effects/Anomalies/steam.ogg
+    - type: ZoneAnomalyEffectPlaySound
+      sound: /Audio/_Stalker_EN/Effects/Anomalies/steam_blowout.ogg
+      volume: -3
+    - type: PointLight
+      radius: 10
+      energy: 12
+      color: "#f9d9c2"
+      castShadows: true
+      enabled: false # EN end
     - type: Stealth
     - type: Sprite
       sprite: _Stalker/Objects/Anomalies/steam.rsi
@@ -251,6 +287,9 @@
         - id: ZoneArtifactLithosphere
           tier: 5
           ratio: 5
+    - type: ParticleEmitter # EN start
+      effect:
+        - Steamer # EN end
 
 - type: entity
   id: ZoneAnomalySol
@@ -463,10 +502,13 @@
       castShadows: true
       enabled: false
     - type: AmbientSound
-      volume: -16
-      range: 8
+      volume: -6 # EN start
+      range: 4
       sound:
-        path: /Audio/_Stalker/Effects/fireball_idle.ogg
+        path: /Audio/_Stalker_EN/Effects/Anomalies/fire_idle.ogg
+    - type: ZoneAnomalyEffectPlaySound
+      sound: /Audio/_Stalker_EN/Effects/Anomalies/fireball_blow.ogg
+      volume: -3 # EN end
     - type: GenericVisualizer
       visuals:
         enum.ZoneAnomalyVisuals.Layer:
@@ -474,3 +516,7 @@
             Activated: { state: active }
             Charging: { state: idle }
             Idle: { state: idle }
+    - type: ParticleEmitter # EN start
+      effect:
+        - BurnerSpark
+        - BurnerSmoke # EN end

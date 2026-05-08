@@ -19,7 +19,7 @@
   special:
     - !type:AddComponentSpecial
       components:
-        - type: PersistentCraftAccess
+        #- type: PersistentCraftAccess
         - type: Psyonics
           psy: 50
         - type: PsyonicsActionLight
@@ -71,7 +71,7 @@
   special:
     - !type:AddComponentSpecial
       components:
-        - type: PersistentCraftAccess
+        #- type: PersistentCraftAccess
         - type: Psyonics
           psy: 75
         - type: PsyonicsActionLight
@@ -137,7 +137,7 @@
   special:
     - !type:AddComponentSpecial
       components:
-        - type: PersistentCraftAccess
+        #- type: PersistentCraftAccess
         - type: Psyonics
           psy: 100
         - type: PsyonicsActionLight

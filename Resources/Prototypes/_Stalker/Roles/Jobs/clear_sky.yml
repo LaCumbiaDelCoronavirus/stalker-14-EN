@@ -19,7 +19,7 @@
   special:
     - !type:AddComponentSpecial
       components:
-      - type: PersistentCraftAccess
+      #- type: PersistentCraftAccess
       - type: Access
         tags:
           - CN
@@ -66,7 +66,7 @@
   special:
   - !type:AddComponentSpecial
     components:
-    - type: PersistentCraftAccess
+    #- type: PersistentCraftAccess
     - type: Access
       tags:
       - CN
@@ -109,8 +109,9 @@
   id: STClearSkyBand
   name: Clear Sky
   factionId: ClearSky
-  maxMembers: 11
+  maxMembers: 16
   managingRankId: 2
+  disguiseTargetJobId: Stalker # stalker EN change
   hierarchy:
     1: StalkerClearSky
     2: StalkerHeadClearSky

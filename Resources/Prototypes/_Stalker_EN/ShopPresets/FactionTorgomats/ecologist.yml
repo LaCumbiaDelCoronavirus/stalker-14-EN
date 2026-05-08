@@ -1,6 +1,114 @@
 - type: shopPreset
-  id: NpcResearchInstituteEN # 0x
+  id: NpcResearchInstituteEN # 1.25x
   minSellPrice: 5
+  itemsForSale:
+    # Thermal group - 1
+    ZoneArtifactFireball: 680
+    ZoneArtifactEye: 1020
+    ZoneArtifactFlame: 2040
+    ZoneArtifactBunch: 2375
+    ZoneArtifactRock: 2040
+    ZoneArtifactSun: 2760
+    ZoneArtifactRoot: 4080
+    ZoneArtifactConflagration: 1020
+    # Thermal group - 2
+    ZoneArtifactCristall: 4080
+    ZoneArtifactLithosphere: 8160
+    # Electrical group - 1
+    ZoneArtifactSparkler: 680
+    ZoneArtifactBattery: 1020
+    ZoneArtifactFlash: 2040
+    ZoneArtifactAccumulator: 2040
+    ZoneArtifactDiamond: 3690
+    ZoneArtifactCharger: 1020
+    ArtMoon: 4080
+    ZoneArtifactTesla: 6120
+    ZoneArtifactIce: 8160
+    # Gravity group - 1
+    ArtMedusa: 680
+    ZoneArtifactWhirlwind: 1020
+    ZoneArtifactFlower: 1020
+    ZoneArtifactNightStar: 4080
+    ZoneArtifactPebble: 680
+    ZoneArtifactRosin: 1020
+    ZoneArtifactStoneCube: 1520
+    ZoneArtifactDarkCube: 6120
+    # Gravity group - 2
+    ZoneArtifactVyvert: 680
+    ZoneArtifactAmoeba: 1020
+    ZoneArtifactFloodlight: 1020
+    ZoneArtifactGravi: 2040
+    ZoneArtifactGoldfish: 8160
+    ZoneArtifactSpring: 4500
+    ZoneArtifactFocus: 6120
+    ZoneArtifactStuntman: 8160
+    ZoneArtifactDistorter: 8160
+    ZoneArtifactSoul: 6120
+    ZoneArtifactCompass: 4500
+    ZoneArtifactCrucifix: 5250
+    ZoneArtifactThorn: 3200
+    ZoneArtifactArf: 3200
+    # Acidic group - 1
+    ZoneArtifactToxic: 610
+    ZoneArtifactCytoplasm: 2040
+    ZoneArtifactBlood: 2040
+    ZoneArtifactMeat: 4080
+    ZoneArtifactKolobok: 6120
+    ZoneArtifactBeer: 720
+    # Acidic group - 2
+    ZoneArtifactPellicle: 680
+    ZoneArtifactBaloon: 6120
+
+    # Mutant parts
+
+    # Boars -------- Health * T * 0.45
+    MutantPartBoarHoof: 230 # T1
+    MutantPartSeasonedBoarHoof: 460 # T2
+    MutantPartOldBoarHoof: 690 # T3
+    # Bears --------- EN addition
+    MutantPartBearClaw: 405
+    MutantPartBearPaw: 575
+    MutantPartBearEye: 900
+    # T1 -------- Health * 1
+    MutantPartBlindDogTail: 155
+    MutantPartFleshEye: 340
+    FoodMeatSpiderLeg: 85
+    MutantPartCatGland: 455
+    # T2 -------- Health * 1.8
+    MutantPartLeshiyRoot: 935
+    MutantPartPsiDogTail: 850
+    MutantPartPseudodogTail: 510
+    MutantPartSnorkFoot: 850
+    MutantPartFrogLeg: 325
+    # T3 -------- Health - same as duty prices for now
+    MutantPartBloodsuckerTentacles: 4125
+    MutantPartOraculeEye: 2700
+    MutantPartPseudogiantHeart: 13575
+    MutantPartZombieHand: 1125
+    ClothingHeadBear: 1125
+    MutantPartIzlomArm: 2475
+    MutantPartBurerBrain: 3000
+    MutantPartControllerBrain: 5250
+
+    #Fish -------- Unc * 1.5
+    #Only anomalous fish
+    STFishGoldfish: 1500
+    STFishLuminantGudgeon: 450
+    STFishSwiftLurker: 375
+    STFishDenseTench: 375
+    STFishSneakyTench: 375
+    STFishFlish: 300
+    STFishDoubleEel: 725
+    STFishJellyfish: 1125
+    STFishPallidSturgeon: 2250 # might be a bit too high but also these things suck to carry so...
+
+    #Other
+    STJunkHardDrive: 100
+    STJunkHardDriveBroken: 1
+    STJunkTag: 50
+    STJunkTagWhite: 100
+    STJunkTracker: 250
+
   categories:
     - name: shop-category-weapons
       priority: 1
@@ -26,9 +134,8 @@
     - name: shop-category-magazines
       priority: 2
       items:
-        BaseGlockMag10: 100
-        GlockMag17: 200
-        GlockMag24: 400
+        GlockMag17: 150
+        GlockMag33: 600
         STSpeedLoader45ACPEmpty: 75
         Base545Mag10: 50 #T1
         545Mag20: 100 #T2
@@ -80,11 +187,14 @@
         Defibrillator: 700
         MedkitElite: 500
         MedkitLAR: 650
+        STPillboxProbud: 350
+        STPillboxAntirad: 200
+        STPillboxShiza: 6500
         # Crates
-        SaviorCrate: 2250
+        SaviorCrate: 2150
         BulkArmyMedCrate: 2500
         #ArmySciCrate: 4500
-        BulkScienceCrate: 4375
+        BulkScienceCrate: 4175
         BulkEliteCrate: 6000
         BulkLARCrate: 7800
 
@@ -102,6 +212,7 @@
         FoodTinMRE: 120
         DrinkLemonadehBottleFull: 50
         STFoodMeatSalami: 350
+        HerculesBottleFull: 200
 
     - name: shop-category-armor
       priority: 6
@@ -126,10 +237,12 @@
         ClothingBackpackDuffelGreenStalker: 30 # T1
         ClothingBackpackTacticGreenStalker: 450 # T2
         ClothingBackpackMercStalker: 650 # T3
+        ClothingBackpackDuffelCommonStalker: 750 #T3
         ClothingBackpackDuffelMilitaryBlue: 1200
           # Containers
         MedkitCMSStalker: 450 # T1
         MedkitGrizzlyStalker: 850 # T2
+        PillCanister: 150
           # Belts
         ClothingBeltBandolierStalker: 50
         ClothingBeltMedicalStalker: 75
@@ -151,8 +264,10 @@
         ClothingOuterCoatLoyalist: 3000
         ClothingOuterCoatEmergencyResourcePouch: 3500
           # Gasmasks
-        ClothingMaskGasM40: 200 # T2
-        ClothingMaskM51: 1000
+        ClothingMaskXoma: 300 # T1
+        STClothingMaskGasPPM88: 1000 # T2
+        ClothingMaskGP7: 3400 # T3
+        ClothingMaskGP21: 7500 # T4
 
     - name: shop-category-research-equipment
       priority: 9
@@ -197,10 +312,6 @@
         STFlashlightSeclite: 50
         PowerCellHyper: 50
         HandheldGPSBasic: 50
-        Paper: 2
-        Pen: 5
-        BoxFolderClipboardEmpty: 20 # Clipboard
-        STEcoClipboard: 20 # Cool Clipboard
         Binocularus1: 750
         BoxFlare: 60
         ClothingBackpackDuffelGreenStalkerHydroponic: 500
@@ -217,10 +328,11 @@
         CigPackBlack: 100
         CigarCase: 500
         CigarGoldCase: 1000
-        STElasticRubberRed: 50
-        STElasticRubberGreen: 50
-        STElasticRubberBlue: 50
+        STElasticRubberRed: 1
+        STElasticRubberGreen: 1
+        STElasticRubberBlue: 1
         FoldedFlagMili: 250
+        HandLabeler: 75
         # Cameras
         STCamera: 750
         STCameraVintage: 1200
@@ -228,8 +340,17 @@
         STCameraFilm: 150
         STLoggingChainsaw: 1000
 
-    - name: shop-category-customization
+    - name: shop-category-paperwork
       priority: 11
+      items:
+        fieldScientistPermit: 1500
+        Paper: 2
+        Pen: 5
+        BoxFolderClipboardEmpty: 20 # Clipboard
+        STEcoClipboard: 20 # Cool Clipboard
+
+    - name: shop-category-customization
+      priority: 12
       items:
         # HAT
         ClothingHeadHatBeaniehat: 10
@@ -249,11 +370,11 @@
         ClothingMaskNeckBalaklava2: 10
         ClothingMaskNeckBalaklava3: 10
         # NECK
+        ClothingBandageStalkerKrest: 10
         ClothingNeckScarfBrown: 100
         ClothingNeckScarfGray: 100
         # faction
         ClothingBandageStalkerPurple: 10
-        ClothingBandageStalkerKrest: 10
         ClothingNeckScarfSci: 100
         ClothingNeckScarfUkraine: 100
         # TORSO
@@ -316,7 +437,7 @@
         ClothingShoesBootsCombat: 30
 
     - name: shop-category-blueprints-research-equipment
-      priority: 12
+      priority: 13
       items:
         # Tech cards
         TechCardCalibrationDosimeter: 100
@@ -325,6 +446,7 @@
         STDetectorAD3Blueprint: 3000
         STZoneArtifactDetectorBushBlueprint: 3000
         ClothingEarsPsyHelmBlueprint: 5000
+        ClothingOuterArmorSevaSciMauveBlueprint: 2000
         STZoneArtifactDetectorResponseBlueprint: 6000
         STZoneArtifactDetectorSpruceBlueprint: 12000
         DetectorVelesBlueprint: 10000
@@ -332,8 +454,13 @@
         STZoneArtifactDetectorBearBlueprint: 25000
         # STZoneArtifactDetectorWolfhoundBlueprint: 40000 Disabled for now
 
+    - name: shop-category-tools
+      priority: 14
+      items:
+        CraftChemicalCleaningKit: 2500
+
     - name: shop-category-entertainment
-      priority: 13
+      priority: 15
       items:
         # Dices
         DiceBag: 20
@@ -348,9 +475,8 @@
         CardBin: 100
         PokerCardBin: 150
 
-
     - name: Smokables #explained using D&D lifestyle expenses
-      priority: 14
+      priority: 16
       items:
         CigPackBub: 250 #comfortable
         CigPackGreen: 150 #poor
@@ -362,7 +488,7 @@
         CigPackKosmos: 100 #squalid
 
     - name: Gardening
-      priority: 15
+      priority: 17
       items:
         HydroponicsToolScythe: 200
         HydroponicsToolMiniHoe: 70

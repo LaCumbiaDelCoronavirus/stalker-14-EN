@@ -51,7 +51,7 @@
       volume: -5
       range: 4
       sound:
-        path: /Audio/_Stalker/Effects/anomaly_gravy_idle.ogg
+        path: /Audio/_Stalker_EN/Effects/Anomalies/gravi_rumble1.ogg # EN
     - type: ZoneArtifactSpawner
       artifacts:
       - id: null
@@ -65,6 +65,9 @@
       - id: ZoneArtifactStoneCube
         tier: 3
         ratio: 5
+    - type: ParticleEmitter # EN start
+      effect:
+        - MulcherLeafs # EN end
 
 - type: entity
   id: ZoneAnomalyGrabber
@@ -106,10 +109,10 @@
             Idle: { state: idle }
     - type: AmbientSound
       enabled: true
-      volume: -5
-      range: 8
+      volume: -3 # EN
+      range: 9 # EN
       sound:
-        path: /Audio/_Stalker/Effects/anomaly_gravy_idle.ogg
+        path: /Audio/_Stalker_EN/Effects/Anomalies/gravi_rumble1.ogg # EN
     - type: Fixtures
       fixtures:
         fix1:
@@ -146,6 +149,9 @@
       - id: ZoneArtifactCrucifix
         tier: 5
         ratio: 5
+    - type: ParticleEmitter # EN start
+      effect:
+        - MulcherLeafsBig # EN end
 
 - type: entity
   id: ZoneAnomalySpringboard
@@ -161,7 +167,7 @@
       force: 40
       distance: 10
     - type: ZoneAnomalyEffectPlaySound
-      sound: /Audio/_Stalker/Effects/springboard_blowout.ogg
+      sound: /Audio/_Stalker_EN/Effects/Anomalies/anomaly_gravy_hit.ogg # EN
     - type: ZoneAnomalyEffectSpawn
       entry:
         - id: SpringboardActiveEffect
@@ -181,10 +187,10 @@
         - state: idle
     - type: AmbientSound
       enabled: true
-      volume: -2
-      range: 8
+      volume: -4 # EN
+      range: 4 # EN
       sound:
-        path: /Audio/_Stalker/Effects/anomaly_gravy_idle.ogg
+        path: /Audio/_Stalker_EN/Effects/Anomalies/gravi_idle01.ogg # EN
     - type: ZoneArtifactSpawner
       artifacts:
         - id: null
@@ -207,6 +213,9 @@
         - id: ZoneArtifactDarkCube
           tier: 5
           ratio: 5
+    - type: ParticleEmitter # EN start
+      effect:
+        - MulcherLeafsSpringboard # EN end
 
 - type: entity
   parent: ZoneAnomalyBaseGravity
@@ -222,7 +231,7 @@
       force: 100
       distance: 70
     - type: ZoneAnomalyEffectPlaySound
-      sound: /Audio/_Stalker/Effects/springboard_blowout.ogg
+      sound: /Audio/_Stalker_EN/Effects/Anomalies/gravity_entrance.ogg # EN
     - type: Stealth
     - type: ZoneAnomalyEffectStealth
       idle: -1
@@ -234,10 +243,10 @@
       chargingTime: 5
     - type: AmbientSound
       enabled: true
-      volume: -4
-      range: 12
+      volume: -4 # EN
+      range: 5 # EN
       sound:
-        path: /Audio/_Stalker/Effects/anomaly_gravy_idle.ogg
+        path: /Audio/_Stalker_EN/Effects/Anomalies/gravi_idle00.ogg # EN
     - type: Sprite
       sprite: _Stalker/Objects/Anomalies/springobard.rsi
       layers:
@@ -258,6 +267,9 @@
         - id: ZoneArtifactNightStar
           tier: 4
           ratio: 5
+    - type: ParticleEmitter # EN start
+      effect:
+        - MulcherLeafsSpringboard # EN end
 
 - type: entity
   id: ZoneAnomalyInversion

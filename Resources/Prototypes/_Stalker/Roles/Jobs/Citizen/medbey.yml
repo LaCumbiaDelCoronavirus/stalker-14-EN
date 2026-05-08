@@ -13,7 +13,7 @@
   special:
     - !type:AddComponentSpecial
       components:
-        - type: PersistentCraftAccess
+        #- type: PersistentCraftAccess
         - type: Access
           tags:
             - Doctor
@@ -43,7 +43,7 @@
   special:
     - !type:AddComponentSpecial
       components:
-        - type: PersistentCraftAccess
+        #- type: PersistentCraftAccess
         - type: Access
           tags:
             - HeadDoctor

@@ -19,7 +19,7 @@
   special:
     - !type:AddComponentSpecial
       components:
-        - type: PersistentCraftAccess
+        #- type: PersistentCraftAccess
         - type: NpcFactionMember
           factions:
           - Duty
@@ -64,7 +64,7 @@
   special:
     - !type:AddComponentSpecial
       components:
-        - type: PersistentCraftAccess
+        #- type: PersistentCraftAccess
         - type: NpcFactionMember
           factions:
           - Duty

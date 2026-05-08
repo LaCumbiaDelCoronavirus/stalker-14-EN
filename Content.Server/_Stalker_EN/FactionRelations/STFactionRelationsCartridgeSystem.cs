@@ -1,5 +1,6 @@
 using System.Linq;
 using Content.Server.CartridgeLoader;
+using Content.Server.CartridgeLoader.Events;
 using Content.Server.Chat.Systems;
 using Content.Server.Database;
 using Content.Server.Discord;
@@ -89,6 +90,11 @@ public sealed class STFactionRelationsCartridgeSystem : EntitySystem
     private HashSet<string> _cachedHiddenFactions = new();
 
     /// <summary>
+    /// Pair-level forbidden relation transitions. Key: normalized pair.
+    /// </summary>
+    private Dictionary<(string, string), HashSet<STFactionRelationType>> _cachedRelationRestrictions = new();
+
+    /// <summary>
     /// Tracks loaders (PDAs) that currently have the faction relations cartridge active.
     /// Only these receive broadcast UI updates.
     /// </summary>
@@ -112,6 +118,7 @@ public sealed class STFactionRelationsCartridgeSystem : EntitySystem
         SubscribeLocalEvent<STFactionRelationsCartridgeComponent, CartridgeUiReadyEvent>(OnUiReady);
         SubscribeLocalEvent<STFactionRelationsCartridgeComponent, CartridgeActivatedEvent>(OnCartridgeActivated);
         SubscribeLocalEvent<STFactionRelationsCartridgeComponent, CartridgeDeactivatedEvent>(OnCartridgeDeactivated);
+        SubscribeLocalEvent<STFactionRelationsCartridgeComponent, CartridgeGetStateEvent>(OnGetState);
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestart);
 
@@ -214,6 +221,7 @@ public sealed class STFactionRelationsCartridgeSystem : EntitySystem
         _primaryToAliases = new Dictionary<string, List<string>>();
         _cachedRestrictedFactions = new HashSet<string>();
         _cachedHiddenFactions = new HashSet<string>();
+        _cachedRelationRestrictions = new Dictionary<(string, string), HashSet<STFactionRelationType>>();
         _cachedFactionIds = null;
 
         if (!_protoManager.TryIndex(DefaultsProtoId, out var proto))
@@ -239,6 +247,22 @@ public sealed class STFactionRelationsCartridgeSystem : EntitySystem
         {
             var key = STFactionRelationHelpers.NormalizePair(rel.FactionA, rel.FactionB);
             _defaultsCache[key] = rel.Relation;
+        }
+
+        foreach (var restriction in proto.RelationRestrictions)
+        {
+            var a = _aliasToPrimary.GetValueOrDefault(restriction.FactionA, restriction.FactionA);
+            var b = _aliasToPrimary.GetValueOrDefault(restriction.FactionB, restriction.FactionB);
+            if (a == b)
+                continue;
+            var key = STFactionRelationHelpers.NormalizePair(a, b);
+            if (!_cachedRelationRestrictions.TryGetValue(key, out var set))
+            {
+                set = new HashSet<STFactionRelationType>();
+                _cachedRelationRestrictions[key] = set;
+            }
+            foreach (var forbidden in restriction.Forbidden)
+                set.Add(forbidden);
         }
     }
 
@@ -298,6 +322,14 @@ public sealed class STFactionRelationsCartridgeSystem : EntitySystem
     {
         var state = BuildUiState();
         _cartridgeLoaderSystem.UpdateCartridgeUiState(args.Loader, state);
+    }
+
+    private void OnGetState(EntityUid uid, STFactionRelationsCartridgeComponent? component, CartridgeGetStateEvent args)
+    {
+        if (!Resolve(uid, ref component))
+            return;
+
+        args.State = BuildUiState();
     }
 
     private void OnCartridgeActivated(EntityUid uid, STFactionRelationsCartridgeComponent component, CartridgeActivatedEvent args)
@@ -470,6 +502,28 @@ public sealed class STFactionRelationsCartridgeSystem : EntitySystem
         return _cachedHiddenFactions.Contains(faction);
     }
 
+    /// <summary>
+    /// Returns true if the UI gate for this faction's members should be hidden.
+    /// Currently equivalent to <see cref="IsFactionRestricted"/>; kept as a distinct name
+    /// so future factions can hide the tab without taking the all-or-nothing lock.
+    /// </summary>
+    public bool HidesRelationsUi(string faction)
+    {
+        return IsFactionRestricted(faction);
+    }
+
+    /// <summary>
+    /// Returns true if the given relation transition is forbidden between this pair by YAML config.
+    /// </summary>
+    public bool IsRelationRestricted(string factionA, string factionB, STFactionRelationType relation)
+    {
+        factionA = ResolvePrimary(factionA);
+        factionB = ResolvePrimary(factionB);
+        var key = STFactionRelationHelpers.NormalizePair(factionA, factionB);
+        return _cachedRelationRestrictions.TryGetValue(key, out var forbidden)
+               && forbidden.Contains(relation);
+    }
+
     #endregion
 
     #region Relation Changes
@@ -505,6 +559,9 @@ public sealed class STFactionRelationsCartridgeSystem : EntitySystem
         var currentRelation = GetRelation(initiatingFaction, targetFaction);
         if (currentRelation == proposedRelation)
             return STFactionRelationChangeResult.SameRelation;
+
+        if (IsRelationRestricted(initiatingFaction, targetFaction, proposedRelation))
+            return STFactionRelationChangeResult.RestrictedRelation;
 
         var key = STFactionRelationHelpers.NormalizePair(initiatingFaction, targetFaction);
         if (_pairCooldowns.TryGetValue(key, out var expiry) && expiry > _timing.CurTime)

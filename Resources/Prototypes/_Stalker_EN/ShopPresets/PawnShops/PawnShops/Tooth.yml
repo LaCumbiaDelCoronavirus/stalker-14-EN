@@ -1,4 +1,4 @@
-﻿# he's a worse barman
+# he's a worse barman
 - type: shopPreset
   id: STNPCToothPresetEN # between sido and barman
   minSellPrice: 5
@@ -226,6 +226,7 @@
       STFoodMeatSalami: 125
       FoodBowlBig: 300
       Spoon: 100
+      DrinkGlass: 150
 
   - name: shop-category-drinks
     priority: 6
@@ -270,18 +271,20 @@
       ClothingBeltPocketPouch: 350
       ClothingBeltHerbalistPouch: 350
       ClothingBeltWebbingHolsterStalkerZarya: 1350
-      ClothingBeltWebbingDoubleStalkerZaryaSmall: 2000
       ClothingBeltCrafterStalker: 4000
 
   - name: shop-category-raincoats-and-gasmasks
     priority: 9
     items:
-      ClothingMaskGP7: 250
-      ClothingMaskXoma: 165
+      ClothingMaskGP7: 3800 # T3
+      ClothingMaskXoma: 500 # T1
       ClothingCloakShortCoverBlack: 1000
       ClothingOuterCoatStalker: 1000
       ClothingOuterCoatLoyalistLight: 3000
       ClothingOuterCoatLoyalist: 3500
+      ClothingOuterCoatRostokPonchoLoose: 1300 # T2
+      ClothingOuterCoatRostokPonchoRipped: 1300 # T2
+      ClothingOuterCoatRostokPonchoHeavy: 1300 # T2
 
   - name: shop-category-research-equipment
     priority: 10
@@ -333,6 +336,7 @@
       STModuleScopeRiflesT1Ru: 800
       STModuleScopeRiflesT1Nato: 800
       STModuleSilencerRiflesT1Ru: 550
+      STModuleSilencerPistolT1: 550
       STModuleSilencerRiflesT1Nato: 550
       STModuleShotgunChokeT1: 300
       STModuleSMGGripT1: 800
@@ -437,7 +441,8 @@
     items:
       ToolkitTearOne: 6000
       ToolkitTearTwo: 12000
-      CraftGunpowderBank: 120
+      CraftGunpowderBank: 500
+      CraftMaterialGunpowder: 100
 
   sponsorCategories:
     SponsorBacker:

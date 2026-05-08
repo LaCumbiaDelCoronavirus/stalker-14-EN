@@ -136,9 +136,14 @@
   - type: ExplosionResistance
     damageCoefficient: 0
   # stalker-changes start
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 5.5
+    baseSprintSpeed: 55
   - type: Bands
     band: Stalker
     bandIcon: stalker
+  - type: CharacterPortrait
+    portraitTexturePath: "/Textures/_Stalker_EN/Portraits/admems/admem_1.png"
   # stalker-changes end
 
 - type: entity

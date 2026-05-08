@@ -94,40 +94,35 @@
     MutantPartBurerBrain: 1000
     MutantPartControllerBrain: 2000
 
-    #Lumber
-    STTradePlankT1: 40
-    STTradePlankT2: 60
-    STTradePlankT3: 80
-    STTradePlankT4: 100
-    STLogStalkerT1: 20
-    STLogStalkerT2: 30
-    STLogStalkerT3: 40
-    STLogStalkerT4: 50
 
   categories:
     - name: shop-category-weapons
       priority: 1
       items:
-        STCombatKnife: 10
+        # Melee
+        STCombatKnife: 25
+        STSurvivalKnife: 50
         # Shotguns
         STWeaponShotgunMossbergM88: 630
         STWeaponShotgunBenelliM4Super90: 1200 # T3
         STWeaponShotgunSPAS: 2200 # T3
+        STWeaponShotgunProtecta: 6500
         # Pistols
         STWeaponPistolP99: 400
         STWeaponPistolUSP: 1500
         STWeaponPistolM1911: 800
         WeaponPistolStalkerGlock: 200
-        STWeaponRevolverSWPC325TR: 350
-        STWeaponRevolverRugerRedhawk: 650
         # SMGs
+        STWeaponSMGUMP: 1900
         STWeaponSMGMP5: 2200
         # Rifles
         STWeaponRifleL85: 2200 # T2
         STWeaponRifleM4: 3300 # T2
         STWeaponRifleSCARH: 6820 # T3
-        #STWeaponRifleG36: 7500 # T3 #STDA
+        STWeaponRifleSCARL: 6820
+        #STWeaponRifleG36: 7500 # T3 # STDA: Removed
         STWeaponRifleLR300v1: 5250 # T3
+        STWeaponRifleGalatz: 8250 # T3 # i really cant tell what guns are good
 
     - name: shop-category-magazines
       priority: 2
@@ -141,18 +136,17 @@
         P99Mag15: 120
         BaseMP5Mag: 260
         BaseTEC9Mag: 120
-        BaseGlockMag10: 100
-        GlockMag24: 200
-        GlockMag33: 300
+        GlockMag17: 150
+        GlockMag33: 600
         # 7.51
         Base751Mag10: 200
         751Mag20: 400
         751Mag30: 500
         # .45
+        UMPMag25: 190
         USPMag12: 170
         M1911Mag7: 100
         STSpeedLoader45ACPEmpty: 90
-        STSpeedLoader357MagnumEmpty: 120
 
     - name: shop-category-ammunition
       priority: 3
@@ -176,10 +170,6 @@
         # 7.51
         751M80Box: 1950 # T3
         751UNBox: 850 # Mutant
-        # .357
-        MagazineBox357Magnum: 300 # T2
-        MagazineBox357MagnumAP: 1400 # T3
-        MagazineBox357MagnumHP: 600 # Mutant
 
     - name: shop-category-medicine
       priority: 4
@@ -213,6 +203,7 @@
         FoodTinMRE: 120
         DrinkLemonadehBottleFull: 50
         STFoodMeatSalami: 350
+        HerculesBottleFull: 200
 
     - name: shop-category-armor
       priority: 6
@@ -246,6 +237,8 @@
         # Medical Storage
         MedkitCMSStalker: 450
         MedkitGrizzlyStalker: 850
+        # Other
+        StalkerGunCaseMercenary: 1800
 
     - name: shop-category-raincoats-and-gasmasks
       priority: 8
@@ -264,10 +257,11 @@
         ClothingOuterCoatLoyalist: 3000
         ClothingOuterCoatKevlarMercenaries: 2750
         # Gas Masks
-        ClothingMaskGasZarya: 100
-        ClothingMaskGasMercStalker: 150
-        ClothingMaskGasM40: 250
-        ClothingMaskGP7: 900
+        ClothingMaskGasZarya: 500 # T1
+        ClothingMaskGasMercStalker: 500 # T1
+        ClothingMaskGasM40: 1500 # T2
+        ClothingMaskM50: 3800 # T3
+        ClothingMaskM51: 7500 # T4
 
     - name: shop-category-research-equipment
       priority: 9
@@ -284,7 +278,6 @@
     - name: shop-category-utilities
       priority: 10
       items:
-        STCombatKnife: 25
         BoxZiptie: 50
         BoxSafebox: 300
         CheapLighter: 5
@@ -295,9 +288,9 @@
         STRadioHeadset: 150
         ClothingHeatBagStalker: 100
         STSkinsKitMercenary: 500
-        STElasticRubberRed: 50
-        STElasticRubberGreen: 50
-        STElasticRubberBlue: 50
+        STElasticRubberRed: 1
+        STElasticRubberGreen: 1
+        STElasticRubberBlue: 1
         STFlashlightSeclite: 50
         PowerCellHyper: 50
         BoxFlare: 60
@@ -315,10 +308,12 @@
       items:
         STModuleScopeRiflesT1Nato: 600
         STModuleSilencerRiflesT1Nato: 400
+        STModuleSilencerPistolT1: 400
         STModuleSMGGripT1: 600
         STModuleSilencerSMGT1: 600
         STModuleSniperSightT1: 600
         STModuleSilencerSniperT1: 600
+        STModuleGlockSwitch: 200
 
     - name: shop-category-paperwork
       priority: 12
@@ -345,6 +340,7 @@
         # faction
         ClothingHeadBandSkull: 30
         ClothingHeadCapMerc: 50
+        ClothingHeadBeretMerc: 50
         # EYES
         ClothingEyesGlasses: 50
         # faction
@@ -355,6 +351,7 @@
         ClothingMaskNeckBalaklava2: 10
         ClothingMaskNeckBalaklava3: 10
         # NECK
+        ClothingBandageStalkerKrest: 10
         ClothingNeckScarfGray: 100
         # faction
         ClothingBandageStalkerMerc: 10
@@ -378,6 +375,8 @@
         ClothingTorsoTurtlenecksMatrosska: 50
         # HANDS
         ClothingHandsGlovesFingerless: 30
+        ClothingHandsGlovesNitrile: 35
+        ClothingHandsGlovesLatex: 35
         ClothingHandsGlovesMercFingerless: 60
         # OUTERCLOTHING
         # CLOAK

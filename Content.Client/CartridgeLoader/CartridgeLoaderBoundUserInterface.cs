@@ -40,28 +40,41 @@ public abstract class CartridgeLoaderBoundUserInterface : BoundUserInterface
 
         var activeUI = _entManager.GetEntity(loaderUiState.ActiveUI);
 
-        _activeProgram = activeUI;
-
         var ui = RetrieveCartridgeUI(activeUI);
         var comp = RetrieveCartridgeComponent(activeUI);
         var control = ui?.GetUIFragmentRoot();
 
-        //Prevent the same UI fragment from getting disposed and attached multiple times
-        // stalker-changes: compare UIFragment instances, not root control types,
-        // so cartridges with the same root Control type (e.g. BoxContainer) can switch properly
-        if (_activeCartridgeUI == ui)
+        // Skip if the same fragment is already attached, but still update the cartridge UI state
+        if (_activeCartridgeUI == ui && _activeUiFragment is not null && _activeCartridgeUI is not null)
+        {
+            _activeCartridgeUI.UpdateState(state);
             return;
+        }
+
+        _activeProgram = activeUI;
 
         if (_activeUiFragment is not null)
             DetachCartridgeUI(_activeUiFragment);
 
-        if (control is not null && _activeProgram.HasValue)
+        if (ui is null)
         {
-            AttachCartridgeUI(control, Loc.GetString(comp?.ProgramName ?? "default-program-name"));
-            SendCartridgeUiReadyEvent(_activeProgram.Value);
+            _activeCartridgeUI = null;
+            _activeUiFragment = null;
+            return;
         }
 
         _activeCartridgeUI = ui;
+
+        if (control is not null && _activeProgram.HasValue)
+        {
+            AttachCartridgeUI(control, Loc.GetString(comp?.ProgramName ?? "default-program-name"));
+
+            if (loaderUiState.ActiveProgramState != null)
+                _activeCartridgeUI?.UpdateState(loaderUiState.ActiveProgramState);
+            else
+                SendCartridgeUiReadyEvent(_activeProgram.Value); // fallback
+        }
+
         _activeUiFragment?.Dispose();
         _activeUiFragment = control;
     }
@@ -69,7 +82,7 @@ public abstract class CartridgeLoaderBoundUserInterface : BoundUserInterface
     protected void ActivateCartridge(EntityUid cartridgeUid)
     {
         var message = new CartridgeLoaderUiMessage(_entManager.GetNetEntity(cartridgeUid), CartridgeUiMessageAction.Activate);
-        SendMessage(message);
+        SendPredictedMessage(message);
     }
 
     protected void DeactivateActiveCartridge()
@@ -78,19 +91,19 @@ public abstract class CartridgeLoaderBoundUserInterface : BoundUserInterface
             return;
 
         var message = new CartridgeLoaderUiMessage(_entManager.GetNetEntity(_activeProgram.Value), CartridgeUiMessageAction.Deactivate);
-        SendMessage(message);
+        SendPredictedMessage(message);
     }
 
     protected void InstallCartridge(EntityUid cartridgeUid)
     {
         var message = new CartridgeLoaderUiMessage(_entManager.GetNetEntity(cartridgeUid), CartridgeUiMessageAction.Install);
-        SendMessage(message);
+        SendPredictedMessage(message);
     }
 
     protected void UninstallCartridge(EntityUid cartridgeUid)
     {
         var message = new CartridgeLoaderUiMessage(_entManager.GetNetEntity(cartridgeUid), CartridgeUiMessageAction.Uninstall);
-        SendMessage(message);
+        SendPredictedMessage(message);
     }
 
     private List<(EntityUid, CartridgeComponent)> GetCartridgeComponents(List<EntityUid> programs)

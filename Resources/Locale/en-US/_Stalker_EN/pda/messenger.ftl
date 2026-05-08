@@ -17,6 +17,7 @@ st-messenger-channel-military = Military
 st-messenger-channel-monolith = Monolith
 st-messenger-channel-clearsky = Clear Sky
 st-messenger-channel-renegades = Renegades
+st-messenger-channel-gov = Government
 
 # Main page
 st-messenger-header-title = STALKER MESSENGER
@@ -46,3 +47,10 @@ st-messenger-char-counter = {$remaining}/{$max}
 # Mute
 st-messenger-mute-button = Mute
 st-messenger-unmute-button = Unmute
+
+# Settings
+st-messenger-settings-header = SETTINGS
+st-messenger-random-name-when-not-disguised = Random name when not disguised
+
+# Emission
+st-messenger-emission-warning = EMISSION ACTIVE - CONNECTION LOST

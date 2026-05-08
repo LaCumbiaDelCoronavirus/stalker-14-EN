@@ -16,7 +16,7 @@
   special:
     - !type:AddComponentSpecial
       components:
-        - type: PersistentCraftAccess
+        #- type: PersistentCraftAccess
         - type: Access
           tags:
             - MilitiaAccess
@@ -54,7 +54,7 @@
   special:
     - !type:AddComponentSpecial
       components:
-        - type: PersistentCraftAccess
+        #- type: PersistentCraftAccess
         - type: Access
           tags:
             - MilitiaAccess
@@ -99,7 +99,7 @@
   id: STMilitiaBand
   name: militia
   factionId: Stalker
-  maxMembers: 10
+  maxMembers: 16
   managingRankId: 2
   hierarchy:
     1: StalkerMilitia

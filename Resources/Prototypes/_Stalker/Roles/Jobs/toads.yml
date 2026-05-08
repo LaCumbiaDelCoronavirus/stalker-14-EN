@@ -16,7 +16,7 @@
   special:
     - !type:AddComponentSpecial
       components:
-      - type: PersistentCraftAccess
+      #- type: PersistentCraftAccess
       - type: Access
         tags:
           - Jaba
@@ -53,7 +53,7 @@
   special:
     - !type:AddComponentSpecial
       components:
-      - type: PersistentCraftAccess
+      #- type: PersistentCraftAccess
       - type: Access
         tags:
           - Jaba

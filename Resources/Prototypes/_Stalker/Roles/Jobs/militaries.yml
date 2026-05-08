@@ -19,7 +19,7 @@
   special:
     - !type:AddComponentSpecial
       components:
-      - type: PersistentCraftAccess
+      #- type: PersistentCraftAccess
       - type: Access
         groups:
           - MilitaryStalker
@@ -67,7 +67,7 @@
   special:
   - !type:AddComponentSpecial
     components:
-    - type: PersistentCraftAccess
+    #- type: PersistentCraftAccess
     - type: Access
       groups:
       - MilitaryStalker
@@ -115,7 +115,7 @@
   special:
     - !type:AddComponentSpecial
       components:
-      - type: PersistentCraftAccess
+      #- type: PersistentCraftAccess
       - type: Access
         groups:
           - Military
@@ -160,7 +160,7 @@
   special:
     - !type:AddComponentSpecial
       components:
-        - type: PersistentCraftAccess
+        #- type: PersistentCraftAccess
         - type: Access
           groups:
             - MilitaryHead
@@ -208,7 +208,7 @@
   special:
     - !type:AddComponentSpecial
       components:
-        - type: PersistentCraftAccess
+        #- type: PersistentCraftAccess
         - type: Access
           groups:
             - MilitaryOfficer
@@ -300,6 +300,7 @@
   factionId: MilitaryStalker
   maxMembers: 6
   managingRankId: 2
+  disguiseTargetJobId: Stalker # stalker EN change
   hierarchy:
     1: MilitaryStalker
     2: HeadMilitaryStalker

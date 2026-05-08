@@ -11,7 +11,7 @@
   special:
   - !type:AddComponentSpecial
     components:
-    - type: PersistentCraftAccess
+    #- type: PersistentCraftAccess
     - type: Access
       groups:
         - Anomalist
@@ -44,7 +44,7 @@
   special:
   - !type:AddComponentSpecial
     components:
-    - type: PersistentCraftAccess
+    #- type: PersistentCraftAccess
     - type: Psyonics
       psy: 75
     - type: PsyonicsActionMeditation

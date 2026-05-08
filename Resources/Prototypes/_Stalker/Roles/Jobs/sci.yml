@@ -19,7 +19,7 @@
   special:
     - !type:AddComponentSpecial
       components:
-      - type: PersistentCraftAccess
+      #- type: PersistentCraftAccess
       - type: Access
         groups:
           - Sci
@@ -64,7 +64,7 @@
   special:
     - !type:AddComponentSpecial
       components:
-      - type: PersistentCraftAccess
+      #- type: PersistentCraftAccess
       - type: Access
         groups:
           - Sci
@@ -109,10 +109,10 @@
   special:
     - !type:AddComponentSpecial
       components:
-      - type: PersistentCraftAccess
+      #- type: PersistentCraftAccess
       - type: Access
         groups:
-          - Sci
+          - Sci_decan
       - type: Bands
         band: Stalker
         bandIcon: sci_decan
@@ -154,7 +154,7 @@
   special:
     - !type:AddComponentSpecial
       components:
-        - type: PersistentCraftAccess
+        #- type: PersistentCraftAccess
         - type: Access
           tags:
             - Sci_rector
@@ -188,7 +188,7 @@
   id: STSciBand
   name: Scientists
   factionId: Scientists
-  maxMembers: 11
+  maxMembers: 16
   managingRankId: 2
   hierarchy:
     1: sci
@@ -204,7 +204,7 @@
     torso: ClothingTorsoShirtWhiteScientific
     outerClothing: ClothingOuterCoatLabSeniorResearcher
     head: ClothingHeadHatBeretRND
-    gloves: ClothingHandsGlovesNitrile
+    gloves: ClothingHandsGlovesLatex # EN
 
 # - type: stBand # Stalker-TODO: Why not combine them all under "STSciBand" band prototype? Also, factionId "ScientistsDecan" does not exist!
   # id: STSciDecanBand
@@ -223,7 +223,7 @@
     dogtag: ClothingNeckDogtagEcoLeader # EN
     outerClothing: ClothingOuterCoatRD
     head: ClothingHeadBeretUN
-    gloves: ClothingHandsGlovesNitrile
+    gloves: ClothingHandsGlovesLatex # EN
 
 # - type: stBand # Stalker-TODO: Why not combine them all under "STSciBand" band prototype? Also, factionId "ScientistsRector" does not exist!
   # id: STSciRectorBand
