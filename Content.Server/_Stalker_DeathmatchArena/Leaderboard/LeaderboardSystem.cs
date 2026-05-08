@@ -48,12 +48,6 @@ public sealed class LeaderboardSystem : EntitySystem
         TrySetHighestScore(entity.Comp.PlayerSession.UserId.UserId, args.NewScore);
     }
 
-    public override void Shutdown()
-    {
-
-        base.Shutdown();
-    }
-
     public void TrySetHighestScore(Guid userId, int newScore)
     {
         ref var scoreRef = ref CollectionsMarshal.GetValueRefOrAddDefault(_currentHighestScores, userId, out var exists);
@@ -97,7 +91,7 @@ public sealed class LeaderboardSystem : EntitySystem
         {
             _nextText = null;
             var eqe = EntityQueryEnumerator<LeaderboardComponent, MapTextComponent>();
-            while (eqe.MoveNext(out var uid, out _, out var mapTextComponent))
+            while (eqe.MoveNext(out var uid, out _, out _))
             {
                 var overrideComponent = EnsureComp<MapTextOverrideComponent>(uid);
                 overrideComponent.Text = text;
@@ -122,7 +116,7 @@ public sealed class LeaderboardSystem : EntitySystem
         // linq gods
         var highestScores = _currentHighestScores.ToList().OrderBy(kv => kv.Value).ToList();
 
-        var text = "Highest Killstreak Leaderboard:\n";
+        var text = "Killstreak Leaderboard:\n";
         for (var i = 1; i <= Math.Min(highestScores.Count, TopDisplayed); i++)
         {
             var profile = highestScores[^i];
