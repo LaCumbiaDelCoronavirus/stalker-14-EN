@@ -6,7 +6,7 @@
   - type: WallMount
     arc: 360
   - type: Sprite
-    drawdepth: OverMobs
+    drawdepth: Doors # ST14-EN Change: OverMobs -> Doors
     sprite: _Stalker/Structures/Wallmounts/bulletholes.rsi
     snapCardinals: true
   - type: Destructible
