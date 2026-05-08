@@ -49,11 +49,10 @@ public sealed class LeaderboardSystem : EntitySystem
         if (_busy)
             return false;
 
-        foreach (var key in _currentHighestScores.Keys)
-            _currentHighestScores[key] = 0;
+        _busy = true;
         _queuedWrites.Clear();
         _nextText = BuildScore();
-        _ = DoSaveAsync();
+        _ = DoNukeAsync();
 
         return true;
     }
@@ -172,6 +171,15 @@ public sealed class LeaderboardSystem : EntitySystem
 
         foreach (var (savedUserId, savedScore) in _currentHighestScores)
             await _serverDbManager.SetStdaLeaderboard(savedUserId, savedScore);
+
+        _busy = false;
+    }
+
+    private async Task DoNukeAsync()
+    {
+        _busy = true;
+
+        await _serverDbManager.NukeStdaLeaderboard();
 
         _busy = false;
     }

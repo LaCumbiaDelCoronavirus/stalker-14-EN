@@ -2128,10 +2128,10 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
         }
 
         // STDA
-        public async Task<List<StdaLeaderboardProfile>> GetFullStdaLeaderboard()
+        public async Task NukeStdaLeaderboard()
         {
             await using var db = await GetDb();
-            return await db.DbContext.StdaLeaderboard.ToListAsync();
+            await db.DbContext.StdaLeaderboard.ExecuteDeleteAsync();
         }
 
         // STDA
@@ -2156,6 +2156,13 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
             }
 
             await db.DbContext.SaveChangesAsync();
+        }
+
+        // STDA
+        public async Task<List<StdaLeaderboardProfile>> GetFullStdaLeaderboard()
+        {
+            await using var db = await GetDb();
+            return await db.DbContext.StdaLeaderboard.ToListAsync();
         }
 
         // stalker-en-changes: Faction relations PDA program

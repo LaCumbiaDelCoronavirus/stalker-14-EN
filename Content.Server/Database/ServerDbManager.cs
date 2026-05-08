@@ -387,6 +387,7 @@ namespace Content.Server.Database
         Task SetStalkerStatsAsync(string login, CharacteristicType characteristic, float value, DateTime? trainTime);
         Task<StalkerStats?> GetStalkerStatAsync(string login, CharacteristicType characteristic);
 
+        Task NukeStdaLeaderboard(); // STDA
         Task SetStdaLeaderboard(Guid userId, int score); // STDA
         Task<List<StdaLeaderboardProfile>> GetFullStdaLeaderboard(); // STDA
 
@@ -1210,6 +1211,13 @@ namespace Content.Server.Database
         {
             DbReadOpsMetric.Inc();
             return RunDbCommand(() => _db.GetStalkerStatAsync(login, characteristic));
+        }
+
+        // STDA
+        public Task NukeStdaLeaderboard()
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.NukeStdaLeaderboard());
         }
 
         // STDA
