@@ -55,7 +55,7 @@ public sealed class MapTextOverlay : Overlay
 
     private void DrawWorld(DrawingHandleScreen handle, OverlayDrawArgs args, float scale)
     {
-        if ( args.ViewportControl == null)
+        if (args.ViewportControl == null)
             return;
 
         var matrix = args.ViewportControl.GetWorldToScreenMatrix();
@@ -64,7 +64,7 @@ public sealed class MapTextOverlay : Overlay
         // Enlarge bounds to try prevent pop-in due to large text.
         var bounds = args.WorldBounds.Enlarged(2);
 
-        while(query.MoveNext(out var uid, out var mapText))
+        while (query.MoveNext(out var uid, out var mapText))
         {
             var mapPos = _transform.GetMapCoordinates(uid);
 
@@ -77,9 +77,15 @@ public sealed class MapTextOverlay : Overlay
             if (mapText.CachedFont == null)
                 continue;
 
+            // STDA Start: maptext override
+            var cachedText = _entManager.TryGetComponent<Shared._Stalker_DeathmatchArena.MapText.MapTextOverrideComponent>(uid, out var mapTextOverrideComponent) ?
+                mapTextOverrideComponent.Text :
+                mapText.CachedText;
+            // STDA End
+
             var pos = Vector2.Transform(mapPos.Position, matrix) + mapText.Offset;
-            var dimensions = handle.GetDimensions(mapText.CachedFont, mapText.CachedText, scale);
-            handle.DrawString(mapText.CachedFont, pos - dimensions / 2f, mapText.CachedText, scale, mapText.Color);
+            var dimensions = handle.GetDimensions(mapText.CachedFont, cachedText /* STDA: use `cachedText` var instead of mapText.CachedText */, scale);
+            handle.DrawString(mapText.CachedFont, pos - dimensions / 2f, cachedText /* STDA: use `cachedText` var instead of mapText.CachedText */, scale, mapText.Color);
         }
     }
 }

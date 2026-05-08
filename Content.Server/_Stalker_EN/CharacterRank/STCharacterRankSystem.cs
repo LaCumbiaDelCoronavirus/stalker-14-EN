@@ -52,17 +52,18 @@ public sealed class STCharacterRankSystem : EntitySystem
 
         _config = _proto.Index(DefaultConfig);
 
-        SubscribeLocalEvent<PlayerSpawnCompleteEvent>(OnPlayerSpawnComplete);
-        SubscribeLocalEvent<STCharacterRankComponent, ComponentInit>(OnComponentInit);
-        SubscribeLocalEvent<STCharacterRankComponent, PlayerAttachedEvent>(OnPlayerAttached);
-        SubscribeLocalEvent<STCharacterRankComponent, PlayerDetachedEvent>(OnPlayerDetached);
-        SubscribeLocalEvent<STCharacterRankComponent, ComponentRemove>(OnComponentRemove);
-        SubscribeLocalEvent<STCharacterRankComponent, MobStateChangedEvent>(OnMobStateChanged);
-        SubscribeLocalEvent<STCharacterRankComponent, STCharacterRankToggleEvent>(OnToggleRank);
-        SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestart);
-        SubscribeLocalEvent<AFKEvent>(OnAfk);
-        SubscribeLocalEvent<UnAFKEvent>(OnUnAfk);
-        SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
+        // STDA: No thanks
+        // SubscribeLocalEvent<PlayerSpawnCompleteEvent>(OnPlayerSpawnComplete);
+        // SubscribeLocalEvent<STCharacterRankComponent, ComponentInit>(OnComponentInit);
+        // SubscribeLocalEvent<STCharacterRankComponent, PlayerAttachedEvent>(OnPlayerAttached);
+        // SubscribeLocalEvent<STCharacterRankComponent, PlayerDetachedEvent>(OnPlayerDetached);
+        // SubscribeLocalEvent<STCharacterRankComponent, ComponentRemove>(OnComponentRemove);
+        // SubscribeLocalEvent<STCharacterRankComponent, MobStateChangedEvent>(OnMobStateChanged);
+        // SubscribeLocalEvent<STCharacterRankComponent, STCharacterRankToggleEvent>(OnToggleRank);
+        // SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestart);
+        // SubscribeLocalEvent<AFKEvent>(OnAfk);
+        // SubscribeLocalEvent<UnAFKEvent>(OnUnAfk);
+        // SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
     }
 
     private void OnComponentInit(EntityUid uid, STCharacterRankComponent comp, ComponentInit args)
