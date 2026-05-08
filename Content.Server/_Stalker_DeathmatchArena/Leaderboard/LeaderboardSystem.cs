@@ -14,6 +14,7 @@ using Robust.Shared.Timing;
 namespace Content.Server._Stalker_DeathmatchArena.Leaderboard;
 
 // no locale legends
+
 /// <summary>
 ///     Leaderboard for highest scorestreak.
 /// </summary>
@@ -32,7 +33,7 @@ public sealed class LeaderboardSystem : EntitySystem
     private volatile bool _dataLoaded = false; // cross-thread
     private volatile bool _busy = false; // cross-thread, this is whether something is busy using a cross-thread dict on another thread
     private readonly ConcurrentDictionary<Guid, string> _cachedUsernames = []; // cross-thread, more easy to use
-    private readonly Dictionary<Guid, int> _currentHighestScores = []; // cross-thread and needs some work too
+    private readonly Dictionary<Guid, int> _currentHighestScores = []; // cross-thread and needs some work too; scores for a player only get saved when theyre in here
     private readonly Stack<(Guid, int)> _queuedWrites = []; // main thread only // for putting off writes to highestscores on main thread until when nothing is busy
 
     public override void Initialize()
@@ -48,7 +49,8 @@ public sealed class LeaderboardSystem : EntitySystem
         if (_busy)
             return false;
 
-        _currentHighestScores.Clear();
+        foreach (var key in _currentHighestScores.Keys)
+            _currentHighestScores[key] = 0;
         _queuedWrites.Clear();
         _nextText = BuildScore();
         _ = DoSaveAsync();
