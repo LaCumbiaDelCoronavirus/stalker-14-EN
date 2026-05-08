@@ -6,6 +6,7 @@
   description: game-preset-stda-description
   rules:
   - STDAWeatherScheduler
+  - STLoadMaps
   supportedMaps: STDADefaultMapPool
 
 - type: gameMapPool
