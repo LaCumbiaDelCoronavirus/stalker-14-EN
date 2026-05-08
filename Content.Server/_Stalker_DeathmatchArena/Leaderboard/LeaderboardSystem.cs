@@ -43,6 +43,12 @@ public sealed class LeaderboardSystem : EntitySystem
         _ = DoLoadAsync();
     }
 
+    public override void Shutdown()
+    {
+        DoSaveAsync().Wait(); // we wait
+        base.Shutdown();
+    }
+
     private void OnScore(Entity<ActorComponent> entity, ref ScorestreakChangedEvent args)
     {
         TrySetHighestScore(entity.Comp.PlayerSession.UserId.UserId, args.NewScore);
