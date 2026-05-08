@@ -1854,6 +1854,23 @@ namespace Content.Server.Database.Migrations.Postgres
                     b.ToTable("stalker_zone_ownerships", (string)null);
                 });
 
+            modelBuilder.Entity("Content.Server.Database.StdaLeaderboardProfile", b =>
+                {
+                    b.Property<Guid>("UserId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("user_id");
+
+                    b.Property<int>("Score")
+                        .HasColumnType("integer")
+                        .HasColumnName("score");
+
+                    b.HasKey("UserId")
+                        .HasName("PK_stda_leaderboard");
+
+                    b.ToTable("stda_leaderboard", (string)null);
+                });
+
             modelBuilder.Entity("Content.Server.Database.Trait", b =>
                 {
                     b.Property<int>("Id")

@@ -103,7 +103,7 @@ namespace Content.Server.Database
             NetUserId? userId,
             ImmutableArray<byte>? hwId,
             ImmutableArray<ImmutableArray<byte>>? modernHWIds,
-            bool includeUnbanned=true);
+            bool includeUnbanned = true);
 
         Task AddServerBanAsync(ServerBanDef serverBan);
         Task AddServerUnbanAsync(ServerUnbanDef serverBan);
@@ -387,6 +387,9 @@ namespace Content.Server.Database
         Task SetStalkerStatsAsync(string login, CharacteristicType characteristic, float value, DateTime? trainTime);
         Task<StalkerStats?> GetStalkerStatAsync(string login, CharacteristicType characteristic);
 
+        Task SetStdaLeaderboard(Guid userId, int score); // STDA
+        Task<List<StdaLeaderboardProfile>> GetFullStdaLeaderboard(); // STDA
+
         Task SetStalkerBandAsync(ProtoId<STBandPrototype> band, float rewardPoints);
 
         Task<StalkerBand?> GetStalkerBandAsync(ProtoId<STBandPrototype> band);
@@ -657,7 +660,7 @@ namespace Content.Server.Database
             NetUserId? userId,
             ImmutableArray<byte>? hwId,
             ImmutableArray<ImmutableArray<byte>>? modernHWIds,
-            bool includeUnbanned=true)
+            bool includeUnbanned = true)
         {
             DbReadOpsMetric.Inc();
             return RunDbCommand(() => _db.GetServerBansAsync(address, userId, hwId, modernHWIds, includeUnbanned));
@@ -1207,6 +1210,20 @@ namespace Content.Server.Database
         {
             DbReadOpsMetric.Inc();
             return RunDbCommand(() => _db.GetStalkerStatAsync(login, characteristic));
+        }
+
+        // STDA
+        public Task SetStdaLeaderboard(Guid userId, int score)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.SetStdaLeaderboard(userId, score));
+        }
+
+        // STDA
+        public Task<List<StdaLeaderboardProfile>> GetFullStdaLeaderboard()
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetFullStdaLeaderboard());
         }
 
         public Task ClearAllStalkerStats()
