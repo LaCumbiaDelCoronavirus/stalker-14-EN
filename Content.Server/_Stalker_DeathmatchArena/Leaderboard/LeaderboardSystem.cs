@@ -50,6 +50,9 @@ public sealed class LeaderboardSystem : EntitySystem
             return false;
 
         _busy = true;
+        foreach (var key in _currentHighestScores.Keys)
+            _currentHighestScores[key] = 0;
+
         _queuedWrites.Clear();
         _nextText = BuildScore();
         _ = DoNukeAsync();
